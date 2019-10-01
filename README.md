@@ -1,6 +1,6 @@
-# Vue Testing Suite
+# Daniel Liew's ripped off version of Vue Testing Suite
 
-Vue Testing Suite enables a user to create an AWS Lambda function with Vue testing abilities. 
+Submission for BT3103 Exercise for auto-deployment onto Lambda
 
 ***
 
