@@ -58,3 +58,4 @@ Resources:
       Timeout:
         Ref: "LambdaTimeout"
     Type: AWS::Serverless::Function
+
