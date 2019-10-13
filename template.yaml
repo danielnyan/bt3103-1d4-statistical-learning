@@ -36,7 +36,7 @@ Resources:
   LambdaFunc:
     Properties:
       CodeUri: ./lambda-deploy.zip
-      Description: Vue Testing Suite
+      Description: Statistical Learning by 1d4
       FunctionName:
         Ref: "LambdaFuncName"
       Events:
