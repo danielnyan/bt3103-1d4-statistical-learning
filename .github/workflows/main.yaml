@@ -8,7 +8,7 @@ jobs:
       - uses: actions/checkout@master
       - uses: ./
         env:
-          AWS_DEFAULT_REGION: "asia-pacific-4"
+          AWS_DEFAULT_REGION: "ap-southeast-1"
           LAMBDA_FUNC_NAME: "1d4StatisticalLearning"
           LAMBDA_RUNTIME: "python3.7"
           LAMBDA_HANDLER: "lambda_handler.py"
