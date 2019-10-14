@@ -7,7 +7,7 @@ def lambda_handler(event, context):
             "headers": {
                 'Content-Type': 'text/html',
             },
-            "body": "Hey, that was a GET request"
+            "body": "Statistical Learning by 1d4"
         }
     if method == 'POST':
         postReq = json.loads(event.get('body', {}))
