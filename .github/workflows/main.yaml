@@ -11,7 +11,7 @@ jobs:
           AWS_DEFAULT_REGION: "ap-southeast-1"
           LAMBDA_FUNC_NAME: "StatisticalLearning"
           LAMBDA_RUNTIME: "python3.7"
-          LAMBDA_HANDLER: "lambda_handler.py"
+          LAMBDA_HANDLER: "lambda_handler.lambda_handler"
           LAMBDA_MEMORY: 1024
           LAMBDA_TIMEOUT: 40
           BUCKET_NAME: ${{ secrets.BUCKET_NAME }}
