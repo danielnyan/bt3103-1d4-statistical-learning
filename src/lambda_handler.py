@@ -2,12 +2,14 @@ import json
 def lambda_handler(event, context):
     method = event.get('httpMethod', {})
     if method == 'GET':
+        with open("index.html", "r") as f:
+            content = f.read()
         return {
             "statusCode": 200,
             "headers": {
                 'Content-Type': 'text/html',
             },
-            "body": "Statistical Learning by 1d4"
+            "body": content
         }
     if method == 'POST':
         postReq = json.loads(event.get('body', {}))
