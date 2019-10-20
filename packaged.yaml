@@ -19,8 +19,8 @@ Parameters:
 Resources:
   LambdaFunc:
     Properties:
-      CodeUri: s3://<bucket-name>/<key>
-      Description: Vue Testing Suite
+      CodeUri: s3://bt3103-1d4-statistical-learning/StatisticalLearning
+      Description: Statistical Learning by 1d4
       FunctionName:
         Ref: "LambdaFuncName"
       Events:
