@@ -10,7 +10,8 @@ import time
 
 def run_local(requestDict):
     solution = requestDict['solution'] + codeInfoChecker + byteCodeChecker
-    tests = requestDict['tests']  
+    # To do: throw error when import in solution. 
+    tests = requestDict['tests']
     import io
     import sys
     old_stdout = sys.stdout
