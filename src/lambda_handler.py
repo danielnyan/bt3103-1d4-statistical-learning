@@ -1,16 +1,11 @@
 import json
+from content_parser import *
+
 def lambda_handler(event, context):
     method = event.get('httpMethod', {})
     if method == 'GET':
-        with open("index.html", "r") as f:
-            content = f.read()
-        return {
-            "statusCode": 200,
-            "headers": {
-                'Content-Type': 'text/html',
-            },
-            "body": content
-        }
+        path = event.get('path')
+        return content_parser(path)
     if method == 'POST':
         postReq = json.loads(event.get('body', {}))
         
