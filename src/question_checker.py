@@ -37,4 +37,4 @@ def alset_api(postReq):
     }
 
 def question_1a(postReq):
-    
+    pass
