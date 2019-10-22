@@ -30,8 +30,12 @@ def test_function():
       /* check if e.shiftKey is true for Shift Tab */
       if (e.key === "Tab") {
         /* To do: add four spaces after cursor */
+        console.log(JSON.stringify(this.$el.children[0].children[0].innerText));
       };
       /* More to do: indent at same level */
+      /* Possibly pretty-print? https://github.com/google/code-prettify/issues/555 */
+      if (e.key === "Enter") {
+      }
     }
   },
 });
