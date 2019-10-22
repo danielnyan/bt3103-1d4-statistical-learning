@@ -12,7 +12,8 @@ Vue.component("codeblock", {
   template: `
     <div>
       <div class="codeblock">
-        <pre class="prettyprint lang-python" contenteditable @keydown="handleKeyDown($event)">
+        <pre class="prettyprint lang-python" contenteditable 
+        @keydown="handleKeyDown($event)">
 def test_function():
 &nbsp;&nbsp;&nbsp;&nbsp;for i in range(5):
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print("Edit me!")</pre>
@@ -29,15 +30,37 @@ def test_function():
     handleKeyDown(e) {
       /* check if e.shiftKey is true for Shift Tab */
       if (e.key === "Tab") {
-        /* To do: add four spaces after cursor */
-        console.log(JSON.stringify(this.$el.children[0].children[0].innerText));
+        e.preventDefault();
+        let original = this.$el.children[0].children[0].innerText;
+        let selection = window.getSelection();
+        let range = selection.getRangeAt(0);
+        let newText = original.slice(0, range.startOffset) + "    " 
+          + original.slice(range.startOffset, original.length);
+        $(this.$el.children[0].children[0]).text(newText);
+        range.collapse();
+        selection.removeAllRanges();
+        console.log(range);
+        selection.addRange(range);
       };
       /* More to do: indent at same level */
       /* Possibly pretty-print? https://github.com/google/code-prettify/issues/555 */
       if (e.key === "Enter") {
-      }
+      };
+    },
+    handleUndo() {
+      console.log("Updated!");
     }
   },
+  data() {
+    return {
+      undoHistory : [],
+      hasChanged : false
+    }
+  },
+  created() {
+    console.log("Test");
+    setInterval(() => {this.handleUndo()}, 10000);
+  }
 });
 
 let fuee = new Vue({
