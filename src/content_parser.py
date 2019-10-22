@@ -1,6 +1,7 @@
 """
 Extracts the directory from the path then returns the appropriate body
 """
+import base64
 
 def content_parser(path):
     # path will be in the form /main.js or /style.css
@@ -23,14 +24,23 @@ def content_parser(path):
 
     if "image" in contentType:
         with open(directory, "rb") as f:
-            content = f.read()
+            content = base64.b64encode(f.read()).decode()
+        return {
+            "statusCode": 200,
+            "headers": {
+                "Content-Type": contentType,
+            },
+            "isBase64Encoded": True,
+            "body": content
+        }
+
     else:
         with open(directory, "r") as f:
             content = f.read()
-    return {
-        "statusCode": 200,
-        "headers": {
-            "Content-Type": contentType,
-        },
-        "body": content
-    }
+        return {
+            "statusCode": 200,
+            "headers": {
+                "Content-Type": contentType,
+            },
+            "body": content
+        }
