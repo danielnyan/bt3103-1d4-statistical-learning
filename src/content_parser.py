@@ -20,8 +20,13 @@ def content_parser(path):
         contentType = "application/json"
     else:
         contentType = "text/html"
-    with open(directory, "r") as f:
-        content = f.read()
+
+    if "image" in contentType:
+        with open(directory, "rb") as f:
+            content = f.read()
+    else:
+        with open(directory, "r") as f:
+            content = f.read()
     return {
         "statusCode": 200,
         "headers": {
