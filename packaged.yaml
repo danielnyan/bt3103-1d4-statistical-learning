@@ -27,7 +27,7 @@ Resources:
         ExecuteFunc:
           Properties:
             Method: any
-            Path: /
+            Path: /{proxy+}
           Type: Api
       Handler:
         Ref: "LambdaHandler"
