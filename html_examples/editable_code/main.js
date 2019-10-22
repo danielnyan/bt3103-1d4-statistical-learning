@@ -19,16 +19,19 @@ def test_function():
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print("Edit me!")</pre>
       </div>
       <div class="unselectable codesubmit">
-        <p>Submit</p>
+        <p @click="execute">Submit</p>
       </div>
     </div>
   `,
   methods: {
-    execute() {
+    async execute() {
+      let solution = JSON.stringify(this.$el.children[0].children[0].innerText);
+      
       console.log(JSON.stringify(this.$el.children[0].children[0].innerText));
     },
     handleKeyDown(e) {
       /* check if e.shiftKey is true for Shift Tab */
+      this.hasChanged = true;
       if (e.key === "Tab") {
         e.preventDefault();
         let original = this.$el.children[0].children[0].innerText;
@@ -46,20 +49,42 @@ def test_function():
       /* Possibly pretty-print? https://github.com/google/code-prettify/issues/555 */
       if (e.key === "Enter") {
       };
+      
+      if (e.key === "z" && e.ctrlKey) {
+        e.preventDefault();
+        console.log(this.undoHistory);
+        if (this.undoHistory.length === 1) {
+          $(this.$el.children[0].children[0]).text(this.undoHistory[0]);
+        } else {
+          this.undoHistory.pop();
+          $(this.$el.children[0].children[0]).text
+            (this.undoHistory[this.undoHistory.length - 1]);
+        }
+      }
     },
+    // To do: handle redos. 
     handleUndo() {
-      console.log("Updated!");
+      if (this.hasChanged) {
+        let text = this.$el.children[0].children[0].innerText;
+        if (text !== this.undoHistory[this.undoHistory.length - 1]) {
+          this.undoHistory.push(this.$el.children[0].children[0].innerText);
+        }
+        this.hasChanged = false;
+      }
+      if (this.undoHistory.length > 100) {
+        this.undoHistory.shift();
+      }
     }
   },
   data() {
     return {
       undoHistory : [],
-      hasChanged : false
+      hasChanged : true
     }
   },
   created() {
-    console.log("Test");
-    setInterval(() => {this.handleUndo()}, 10000);
+    setTimeout(() => {this.handleUndo()}, 5);
+    setInterval(() => {this.handleUndo()}, 1000);
   }
 });
 
