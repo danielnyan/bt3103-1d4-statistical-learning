@@ -1,8 +1,9 @@
 import json
+import sys
+sys.path.append("./site-packages")
 
-def get_output(solution, tests):
+def get_output(solution, prepend, tests):
     import io
-    import sys
     old_stdout = sys.stdout
     output = io.StringIO()
     sys.stdout = output
@@ -11,7 +12,7 @@ def get_output(solution, tests):
 
     try:
         namespace = {}
-        compiled = compile("import json", "submitted code", "exec")
+        compiled = compile(prepend, "submitted code", "exec")
         exec(compiled, namespace)
         compiled = compile(solution, "submitted code", "exec")
         exec(compiled, namespace)
