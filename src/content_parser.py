@@ -28,7 +28,7 @@ def content_parser(path):
         return {
             "statusCode": 200,
             "headers": {
-                "Content-Type": contentType,
+                "Content-Type": contentType
             },
             "isBase64Encoded": True,
             "body": content
@@ -40,7 +40,7 @@ def content_parser(path):
         return {
             "statusCode": 200,
             "headers": {
-                "Content-Type": contentType,
+                "Content-Type": contentType
             },
             "body": content
         }
