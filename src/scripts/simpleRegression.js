@@ -42,7 +42,7 @@ const submit1b = async function() {
         resolve(xmlHttp.responseText);
     }
     xmlHttp.open("POST", nekoUrl, true); 
-    xmlHttp.send(JSON.stringify({answer:JSON.stringify(entered)});
+    xmlHttp.send(JSON.stringify({answer:JSON.stringify(entered)}));
   });
   let resultInfo = JSON.parse(result);
   if (resultInfo.correct) {{
