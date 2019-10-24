@@ -79,12 +79,11 @@ Vue.component("bar", {
   props: ["name", "val"],
   template: `
     <p>{{name}} : p-value = {{val}}
-  `,
+  `,/*
   watch: {
     val(newValue, oldValue) {
-      console.log(newValue + ", " + oldValue);
     }
-  }
+  }*/
 });
 
 let variables = new Vue({
@@ -122,7 +121,7 @@ let variables = new Vue({
                 return;
               }
             }
-            for (let index in this.unselected) {
+            for (let index in this.selected) {
               if (this.selected[index].name === name) {
                 let variable = this.selected[index];
                 this.unselected.push(variable);
@@ -148,6 +147,7 @@ let variables = new Vue({
           }
         },
         initialise(e) {
+            console.log("Initialised");
             Vue.nextTick(() => {
                 e.previousParent = e.$el.parentElement;
             })
