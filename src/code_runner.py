@@ -2,11 +2,7 @@ import json
 import sys
 sys.path.insert(0, "./site-packages")
 
-def get_output(solution, prepend, tests):
-    import io
-    old_stdout = sys.stdout
-    output = io.StringIO()
-    sys.stdout = output
+def get_output(solution, prepend, append, tests):
     error = False
     results = None
 
@@ -16,14 +12,12 @@ def get_output(solution, prepend, tests):
         exec(compiled, namespace)
         compiled = compile(solution, "submitted code", "exec")
         exec(compiled, namespace)
-        compiled = compile(tests, "submitted code", "exec")
+        compiled = compile(append, "submitted code", "exec")
         exec(compiled, namespace)
-        results = output.getvalue()
+        results = eval(tests, namespace)
     except Exception as e:
         results = type(e).__name__ + ": " + str(e)
         error = True
-    finally:
-        sys.stdout = old_stdout
     return json.dumps({
         "output" : results,
         "error" : error
