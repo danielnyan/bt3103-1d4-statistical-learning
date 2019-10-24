@@ -117,6 +117,7 @@ h1 {letter-spacing: 6px}
     <button class="w3-button w3-border" type="button" onclick="submit1a()">Check Answer</button>
     <p id="correct1a" style="color:green; display:none">Correct!</p>
     <p id="incorrect1a" style="color:red; display:none">Incorrect!</p>
+    <p id="neutral1a" style="color:black;"></p>
   </div>
 </div>
 
@@ -124,7 +125,8 @@ h1 {letter-spacing: 6px}
 <div class="w3-container w3-opacity" id="exercise2" style="padding:64px 16px">
   <div class="w3-content" style="max-width:800px">
     <h1 class="w3-center w3-padding-large"><span class="w3-header" style="font-size:36px">Exercise 2</span></h5>
-    <p>Perform a simple linear regression with MPG as the dependent variable and Acceleration as the indepedent variable!</p>
+    <p>Perform a simple linear regression with MPG as the dependent variable and Acceleration as the indepedent variable!
+    The data has already been loaded for you within the variable df.</p>
     <pre class="w3-border" style="padding:20px">
 <code contenteditable id="answer1b">import statsmodels.formula.api as smf
 ols = smf.ols(formula='mpg ~ weight', data=df)
@@ -135,6 +137,8 @@ print(ols_result.summary())
     <button class="w3-button w3-border" type="button" onclick="submit1b()">Check Answer</button>
     <p id="correct1b" style="color:green; display:none">Correct!</p>
     <p id="incorrect1b" style="color:red; display:none">Incorrect!</p>
+    <p id="checking1b" style="color:black; display:none">Checking answer...</p>
+    <p id="neutral1b" style="color:black"></p>
   </div>
 </div>
   

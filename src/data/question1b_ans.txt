@@ -1,0 +1,23 @@
+                            OLS Regression Results                            
+==============================================================================
+Dep. Variable:                    mpg   R-squared:                       0.178
+Model:                            OLS   Adj. R-squared:                  0.176
+Method:                 Least Squares   F-statistic:                     85.73
+No. Observations:                 397   Prob (F-statistic):           1.33e-18
+Df Residuals:                     395   Log-Likelihood:                -1340.6
+Df Model:                           1   AIC:                             2685.
+Covariance Type:            nonrobust   BIC:                             2693.
+================================================================================
+                   coef    std err          t      P>|t|      [0.025      0.975]
+--------------------------------------------------------------------------------
+Intercept        4.8218      2.050      2.352      0.019       0.791       8.852
+acceleration     1.2018      0.130      9.259      0.000       0.947       1.457
+==============================================================================
+Omnibus:                       17.047   Durbin-Watson:                   0.670
+Prob(Omnibus):                  0.000   Jarque-Bera (JB):               17.752
+Skew:                           0.491   Prob(JB):                     0.000140
+Kurtosis:                       2.672   Cond. No.                         91.2
+==============================================================================
+
+Warnings:
+[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.

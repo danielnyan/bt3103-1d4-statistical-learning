@@ -1,4 +1,5 @@
 from code_runner import *
+import json
 
 def question_checker(postReq):
     if "userToken" in postReq:
@@ -40,4 +41,35 @@ def alset_api(postReq):
     }
 
 def question_1a(postReq):
-    pass
+    return {
+        "statusCode": 200,
+        "headers": {
+            "Content-Type": "application/json",
+            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Headers": "Content-Type",
+            "Access-Control-Allow-Methods": "OPTIONS,POST,GET"
+        },
+        "body":  json.dumps({
+            "correct": True
+        })
+    }
+
+def question_1b(postReq):
+    answer = postReq["answer"]
+    expected = None
+    with open("./data/question1b_ans.txt", "r") as f:
+        expected = f.read()
+    gotten = json.loads(get_output(answer, "import pandas as pd\ndf=pd.read_csv('./data/dataset.csv')", ""))
+    solved = (json.dumps(expected) == json.dumps(gotten["output"]))
+    return {
+        "statusCode": 200,
+        "headers": {
+            "Content-Type": "application/json",
+            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Headers": "Content-Type",
+            "Access-Control-Allow-Methods": "OPTIONS,POST,GET"
+        },
+        "body":  json.dumps({
+            "correct": solved
+        })
+    } 
