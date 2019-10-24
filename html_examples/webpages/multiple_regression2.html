@@ -70,11 +70,10 @@ h1 {letter-spacing: 6px}
     <span class = 'unselectable block'>
       =
     </span>
-    <variableblock @itemclicked="swapVar(item.name)" @initialize="initialise" v-for="item in selected" :name="item.name"></variableblock>
   </div>
   <span id = "unselected-variables" class = "droppable variables">
     <p> Variables </p>
-    <variableblock @itemclicked="swapVar(item.name)" @initialize="initialise" v-for="item in unselected" :name="item.name"></variableblock>
+    <variableblock @itemclicked="swapVar(item.name)" @initialize="initialise" v-for="item in variables" :name="item.name"></variableblock>
   </span>
 </div>
 

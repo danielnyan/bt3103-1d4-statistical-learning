@@ -51,13 +51,12 @@ Vue.component("variableblock", {
             this.$el.style.zIndex = "";
             this.$el.style.left = "";
             this.$el.style.top = "";
-            if (this.currentDroppable != null) {
-                if (this.currentDroppable != this.previousParent) {
+            if (this.currentDroppable !== null) {
+                this.currentDroppable.appendChild(this.$el);
+                if (this.currentDroppable !== this.previousParent) {
                     this.$emit("itemclicked");
                 }
-                else {
-                    this.previousParent.appendChild(this.$el);
-                }
+                this.previousParent = this.currentDroppable;
             } else {
                 this.previousParent.appendChild(this.$el);
             }
@@ -79,6 +78,15 @@ Vue.component("variableblock", {
 let variables = new Vue({
     el: '#app',
     data: {
+        variables: [
+            { name: "cylinder" },
+            { name: "displacement" },
+            { name: "horsepower" },
+            { name: "weight" },
+            { name: "acceleration" },
+            { name: "year" },
+            { name: "origin" }
+        ],
         unselected: [
             { name: "cylinder" },
             { name: "displacement" },
@@ -108,6 +116,8 @@ let variables = new Vue({
                 return;
               }
             }
+            console.log(this.unselected);
+            console.log(this.selected);
         },
         initialise(e) {
             Vue.nextTick(() => {

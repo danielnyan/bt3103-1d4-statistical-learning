@@ -1,6 +1,6 @@
 import json
 import sys
-sys.path.append("./site-packages")
+sys.path.insert(0, "./site-packages")
 
 def get_output(solution, prepend, tests):
     import io
