@@ -121,7 +121,7 @@ let variables = new Vue({
         },
         submitToLambda() {
           
-        }
+        },
         initialise(e) {
             Vue.nextTick(() => {
                 e.previousParent = e.$el.parentElement;

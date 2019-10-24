@@ -56,13 +56,14 @@ h1 {letter-spacing: 6px}
   </div>
 </div>
 
-<div id = "statistics-container">
-  <div id = "p-values">
-  </div>
-  <div id = "r-squared">
-  </div>
-</div>
 <div id="app">
+  <div id = "statistics-container">
+    <div id = "p-values">
+    <p v-for="item in selected">{{item.name}}</p>
+    </div>
+    <div id = "r-squared">
+    </div>
+  </div>
   <div id = "selected-variables" class = "droppable variables">
     <span class = 'unselectable block'>
       MPG
