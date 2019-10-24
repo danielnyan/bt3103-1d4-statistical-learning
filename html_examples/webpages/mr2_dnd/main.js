@@ -105,6 +105,7 @@ let variables = new Vue({
                 let variable = this.unselected[index];
                 this.selected.push(variable);
                 this.unselected.splice(index, 1);
+                this.submitToLambda();
                 return;
               }
             }
@@ -113,12 +114,14 @@ let variables = new Vue({
                 let variable = this.selected[index];
                 this.unselected.push(variable);
                 this.selected.splice(index, 1);
+                this.submitToLambda();
                 return;
               }
             }
-            console.log(this.unselected);
-            console.log(this.selected);
         },
+        submitToLambda() {
+          
+        }
         initialise(e) {
             Vue.nextTick(() => {
                 e.previousParent = e.$el.parentElement;

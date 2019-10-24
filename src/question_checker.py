@@ -59,7 +59,8 @@ def question_1b(postReq):
     expected = None
     with open("./data/question1b_ans.txt", "r") as f:
         expected = json.dumps(f.read())
-    gotten = json.loads(get_output(answer, "import pandas as pd\ndf=pd.read_csv('./data/dataset.csv')", ""))
+    gotten = json.loads(get_output(answer, "", ""))
+    # gotten = json.loads(get_output(answer, "import pandas as pd\ndf=pd.read_csv('./data/dataset.csv')", ""))
     gotten = json.dumps(gotten["output"])
     solved = (expected == gotten)
     return {
