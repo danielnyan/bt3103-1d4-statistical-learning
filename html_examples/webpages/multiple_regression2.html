@@ -62,18 +62,19 @@ h1 {letter-spacing: 6px}
   <div id = "r-squared">
   </div>
 </div>
-<div id = "selected-variables" class = "droppable variables">
-  <span class = 'unselectable block'>
-    MPG
-  </span>
-  <span class = 'unselectable block'>
-    =
-  </span>
-</div>
 <div id="app">
+  <div id = "selected-variables" class = "droppable variables">
+    <span class = 'unselectable block'>
+      MPG
+    </span>
+    <span class = 'unselectable block'>
+      =
+    </span>
+    <variableblock @itemclicked="swapVar(item.name)" @initialize="initialise" v-for="item in selected" :name="item.name"></variableblock>
+  </div>
   <span id = "unselected-variables" class = "droppable variables">
     <p> Variables </p>
-    <variableblock @itemclicked="removeItem(name)" v-for="item in unselected" :name="item.name"></variableblock>
+    <variableblock @itemclicked="swapVar(item.name)" @initialize="initialise" v-for="item in unselected" :name="item.name"></variableblock>
   </span>
 </div>
 

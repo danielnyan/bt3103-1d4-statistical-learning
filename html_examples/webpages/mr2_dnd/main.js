@@ -1,13 +1,15 @@
 Vue.component("variableblock", {
     props: ["name"],
     template: `
-    <span class="draggable block" @mousedown="handleMouseDown($event)" @mouseup="handleMouseUp($event)">
+    <span class="unselectable draggable block" @mousedown="handleMouseDown($event)" @mouseup="handleMouseUp($event)">
     {{name}}
     </span>
   `,
     methods: {
+        initialize : async function(e) {
+            this.$emit("initialize", this);
+        },
         handleMouseDown(e) {
-            console.log("X: " + e.pageX + ", Y:" + e.pageY);
             this.$el.style.position = "absolute";
             this.$el.style.zIndex = 9001;
             document.body.appendChild(this.$el);
@@ -50,23 +52,27 @@ Vue.component("variableblock", {
             this.$el.style.left = "";
             this.$el.style.top = "";
             if (this.currentDroppable != null) {
-                this.currentDroppable.appendChild(this.$el);
-                this.previousParent = this.currentDroppable;
+                if (this.currentDroppable != this.previousParent) {
+                    this.$emit("itemclicked");
+                }
+                else {
+                    this.previousParent.appendChild(this.$el);
+                }
             } else {
                 this.previousParent.appendChild(this.$el);
             }
         },
-        itemclicked() {
-            this.$emit("itemclicked", this);
-        },
-        data() {
-            return {
-                imageUrl: "",
-                currentDroppable: null,
-                previousParent: null,
-                onMouseMove: null,
-            }
+    },
+    data() {
+        return {
+            imageUrl: "",
+            currentDroppable: null,
+            previousParent: null,
+            onMouseMove: null,
         }
+    },
+    created() {
+        this.initialize();
     }
 });
 
@@ -85,7 +91,28 @@ let variables = new Vue({
         selected: []
     },
     methods: {
-        removeItem() {},
-        addItem() {}
+        swapVar(name) {
+            for (let index in this.unselected) {
+              if (this.unselected[index].name == name) {
+                let variable = this.unselected[index];
+                this.selected.push(variable);
+                this.unselected.splice(index, 1);
+                return;
+              }
+            }
+            for (let index in this.unselected) {
+              if (this.selected[index].name == name) {
+                let variable = this.selected[index];
+                this.unselected.push(variable);
+                this.selected.splice(index, 1);
+                return;
+              }
+            }
+        },
+        initialise(e) {
+            Vue.nextTick(() => {
+                e.previousParent = e.$el.parentElement;
+            })
+        },
     }
 });
