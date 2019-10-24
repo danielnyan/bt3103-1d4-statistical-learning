@@ -59,7 +59,7 @@ h1 {letter-spacing: 6px}
 <div id="app">
   <div id = "statistics-container">
     <div id = "p-values">
-    <p v-for="item in selected">{{item.name}}</p>
+    <bar v-for="prop in properties" :name="prop.name" :val="prop.val"></bar>
     </div>
     <div id = "r-squared">
     </div>

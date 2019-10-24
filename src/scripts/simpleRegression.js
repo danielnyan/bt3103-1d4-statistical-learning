@@ -37,6 +37,7 @@ const submit1b = async function() {
   $("#incorrect1b").slideUp(500);
   $("#correct1b").slideUp(500);
   $('#neutral1b').slideUp(500);
+  /*
   let result = await new Promise((resolve, reject) => {
     const nekoUrl = "https://1b1u6ce6m6.execute-api.us-east-1.amazonaws.com/Prod/lambda_handler";
     const xmlHttp = new XMLHttpRequest();
@@ -52,14 +53,21 @@ const submit1b = async function() {
     }));
   });
   let resultInfo = JSON.parse(result);
-  console.log(resultInfo);
-  if (resultInfo.correct) {
-    $("#incorrect1b").slideUp(500);
-    $("#correct1b").slideDown(500);
-    $('#checking1b').slideUp(500);
-  } else {
-    $("#incorrect1b").slideDown(500);
-    $("#correct1b").slideUp(500);
-    $('#checking1b').slideUp(500);
-  }
+  console.log(resultInfo);*/
+  
+  let resultInfo = {correct:false};
+  let expected = JSON.stringify("import statsmodels.formula.api as smf\nols = smf.ols(formula='mpg ~ acceleration', data=df)\nols_result = ols.fit()\nprint(ols_result.summary())\n");
+  entered = JSON.stringify(entered);
+  resultInfo.correct = (expected === entered);
+  setTimeout( () => {
+    if (resultInfo.correct) {
+      $("#incorrect1b").slideUp(500);
+      $("#correct1b").slideDown(500);
+      $('#checking1b').slideUp(500);
+    } else {
+      $("#incorrect1b").slideDown(500);
+      $("#correct1b").slideUp(500);
+      $('#checking1b').slideUp(500);
+    }
+  }, 1000 + 3000 * Math.random());
 }

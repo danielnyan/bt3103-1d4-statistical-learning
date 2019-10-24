@@ -75,6 +75,18 @@ Vue.component("variableblock", {
     }
 });
 
+Vue.component("bar", {
+  props: ["name", "val"],
+  template: `
+    <p>{{name}} : p-value = {{val}}
+  `,
+  watch: {
+    val(newValue, oldValue) {
+      console.log(newValue + ", " + oldValue);
+    }
+  }
+});
+
 let variables = new Vue({
     el: '#app',
     data: {
@@ -96,31 +108,44 @@ let variables = new Vue({
             { name: "year" },
             { name: "origin" }
         ],
-        selected: []
+        selected: [],
+        properties: [{name:"Adjusted R-squared", val:0}],
     },
     methods: {
         swapVar(name) {
             for (let index in this.unselected) {
-              if (this.unselected[index].name == name) {
+              if (this.unselected[index].name === name) {
                 let variable = this.unselected[index];
                 this.selected.push(variable);
                 this.unselected.splice(index, 1);
-                this.submitToLambda();
+                this.submitToLambda(variable.name, "add");
                 return;
               }
             }
             for (let index in this.unselected) {
-              if (this.selected[index].name == name) {
+              if (this.selected[index].name === name) {
                 let variable = this.selected[index];
                 this.unselected.push(variable);
                 this.selected.splice(index, 1);
-                this.submitToLambda();
+                this.submitToLambda(variable.name, "remove");
                 return;
               }
             }
         },
-        submitToLambda() {
-          
+        submitToLambda(variable, operation) {
+          if (operation === "remove") {
+            for (let index in this.properties) {
+              if (this.properties[index].name === variable) {
+                this.properties.splice(index, 1);
+                break;
+              }
+            }
+          } else if (operation === "add") {
+            this.properties.push({name:variable,val:0});
+          }
+          for (let item of this.properties) {
+            item.val = Math.random();
+          }
         },
         initialise(e) {
             Vue.nextTick(() => {
