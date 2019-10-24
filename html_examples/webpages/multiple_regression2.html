@@ -73,7 +73,7 @@ h1 {letter-spacing: 6px}
 <div id="app">
   <span id = "unselected-variables" class = "droppable variables">
     <p> Variables </p>
-    <variableblock v-for="item in items" :name="item.name"></variableblock>
+    <variableblock @itemclicked="removeItem(name)" v-for="item in unselected" :name="item.name"></variableblock>
   </span>
 </div>
 

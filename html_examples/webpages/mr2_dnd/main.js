@@ -1,9 +1,9 @@
 Vue.component("variableblock", {
     props: ["name"],
     template: `
-    <div class="draggable block">
-    <p>{{name}}</p>
-    </div>
+    <span class="draggable block" @mousedown="handleMouseDown($event)" @mouseup="handleMouseUp($event)">
+    {{name}}
+    </span>
   `,
     methods: {
         handleMouseDown(e) {
@@ -56,6 +56,9 @@ Vue.component("variableblock", {
                 this.previousParent.appendChild(this.$el);
             }
         },
+        itemclicked() {
+            this.$emit("itemclicked", this);
+        },
         data() {
             return {
                 imageUrl: "",
@@ -70,7 +73,7 @@ Vue.component("variableblock", {
 let variables = new Vue({
     el: '#app',
     data: {
-        items: [
+        unselected: [
             { name: "cylinder" },
             { name: "displacement" },
             { name: "horsepower" },
@@ -78,7 +81,11 @@ let variables = new Vue({
             { name: "acceleration" },
             { name: "year" },
             { name: "origin" }
-        ]
+        ],
+        selected: []
     },
-    methods: {}
+    methods: {
+        removeItem() {},
+        addItem() {}
+    }
 });
