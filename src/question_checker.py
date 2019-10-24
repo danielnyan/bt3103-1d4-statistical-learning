@@ -58,9 +58,10 @@ def question_1b(postReq):
     answer = postReq["answer"]
     expected = None
     with open("./data/question1b_ans.txt", "r") as f:
-        expected = f.read()
+        expected = json.dumps(f.read())
     gotten = json.loads(get_output(answer, "import pandas as pd\ndf=pd.read_csv('./data/dataset.csv')", ""))
-    solved = (json.dumps(expected) == json.dumps(gotten["output"]))
+    gotten = json.dumps(gotten["output"])
+    solved = (expected == gotten)
     return {
         "statusCode": 200,
         "headers": {
@@ -70,6 +71,9 @@ def question_1b(postReq):
             "Access-Control-Allow-Methods": "OPTIONS,POST,GET"
         },
         "body":  json.dumps({
-            "correct": solved
+            "correct": solved,
+            "expected": expected,
+            "gotten": gotten,
+            "answer": answer
         })
     } 
