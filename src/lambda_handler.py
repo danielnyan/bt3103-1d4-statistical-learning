@@ -1,6 +1,8 @@
 import json
 from content_parser import *
 from question_checker import *
+import sys
+sys.path.append("./site-packages")
 import pandas as pd
 
 def lambda_handler(event, context):
