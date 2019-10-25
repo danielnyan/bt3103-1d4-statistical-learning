@@ -38,7 +38,7 @@ h1 {letter-spacing: 6px}
       <h1 class="w3-center w3-padding-large"><span class="w3-header" style="font-size:36px">The P-value</span></h5>
       <p>In the previous exercise, you have created a multiple regression model with all the variables available. Let's take a look at the results now.</p>
     </div>
-    <img src="img/multiple_linear_all.png">
+    <img src="img/multiple_linear_all.png" class="w3-image">
     <div class="w3-opacity">
     <p>Wow, that's a lot of variables. Do you think all of them are useful for estimating MPG, or are some of them useless? To find out, take a look at the highlighted column. This column is the p-value, which tells us how relevant the variable is to the regression model. The higher the p-value, the more likely that the variable is insignificant. As a default baseline, most studies set the threshold at 0.05. If the p-value is larger than that, then that variable is deemed insignificant for the model, and can be removed. We will disregard the possibility of omitted variable bias, which is outside of the scope of this tutorial.</p>
       <div class="w3-panel w3-leftbar w3-light-grey">
@@ -59,9 +59,10 @@ h1 {letter-spacing: 6px}
 <div id="app">
   <div id = "statistics-container">
     <div id = "p-values">
-    <bar v-for="prop in properties" :name="prop.name" :val="prop.val"></bar>
+      <bar v-for="prop in properties" :name="prop.name" :val="prop.val"></bar>
     </div>
     <div id = "r-squared">
+      <rsqbar :val="rSquared" :target="0.6"></rsqbar>
     </div>
   </div>
   <div id = "selected-variables" class = "droppable variables">

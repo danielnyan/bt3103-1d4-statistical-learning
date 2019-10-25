@@ -1,3 +1,24 @@
+/* Credits to https://gist.github.com/adambene/b3de67803e634be8f7d6baa273b5f447 
+for coroutine and delay code */
+const coroutine = nextValue => iterator => {
+  const { done, value } = iterator.next(nextValue);
+
+  if (done) {
+    return;
+  }
+
+  if (value.constructor === Promise) {
+    value.then(promiseValue => {
+      coroutine(promiseValue)(iterator);
+    });
+  } else {
+    coroutine(value)(iterator);
+  }
+};
+
+const delay = (ms, result) =>
+  new Promise(resolve => setTimeout(() => resolve(result), ms));
+
 Vue.component("variableblock", {
     props: ["name"],
     template: `
@@ -78,13 +99,47 @@ Vue.component("variableblock", {
 Vue.component("bar", {
     props: ["name", "val"],
     template: `
-    <p>{{name}} : p-value = {{val}}
+    <p>{{name}} : p-value = {{val}}</p>
   `,
     /*
       watch: {
         val(newValue, oldValue) {
         }
       }*/
+});
+
+Vue.component("rsqbar", {
+    props: ["val", "target"],
+    template: `
+    <div style="height:22px">
+      <div class="bar-description">Adj R^2</div>
+      <div class="bar-container">
+        <div class="bar" :style="{width:size*100+'%'}"></div>
+        <div :style="{position:'absolute', left:target*100+'%'}">
+            | &larr; Goal
+        </div>
+      </div>
+    </div>
+    `,
+    data() {
+        return {
+            size: this.val
+        }
+    },
+    methods : {
+        *testMethod(newValue) {
+            while (Math.abs(this.size - newValue) > 0.001) {
+                this.size = (this.size) + 0.2*(newValue - this.size);
+                yield delay(25, null);
+            }
+            this.size = newValue
+        }
+    },
+    watch: {
+        val(newValue, oldValue) {
+            coroutine()(this.testMethod(newValue));
+        }
+    }
 });
 
 let variables = new Vue({
@@ -109,7 +164,8 @@ let variables = new Vue({
             { name: "origin" }
         ],
         selected: [],
-        properties: [{ name: "Adjusted R-squared", val: 0 }],
+        properties: [],
+        rSquared: 0,
     },
     methods: {
         swapVar(name) {
@@ -146,8 +202,10 @@ let variables = new Vue({
             for (let item of this.properties) {
                 item.val = Math.random();
             }
-            if (this.properties.length == 1) {
-                this.properties[0].val = 0;
+            if (this.properties.length == 0) {
+                this.rSquared = 0;
+            } else {
+                this.rSquared = Math.random();
             }
         },
         initialise(e) {
