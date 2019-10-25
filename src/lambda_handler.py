@@ -1,6 +1,7 @@
 import json
 from content_parser import *
 from question_checker import *
+import pandas as pd
 
 def lambda_handler(event, context):
     method = event.get('httpMethod', {})
