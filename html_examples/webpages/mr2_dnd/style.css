@@ -39,7 +39,7 @@
 }
 
 #selected-variables {
-    width: 55%;
+    width: 750px;
     padding: 5px;
     margin-bottom: 10px;
     overflow-x: auto;
@@ -48,7 +48,7 @@
 }
 
 #unselected-variables {
-    width: 55%;
+    width: 750px;
     padding: 0px 10px;
     margin-bottom: 10px;
     overflow-y: auto;
@@ -72,7 +72,7 @@
 }
 
 #statistics-container {
-    width: 55%;
+    width: 750px;
     margin: auto;
     margin-bottom: 10px;
     border: 1px solid black;
@@ -81,11 +81,11 @@
 
 .codeblock {
     font-family: Consolas;
-    width: 55%;
+    width: 750px;
     padding: 5px;
     margin: auto;
     margin-bottom: 10px;
-    overflow-y: auto;
+    overflow: auto;
     height: 350px;
     box-sizing: border-box;
     border: 1px solid black
@@ -93,6 +93,7 @@
 
 .bar, .bar-container {
     border-radius: 25px;
+    transition: background-color 0.3s ease;
 }
 
 .bar, .bar-description, .bar-container, .bar-value {
@@ -102,16 +103,16 @@
 }
 
 .bar-description {
-    width: 10%;
+    width: 15%;
 }
 
 .bar-container {
-    width: 90%;
-    background-color: #888;
+    width: 85%;
+    height: 100%;
+    background-color: #AAA;
     position: relative;
 }
 
 .bar {
     height:100%;
-    background-color: #CCC;
 }

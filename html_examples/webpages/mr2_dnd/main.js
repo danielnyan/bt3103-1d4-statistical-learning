@@ -99,13 +99,41 @@ Vue.component("variableblock", {
 Vue.component("bar", {
     props: ["name", "val"],
     template: `
-    <p>{{name}} : p-value = {{val}}</p>
-  `,
-    /*
-      watch: {
-        val(newValue, oldValue) {
+    <div style="height:16px; margin:10px;">
+      <div class="bar-description">{{name}}</div>
+        <div class="bar" :style="{width:size*60+'%','background-color':colour}"></div>
+        <div class="bar-description" style="margin-left:10px">{{Math.round(this.size*1000)/1000}}</div>
+      </div>
+    </div>
+    `,
+    data() {
+        return {
+            size: 0,
+            colour: "#CCC",
         }
-      }*/
+    },
+    methods : {
+        *adjustBar(newValue) {
+            while (Math.abs(this.size - newValue) > 0.001) {
+                this.size = (this.size) + 0.2*(newValue - this.size);
+                yield delay(25, null);
+            }
+            this.size = newValue;
+            if (newValue > 0.05) {
+                this.colour = "#EBB";
+            } else {
+                this.colour = "#CCC";
+            }
+        }
+    },
+    watch: {
+        val(newValue, oldValue) {
+            coroutine()(this.adjustBar(newValue));
+        }
+    },
+    created() {
+        coroutine()(this.adjustBar(this.val));
+    }
 });
 
 Vue.component("rsqbar", {
@@ -114,30 +142,41 @@ Vue.component("rsqbar", {
     <div style="height:22px">
       <div class="bar-description">Adj R^2</div>
       <div class="bar-container">
-        <div class="bar" :style="{width:size*100+'%'}"></div>
+        <div class="bar" :style="{width:size*100+'%','background-color':colour}"></div>
         <div :style="{position:'absolute', left:target*100+'%'}">
-            | &larr; Goal
+            | &larr; {{size > target ? "Reached!" : "Goal"}}
         </div>
       </div>
     </div>
     `,
     data() {
         return {
-            size: this.val
+            size: this.val,
+            colour: "#CCC",
         }
     },
     methods : {
-        *testMethod(newValue) {
+        *adjustBar(newValue) {
+            if (this.size < newValue) {
+                this.colour = "#EEA";
+            } else {
+                this.colour = "#EBB"
+            }
             while (Math.abs(this.size - newValue) > 0.001) {
                 this.size = (this.size) + 0.2*(newValue - this.size);
                 yield delay(25, null);
             }
-            this.size = newValue
+            this.size = newValue;
+            if (newValue > this.target) {
+                this.colour = "#9E9";
+            } else {
+                this.colour = "#CCC";
+            }
         }
     },
     watch: {
         val(newValue, oldValue) {
-            coroutine()(this.testMethod(newValue));
+            coroutine()(this.adjustBar(newValue));
         }
     }
 });
@@ -200,7 +239,7 @@ let variables = new Vue({
                 this.properties.push({ name: variable, val: 0 });
             }
             for (let item of this.properties) {
-                item.val = Math.random();
+                item.val = Math.min(...Array.from({length: 10},()=>Math.random()));
             }
             if (this.properties.length == 0) {
                 this.rSquared = 0;
@@ -209,7 +248,6 @@ let variables = new Vue({
             }
         },
         initialise(e) {
-            console.log("Initialised");
             Vue.nextTick(() => {
                 e.previousParent = e.$el.parentElement;
             })
