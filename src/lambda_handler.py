@@ -1,10 +1,9 @@
 import json
 from content_parser import *
 from question_checker import *
-import numpy as np
-import statsmodels.formula as smf
+import sys
+sys.path.append("./site-packages")
 import pandas as pd
-
 
 def lambda_handler(event, context):
     method = event.get('httpMethod', {})
