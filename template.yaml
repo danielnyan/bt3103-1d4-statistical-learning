@@ -7,7 +7,7 @@ Parameters:
     Default: "pythonTest"
   LambdaRuntime:
     Type: String
-    Default: "python3.7"
+    Default: "python3.6"
   LambdaHandler:
     Type: String
     Default: "index.lambda_handler"
@@ -36,9 +36,9 @@ Resources:
   LambdaFunc:
     Properties:
       CodeUri: ./lambda-deploy.zip
-      Description: Statistical Learning by 1d4
       Layers:
         - arn:aws:lambda:us-east-1:432853048830:layer:bt3103-dependency-packages:1
+      Description: Statistical Learning by 1d4
       FunctionName:
         Ref: "LambdaFuncName"
       Events:
@@ -60,4 +60,7 @@ Resources:
       Timeout:
         Ref: "LambdaTimeout"
     Type: AWS::Serverless::Function
+
+
+
 
