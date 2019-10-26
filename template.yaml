@@ -7,7 +7,7 @@ Parameters:
     Default: "pythonTest"
   LambdaRuntime:
     Type: String
-    Default: "python3.6"
+    Default: "python3.7"
   LambdaHandler:
     Type: String
     Default: "index.lambda_handler"
