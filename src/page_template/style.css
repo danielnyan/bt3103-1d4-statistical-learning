@@ -1,0 +1,135 @@
+.unselectable {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    cursor: default;
+}
+
+.variables {
+    background-color: #f0f0f0;
+}
+
+.block {
+    background-color: #cccccc;
+    box-sizing: border-box;
+    padding: 4px 9px;
+    margin: 2px;
+    display: inline-block;
+    float: left;
+    border: 1px solid black;
+}
+
+.draggable {
+    background-color: #eeeeee;
+}
+
+.draggable:hover {
+    background-color: #eeeeaa;
+    cursor: grab;
+}
+
+.droppable {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    border: 1px solid black;
+}
+
+#selected-variables {
+    width: 750px;
+    padding: 5px;
+    margin-bottom: 10px;
+    overflow-x: auto;
+    white-space: nowrap;
+    box-sizing: border-box;
+}
+
+#unselected-variables {
+    width: 750px;
+    padding: 0px 10px;
+    margin-bottom: 10px;
+    overflow-y: auto;
+    height: 100px;
+    box-sizing: border-box;
+}
+
+#p-values {
+    padding: 5px;
+    overflow-y: auto;
+    margin: 10px;
+    height: 250px;
+    box-sizing: border-box;
+}
+
+#r-squared {
+    padding: 5px;
+    overflow-y: auto;
+    margin: 10px;
+    box-sizing: border-box;
+}
+
+#statistics-container {
+    width: 750px;
+    margin: auto;
+    margin-bottom: 10px;
+    border: 1px solid black;
+    box-sizing: border-box;
+}
+
+.codeblock {
+    font-family: Consolas;
+    width: 750px;
+    padding: 5px;
+    margin: auto;
+    margin-bottom: 10px;
+    overflow: auto;
+    height: 350px;
+    box-sizing: border-box;
+    border: 1px solid black
+}
+
+.bar, .bar-container {
+    border-radius: 25px;
+    transition: background-color 0.3s ease;
+}
+
+.bar, .bar-description, .bar-container, .bar-value {
+    display: inline-block;
+    float: left;
+    height: 100%;
+}
+
+.bar-description {
+    width: 15%;
+}
+
+.bar-container {
+    width: 85%;
+    height: 100%;
+    background-color: #AAA;
+    position: relative;
+}
+
+.bar {
+    height:100%;
+}
+
+.w3-container:after {
+    border-bottom: 1px solid #ddd;
+    content: '';
+    display: block;
+    width: 60%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 32px;
+}
+
+.feedback {
+    height:80px; 
+    overflow-y: auto; 
+    margin-top: 16px; 
+    padding: 20px;
+}
