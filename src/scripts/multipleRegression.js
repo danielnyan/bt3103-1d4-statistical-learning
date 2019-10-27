@@ -44,7 +44,7 @@ let variables = new Vue({
                 }
             }
         },
-        submitToLambda(variable, operation) {
+        async submitToLambda(variable, operation) {
             if (operation === "remove") {
                 for (let index in this.properties) {
                     if (this.properties[index].name === variable) {

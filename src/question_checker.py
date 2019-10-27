@@ -57,7 +57,7 @@ def question_1a(postReq):
     }
 
 def question_1b(postReq):
-    answer = postReq["answer"]
+    answer = json.loads(postReq["answer"])
     expected = {'response': 'mpg', 'predictors': ['Intercept', 'acceleration']}
     gotten = get_output(answer, "import pandas as pd\ndf=pd.read_csv('./data/dataset.csv')", "", '{"response":ols_result.model.endog_names, "predictors":ols_result.model.exog_names}')
     gotten = json.loads(gotten)
@@ -79,8 +79,8 @@ def question_1b(postReq):
     } 
 
 def question_2b(postReq):
-    answer = postReq["answer"]
-    properties = [name for name in answer["name"]]
+    answer = json.loads(postReq["answer"])
+    properties = [log["name"] for log in answer]
     return {
         "statusCode": 200,
         "headers": {
