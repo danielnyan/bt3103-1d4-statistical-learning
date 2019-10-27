@@ -110,29 +110,37 @@ Vue.component("bar", {
         return {
             size: 0,
             colour: "#CCC",
+            targetValue: null
         }
     },
     methods : {
-        *adjustBar(newValue) {
-            while (Math.abs(this.size - newValue) > 0.001) {
-                this.size = (this.size) + 0.2*(newValue - this.size);
+        *adjustBar() {
+            while (Math.abs(this.size - this.targetValue) > 0.001) {
+                this.size = (this.size) + 0.2*(this.targetValue - this.size);
+                if (this.size > 0.05) {
+                    this.colour = "#EBB";
+                } else {
+                    this.colour = "#CCC";
+                }
                 yield delay(25, null);
             }
-            this.size = newValue;
-            if (newValue > 0.05) {
-                this.colour = "#EBB";
-            } else {
-                this.colour = "#CCC";
-            }
+            this.size = this.targetValue;
+            this.targetValue = null;
         }
     },
     watch: {
         val(newValue, oldValue) {
-            coroutine()(this.adjustBar(newValue));
+            if (this.targetValue == null) {
+                this.targetValue = newValue;
+                coroutine()(this.adjustBar());
+            } else {
+                this.targetValue = newValue;
+            }
         }
     },
     created() {
-        coroutine()(this.adjustBar(this.val));
+        this.targetValue = this.val;
+        coroutine()(this.adjustBar());
     }
 });
 
@@ -153,30 +161,37 @@ Vue.component("rsqbar", {
         return {
             size: this.val,
             colour: "#CCC",
+            targetValue: null
         }
     },
     methods : {
-        *adjustBar(newValue) {
-            if (this.size < newValue) {
-                this.colour = "#EEA";
-            } else {
-                this.colour = "#EBB"
-            }
-            while (Math.abs(this.size - newValue) > 0.001) {
-                this.size = (this.size) + 0.2*(newValue - this.size);
+        *adjustBar() {
+            while (Math.abs(this.size - this.targetValue) > 0.001) {
+                if (this.size < this.targetValue) {
+                    this.colour = "#EEA";
+                } else {
+                    this.colour = "#EBB";
+                }
+                this.size = (this.size) + 0.2*(this.targetValue - this.size);
                 yield delay(25, null);
             }
-            this.size = newValue;
-            if (newValue > this.target) {
+            if (this.size > this.target) {
                 this.colour = "#9E9";
             } else {
                 this.colour = "#CCC";
             }
+            this.size = this.targetValue;
+            this.targetValue = null;
         }
     },
     watch: {
         val(newValue, oldValue) {
-            coroutine()(this.adjustBar(newValue));
+            if (this.targetValue == null) {
+                this.targetValue = newValue;
+                coroutine()(this.adjustBar());
+            } else {
+                this.targetValue = newValue;
+            }
         }
-    }
+    },
 });
