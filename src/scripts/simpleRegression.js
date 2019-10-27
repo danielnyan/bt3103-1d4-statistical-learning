@@ -65,10 +65,8 @@ let fuee = new Vue({
             }
         },
         submit1b : async function() {
-            let entered = $("#answer1b").text()
-            $('#checking1b').slideDown(500);
-            $("#incorrect1b").slideUp(500);
-            $("#correct1b").slideUp(500);
+            let entered = $("#answer1b").text();
+            this.q1b.status = "checking";
             
             let result = await new Promise((resolve, reject) => {
               const nekoUrl = "https://1b1u6ce6m6.execute-api.us-east-1.amazonaws.com/Prod/lambda_handler";
@@ -93,13 +91,10 @@ let fuee = new Vue({
             resultInfo.correct = (expected === entered);
             setTimeout( () => {
               if (resultInfo.correct) {
-                $("#incorrect1b").slideUp(500);
-                $("#correct1b").slideDown(500);
-                $('#checking1b').slideUp(500);
+                this.q1b.status = "correct";
+                this.q1b.solved = true;
               } else {
-                $("#incorrect1b").slideDown(500);
-                $("#correct1b").slideUp(500);
-                $('#checking1b').slideUp(500);
+                this.q1b.status = "incorrect";
               }
             }, 1000 + 3000 * Math.random());
         }

@@ -9,6 +9,8 @@ def question_checker(postReq):
         return question_1a(postReq)
     elif question_id == "1b":
         return question_1b(postReq)
+    elif question_id == "2b":
+        return question_2b(postReq)
 
 def alset_api(postReq):
     # Retrieve the contents from the request
@@ -56,12 +58,10 @@ def question_1a(postReq):
 
 def question_1b(postReq):
     answer = postReq["answer"]
-    expected = None
-    with open("./data/question1b_ans.txt", "r") as f:
-        expected = json.dumps(f.read())
-    gotten = json.loads(get_output(answer, "import pandas as pd\ndf=pd.read_csv('./data/dataset.csv')", "", "ols_result.summary()"))
-    gotten = json.dumps(gotten["output"])
-    solved = (expected == gotten)
+    expected = {'response': 'mpg', 'predictors': ['Intercept', 'acceleration']}
+    gotten = get_output(answer, "import pandas as pd\ndf=pd.read_csv('./data/dataset.csv')", "", '{"response":ols_result.model.endog_names, "predictors":ols_result.model.exog_names}')
+    gotten = json.loads(gotten)
+    solved = (expected == gotten["output"])
     return {
         "statusCode": 200,
         "headers": {
@@ -77,3 +77,19 @@ def question_1b(postReq):
             "answer": answer
         })
     } 
+
+def question_2b(postReq):
+    answer = postReq["answer"]
+    properties = [name for name in answer["name"]]
+    return {
+        "statusCode": 200,
+        "headers": {
+            "Content-Type": "application/json",
+            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Headers": "Content-Type",
+            "Access-Control-Allow-Methods": "OPTIONS,POST,GET"
+        },
+        "body":  json.dumps({
+            "result": properties
+        })
+    }

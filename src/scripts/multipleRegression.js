@@ -55,6 +55,24 @@ let variables = new Vue({
             } else if (operation === "add") {
                 this.properties.push({ name: variable, val: 0 });
             }
+            
+            let result = await new Promise((resolve, reject) => {
+              const nekoUrl = "https://1b1u6ce6m6.execute-api.us-east-1.amazonaws.com/Prod/lambda_handler";
+              const xmlHttp = new XMLHttpRequest();
+              xmlHttp.onreadystatechange = function() { 
+                if (xmlHttp.readyState == 4 && xmlHttp.status == 200) {
+                  resolve(xmlHttp.responseText);
+                } 
+              }
+              xmlHttp.open("POST", nekoUrl, true); 
+              xmlHttp.send(JSON.stringify({
+                questionId:"2b", 
+                answer:JSON.stringify(this.properties)
+              }));
+            });
+            let resultInfoTest = JSON.parse(result);
+            console.log(resultInfoTest);
+            
             for (let item of this.properties) {
                 item.val = Math.min(...Array.from({length: 10},()=>Math.random()));
             }
