@@ -17,7 +17,7 @@ h1 {letter-spacing: 6px}
 <body>
 
 <!-- !PAGE CONTENT! -->
-<div class="w3-content" style="max-width:1500px" id="app">
+<div class="w3-content" id="app" style="max-width:1500px">
 
 <!-- Header -->
 <header class="w3-panel w3-center w3-opacity">
@@ -42,7 +42,7 @@ h1 {letter-spacing: 6px}
       <h1 class="w3-center w3-padding-large"><span class="w3-header" style="font-size:36px">Simple Linear Regression</span></h5>
       <p>Welcome to a tutorial on regression analysis. Regression Analysis is a statistical process of estimate relationships between a depedent variable and one or more independent variables. In this section of the tutorial, we will focus on the simplest form of regression, the Simple Linear Regression.</p>
     </div>
-    <img src="https://raw.githubusercontent.com/danielnyan/bt3103-1d4-statistical-learning/master/img/simple_linear_ex_plot.png" max-width:100% max-height:100% class="w3-image"></img>
+    <img src="https://raw.githubusercontent.com/danielnyan/bt3103-1d4-statistical-learning/master/img/simple_linear_ex_plot.png" class="w3-image"></img>
     <div class="w3-opacity">
     <p>Above we have an example of a simple linear regression, a basic x-y plot. Miles Per Gallon (MPG) is the dependent variable and Weight is the independent variable.</p>
     <p>We plot this in order to find a relationship between the two variables, so that we can use our independent variable, weight, to predict future values of our dependent variable, MPG. With this plot, we can easily tell that two variables have a negative relationship. A higher weight is proportionate to a lower MPG value.</p>
@@ -115,12 +115,8 @@ h1 {letter-spacing: 6px}
     <h1 class="w3-center w3-padding-large"><span class="w3-header" style="font-size:36px">Exercise 1</span></h5>
     <p>Given the following equation, estimate the value <strong>MPG</strong> will take if the <strong>Weight</strong> provided is <strong>5000</strong>! $${MPG = 46.32 + -0.0077*Weight}$$</p>
     <input id="answer1a" size="40"></input>
-    <button class="w3-button w3-border" type="button" onclick="submit1a()">Check Answer</button>
-    <div class="feedback">
-      <div id="correct1a" style="color:green; display:none">Correct!</div>
-      <div id="incorrect1a" style="color:red; display:none">Incorrect!</div>
-      <div id="checking1a" style="color:black; display:none">Checking answer...</div>
-    </div>
+    <button class="w3-button w3-border" type="button" @click="submit1a()">Check Answer</button>
+    <feedback :status="q1a.status" :correct="q1a.correct" :incorrect="q1a.incorrect"></feedback>
   </div>
 </div>
 
@@ -137,12 +133,8 @@ ols_result = ols.fit()
 print(ols_result.summary())
 </code>
     </pre>
-    <button class="w3-button w3-border" type="button" onclick="submit1b()">Check Answer</button>
-    <div class="feedback">
-      <div id="correct1b" style="color:green; display:none">Correct!</div>
-      <div id="incorrect1b" style="color:red; display:none">Incorrect!</div>
-      <div id="checking1b" style="color:black; display:none">Checking answer...</div>
-    </div>
+    <button class="w3-button w3-border" type="button" @click="submit1b()">Check Answer</button>
+    <feedback :status="q1b.status" :correct="q1b.correct" :incorrect="q1b.incorrect"></feedback>
   </div>
 </div>
   

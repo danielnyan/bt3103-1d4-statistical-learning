@@ -195,3 +195,44 @@ Vue.component("rsqbar", {
         }
     },
 });
+
+Vue.component("feedback", {
+    props: ["status", "correct", "incorrect"],
+    template: `
+        <div class="feedback">
+            <div style="color:green; display:none">{{correct}}</div>
+            <div style="color:red; display:none">{{incorrect}}</div>
+            <div style="color:black; display:none">Checking answer...</div>
+        </div>
+    `,
+    watch: {
+        status(newValue, oldValue) {
+            const children = $(this.$el).children();
+            let correctElement = children.eq(0);
+            let incorrectElement = children.eq(1);
+            let checkingElement = children.eq(2);
+            switch (newValue) {
+                case "correct":
+                    correctElement.slideDown(500);
+                    incorrectElement.slideUp(500);
+                    checkingElement.slideUp(500);
+                    break;
+                case "incorrect":
+                    correctElement.slideUp(500);
+                    incorrectElement.slideDown(500);
+                    checkingElement.slideUp(500);
+                    break;
+                case "checking":
+                    correctElement.slideUp(500);
+                    incorrectElement.slideUp(500);
+                    checkingElement.slideDown(500);
+                    break;
+                default:
+                    correctElement.slideUp(500);
+                    incorrectElement.slideUp(500);
+                    checkingElement.slideUp(500);
+                    break;
+            }
+        }
+    },
+});
