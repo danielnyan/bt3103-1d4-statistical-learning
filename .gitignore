@@ -2,3 +2,4 @@ node_modules
 lambdaFunc.zip
 .DS_Store
 site-packages/
+.git

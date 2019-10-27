@@ -112,7 +112,7 @@ h1 {letter-spacing: 6px}
 <!-- Exercise1 Container -->
 <div class="w3-container w3-opacity" id="exercise1" style="padding:64px 16px">
   <div class="w3-content" style="max-width:800px">
-    <h1 class="w3-center w3-padding-large"><span class="w3-header" style="font-size:36px">Exercise 1</span></h5>
+    <h1 class="w3-center w3-padding-large"><span :class="{'w3-header':true, 'correct':q1a.solved}" style="font-size:36px">Exercise 1</span></h5>
     <p>Given the following equation, estimate the value <strong>MPG</strong> will take if the <strong>Weight</strong> provided is <strong>5000</strong>! $${MPG = 46.32 + -0.0077*Weight}$$</p>
     <input id="answer1a" size="40"></input>
     <button class="w3-button w3-border" type="button" @click="submit1a()">Check Answer</button>
@@ -123,7 +123,7 @@ h1 {letter-spacing: 6px}
 <!-- Exercise2 Container -->
 <div class="w3-container w3-opacity" id="exercise2" style="padding:64px 16px">
   <div class="w3-content" style="max-width:800px">
-    <h1 class="w3-center w3-padding-large"><span class="w3-header" style="font-size:36px">Exercise 2</span></h5>
+    <h1 class="w3-center w3-padding-large"><span :class="{'w3-header':true, 'correct':q1b.solved}" style="font-size:36px">Exercise 2</span></h5>
     <p>Perform a simple linear regression with MPG as the dependent variable and Acceleration as the indepedent variable!
     The data has already been loaded for you within the variable df.</p>
     <pre class="w3-border" style="padding:20px">
