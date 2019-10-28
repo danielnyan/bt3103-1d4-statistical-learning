@@ -17,6 +17,14 @@ Parameters:
   LambdaTimeout:
     Type: Number
     Default: 40
+  TableName:
+    Type: String
+    Default: 'lambdalogs'
+    Description: (Required) The name of the new DynamoDB table you want to create and save to. Minimum 3 characters
+    MinLength: 3
+    MaxLength: 50
+    AllowedPattern: ^[A-Za-z]+$
+    ConstraintDescription: 'Required parameter. Must be characters only. No numbers allowed.'
 Resources:
   FunctionRole:
     Properties:
@@ -28,9 +36,11 @@ Resources:
             Principal:
               Service:
                 - lambda.amazonaws.com
+                - dynamodb.amazonaws.com
       ManagedPolicyArns:
         - arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole
         - arn:aws:iam::aws:policy/AmazonS3ReadOnlyAccess
+        - arn:aws:iam::aws:policy/service-role/AWSLambdaDynamoDBExecutionRole
       Path: /
     Type: AWS::IAM::Role
   LambdaFunc:
@@ -59,7 +69,27 @@ Resources:
         Ref: "LambdaRuntime"
       Timeout:
         Ref: "LambdaTimeout"
+      Policies:
+        - DynamoDBCrudPolicy:
+            TableName: 
+              Ref: TableName
+      Environment:
+        Variables:
+          TABLE_NAME: 
+            Ref: TableName 
     Type: AWS::Serverless::Function
+  DynamoDBTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      TableName: 
+        Ref: TableName
+      AttributeDefinitions:
+        - AttributeName: logId
+          AttributeType: S
+      KeySchema:
+        - AttributeName: logId
+          KeyType: HASH
+      BillingMode: PAY_PER_REQUEST
 
 
 
