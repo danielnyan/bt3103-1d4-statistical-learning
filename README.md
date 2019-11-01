@@ -1,4 +1,5 @@
 # bt3103-1d4-statistical-learning
+*Now called Regression Analysis by Team 1d4*
 
 Steps for deploying to Lambda:
 tl;dr: Go to your AWS Educate account and click Account Details. Fork this repo and key in 
@@ -7,8 +8,7 @@ BUCKET_NAME is the name of the S3 bucket you want to use to store the source cod
 trigger our GitHub Action by making a change. 
 
 If you understood the tl;dr, good! Else, if you need a step by step walkthrough, refer to the 
-steps below.
-
+steps below.  
 1. Fork this repository
 <p align="center">
   <img src="./img/lambda_image1.png">
@@ -31,6 +31,7 @@ aws_session_token=reallyLongText
 ```
 Take note of your AWS_ACCESS_KEY_ID (which is MYACCESSKEYID in my case, your access key ID may differ), 
 as well as the AWS_SECRET_ACCESS_KEY and AWS_SESSION_TOKEN. We will use them soon.
+
 5. Go back to your forked repository and click on Settings. 
 <p align="center">
   <img src="./img/lambda_image4.png">
@@ -43,6 +44,7 @@ as well as the AWS_SECRET_ACCESS_KEY and AWS_SESSION_TOKEN. We will use them soo
 the value of your access key ID (which is MYACCESSKEYID in my case). Add in two more secrets 
 AWS_SECRET_ACCESS_KEY and AWS_SESSION_TOKEN and fill in the values according to what you've recorded 
 from Step 4.
+
 8. On AWS Educate, go to AWS Console. 
 <p align="center">
   <img src="./img/lambda_image6.png">
@@ -66,8 +68,10 @@ the example below. Click Next
   <img src="./img/lambda_image10.png">
 </p>
 13. You should be at the Review tab. Click Next to create your bucket, and go back to your Secrets Tab in GitHub.
+
 14. Add your last key which is BUCKET_NAME and set it to be exactly the name of your S3 bucket that you've 
-just created. With reference to step 10, the bucket name we used is example-bucket-name.  
+just created. With reference to step 10, the bucket name we used is example-bucket-name.
+
 15. Make a change in your repository to trigger the Action. You can track the status of the action under the 
 Actions tab. 
 <p align="center">
@@ -88,10 +92,10 @@ of the serverless application. Replace {proxy+} with index.html and you're good 
 </p>
 
 ### Troubleshooting
-**Invalid Credentials**
+**Invalid Credentials**  
 Assuming that you're using AWS Educate, repeat steps 3 to 8 and replace your AWS_SECRET_ACCESS_KEY, 
 AWS_SESSION_TOKEN and AWS_ACCESS_KEY_ID with the new values. Your credentials expire every 3 hours.
 
-**Unable to create stack / ROLLBACK COMPLETE**
+**Unable to create stack / ROLLBACK COMPLETE**  
 Search for CloudFormation on AWS Console and delete the stack called StatisticalLearning, if it exists. 
 Then rerun the checks again. Usually deleting and recreating the stack rectifies the problem.
