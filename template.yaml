@@ -17,10 +17,18 @@ Parameters:
   LambdaTimeout:
     Type: Number
     Default: 40
-  TableName:
+  LogTableName:
     Type: String
     Default: 'lambdalogs'
     Description: (Required) The name of the DynamoDB table containing usage logs of your serverless application. Minimum 3 characters
+    MinLength: 3
+    MaxLength: 50
+    AllowedPattern: ^[A-Za-z]+$
+    ConstraintDescription: 'Required parameter. Must be characters only. No numbers allowed.'
+  UserTableName:
+    Type: String
+    Default: 'userlist'
+    Description: (Required) The name of the DynamoDB table containing user info of your serverless application. Minimum 3 characters
     MinLength: 3
     MaxLength: 50
     AllowedPattern: ^[A-Za-z]+$
@@ -76,21 +84,42 @@ Resources:
                 - "dynamodb:Describe*"
                 - "dynamodb:GetItem"
               Resource:
-                - "*"
+                Fn::Sub: 
+                    arn:${AWS::Partition}:dynamodb:${AWS::Region}:${AWS::AccountId}:table/${tableName}
+                    tableName:
+                        Ref: LogTableName
+                Fn::Sub: 
+                    arn:${AWS::Partition}:dynamodb:${AWS::Region}:${AWS::AccountId}:table/${tableName}
+                    tableName:
+                        Ref: UserTableName
       Environment:
         Variables:
-          TABLE_NAME: 
-            Ref: TableName 
+          LOG_TABLE_NAME: 
+            Ref: LogTableName 
+          USER_TABLE_NAME: 
+            Ref: UserTableName 
     Type: AWS::Serverless::Function
-  DynamoDBTable:
+  DynamoDBLogTable:
     Type: AWS::DynamoDB::Table
     Properties:
       TableName: 
-        Ref: TableName
+        Ref: LogTableName
       AttributeDefinitions:
         - AttributeName: logId
           AttributeType: S
       KeySchema:
         - AttributeName: logId
+          KeyType: HASH
+      BillingMode: PAY_PER_REQUEST
+  DynamoDBUserTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      TableName: 
+        Ref: UserTableName
+      AttributeDefinitions:
+        - AttributeName: userId
+          AttributeType: S
+      KeySchema:
+        - AttributeName: userId
           KeyType: HASH
       BillingMode: PAY_PER_REQUEST
