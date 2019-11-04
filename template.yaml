@@ -104,9 +104,6 @@ Resources:
         - AttributeName: logId
           KeyType: HASH
       BillingMode: PAY_PER_REQUEST
-      ProvisionedThroughput:
-          ReadCapacityUnits: 2
-          WriteCapacityUnits: 2  
   DynamoDBTableUser:
     Type: AWS::DynamoDB::Table
     Properties:
@@ -119,6 +116,3 @@ Resources:
         - AttributeName: userId
           KeyType: HASH
       BillingMode: PAY_PER_REQUEST
-      ProvisionedThroughput:
-          ReadCapacityUnits: 2
-          WriteCapacityUnits: 2  
