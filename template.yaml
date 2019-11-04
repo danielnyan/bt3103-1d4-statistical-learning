@@ -60,28 +60,28 @@ Resources:
         - Statement:
             - Effect: Allow
               Action: 
-                - "s3:Get*",
-                - "cloudwatch:GetMetricStatistics",
-                - "s3:List*",
-                - "cloudwatch:ListMetrics",
-                - "logs:CreateLogGroup",
-                - "logs:PutLogEvents",
-                - "logs:CreateLogStream",
-                - "cloudwatch:DescribeAlarmHistory",
-                - "cloudwatch:DescribeAlarmsForMetric",
+                - "s3:Get*"
+                - "cloudwatch:GetMetricStatistics"
+                - "s3:List*"
+                - "cloudwatch:ListMetrics"
+                - "logs:CreateLogGroup"
+                - "logs:PutLogEvents"
+                - "logs:CreateLogStream"
+                - "cloudwatch:DescribeAlarmHistory"
+                - "cloudwatch:DescribeAlarmsForMetric"
                 - "cloudwatch:DescribeAlarms"
               Resource:
                 - "*"
         - Statement:
             - Effect: Allow
               Action: 
-                - "dynamodb:BatchGetItem",
-                - "dynamodb:PutItem",
-                - "dynamodb:Scan",
-                - "dynamodb:Query",
-                - "dynamodb:UpdateItem",
-                - "dynamodb:List*",
-                - "dynamodb:Describe*",
+                - "dynamodb:BatchGetItem"
+                - "dynamodb:PutItem"
+                - "dynamodb:Scan"
+                - "dynamodb:Query"
+                - "dynamodb:UpdateItem"
+                - "dynamodb:List*"
+                - "dynamodb:Describe*"
                 - "dynamodb:GetItem"
               Resource:
                 - "*"
