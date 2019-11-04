@@ -92,7 +92,7 @@ Resources:
           USER_TABLE_NAME:
             Ref: UserTableName
     Type: AWS::Serverless::Function
-  DynamoDBTableLog:
+  DynamoDBTable:
     Type: AWS::DynamoDB::Table
     Properties:
       TableName: 
@@ -102,17 +102,5 @@ Resources:
           AttributeType: S
       KeySchema:
         - AttributeName: logId
-          KeyType: HASH
-      BillingMode: PAY_PER_REQUEST
-  DynamoDBTableUser:
-    Type: AWS::DynamoDB::Table
-    Properties:
-      TableName: 
-        Ref: UserTableName
-      AttributeDefinitions:
-        - AttributeName: userId
-          AttributeType: S
-      KeySchema:
-        - AttributeName: userId
           KeyType: HASH
       BillingMode: PAY_PER_REQUEST
