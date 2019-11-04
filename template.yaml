@@ -27,8 +27,8 @@ Parameters:
     ConstraintDescription: 'Required parameter. Must be characters only. No numbers allowed.'
   UserTableName:
     Type: String
-    Default: 'userlist'
-    Description: (Required) The name of the DynamoDB table containing user info of your serverless application. Minimum 3 characters
+    Default: 'userdata'
+    Description: (Required) The name of the new DynamoDB table containing user data. Minimum 3 characters
     MinLength: 3
     MaxLength: 50
     AllowedPattern: ^[A-Za-z]+$
@@ -83,16 +83,16 @@ Resources:
                 - "dynamodb:List*"
                 - "dynamodb:Describe*"
                 - "dynamodb:GetItem"
-              Resource: 
+              Resource:
                 - "*"
       Environment:
         Variables:
           LOG_TABLE_NAME: 
             Ref: LogTableName 
-          USER_TABLE_NAME: 
-            Ref: UserTableName 
+          USER_TABLE_NAME:
+            Ref: UserTableName
     Type: AWS::Serverless::Function
-  DynamoDBLogTable:
+  DynamoDBTableLog:
     Type: AWS::DynamoDB::Table
     Properties:
       TableName: 
@@ -104,7 +104,7 @@ Resources:
         - AttributeName: logId
           KeyType: HASH
       BillingMode: PAY_PER_REQUEST
-  DynamoDBUserTable:
+  DynamoDBTableUser:
     Type: AWS::DynamoDB::Table
     Properties:
       TableName: 
