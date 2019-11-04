@@ -10,8 +10,8 @@ dynamodb = boto3.resource('dynamodb')
 def save_logs(logData):
     timestamp = str(datetime.utcnow().timestamp())
 
-    log_table_name = os.environ['LOG_TABLE_NAME']
-    table = dynamodb.Table(log_table_name)
+    table_name = os.environ['TABLE_NAME']
+    table = dynamodb.Table(table_name)
     
     log = logData.copy() 
     log['logId'] = str(timestamp) 

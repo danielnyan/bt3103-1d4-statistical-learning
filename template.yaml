@@ -17,18 +17,10 @@ Parameters:
   LambdaTimeout:
     Type: Number
     Default: 40
-  LogTableName:
+  TableName:
     Type: String
     Default: 'lambdalogs'
     Description: (Required) The name of the DynamoDB table containing usage logs of your serverless application. Minimum 3 characters
-    MinLength: 3
-    MaxLength: 50
-    AllowedPattern: ^[A-Za-z]+$
-    ConstraintDescription: 'Required parameter. Must be characters only. No numbers allowed.'
-  UserTableName:
-    Type: String
-    Default: 'userdata'
-    Description: (Required) The name of the new DynamoDB table containing user data. Minimum 3 characters
     MinLength: 3
     MaxLength: 50
     AllowedPattern: ^[A-Za-z]+$
@@ -87,16 +79,14 @@ Resources:
                 - "*"
       Environment:
         Variables:
-          LOG_TABLE_NAME: 
-            Ref: LogTableName 
-          USER_TABLE_NAME:
-            Ref: UserTableName
+          TABLE_NAME: 
+            Ref: TableName 
     Type: AWS::Serverless::Function
   DynamoDBTable:
     Type: AWS::DynamoDB::Table
     Properties:
       TableName: 
-        Ref: LogTableName
+        Ref: TableName
       AttributeDefinitions:
         - AttributeName: logId
           AttributeType: S
@@ -104,19 +94,3 @@ Resources:
         - AttributeName: logId
           KeyType: HASH
       BillingMode: PAY_PER_REQUEST
-  DynamoDBTable:
-    Type: AWS::DynamoDB::Table
-    Properties:
-      TableName: 
-        Ref: UserTableName
-      AttributeDefinitions:
-        - AttributeName: userId
-          AttributeType: S
-      KeySchema:
-        - AttributeName: userId
-          KeyType: HASH
-      BillingMode: PAY_PER_REQUEST
-
-
-
-
