@@ -35,19 +35,17 @@ def generate_id():
     generatedId = None
     while generatedId == None:
         generatedId = str(uuid4())
-        try:
-            response = table.get_item(
-                Key={
-                    'userId': generatedId
-                }
-            )
-        except ClientError as e:
-            table.put_item(Item={
-                'userId': generatedId,
-                'completedQuestions': 0
-            })
+        response = table.get_item(
+            Key={
+                'userId' : generatedId
+            }
+        )
+        if "Item" in response:
+            generatedId = None
         else:
-            generatedId = "asdf"
+            table.put_item(Item={
+                "userId" : generatedId
+            })
     return {
         "statusCode": 200,
         "headers": {
