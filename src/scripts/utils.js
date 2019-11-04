@@ -272,3 +272,10 @@ const initializeCodeblocks = function(codeblockNames) {
     });
   }
 }
+
+$(document).ready(() => {
+  if (sessionStorage.getItem("userID") === null) {
+    $("#nologin").show();
+    $("#app").hide();
+  }
+});

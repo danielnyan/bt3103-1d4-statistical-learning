@@ -6,3 +6,5 @@ and the questions they completed.
 We can either use window.name or sessionStorage.getItem / 
 setItem to persist the user ID across webpages.
 */
+
+sessionStorage.setItem("userID", "nyan");
