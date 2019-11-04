@@ -83,7 +83,8 @@ Resources:
                 - "dynamodb:List*"
                 - "dynamodb:Describe*"
                 - "dynamodb:GetItem"
-              Resource: "*"
+              Resource: 
+                - "*"
       Environment:
         Variables:
           LOG_TABLE_NAME: 

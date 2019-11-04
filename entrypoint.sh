@@ -35,6 +35,7 @@ if  sam deploy \
     then 
         exit 0
     else
+        sam describe-stack-events --stack-name StatisticalLearning
         exit 1
 fi
 
