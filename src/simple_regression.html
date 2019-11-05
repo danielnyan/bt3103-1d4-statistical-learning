@@ -154,9 +154,9 @@
       <p>Perform a simple linear regression with MPG as the dependent variable and Acceleration as the indepedent variable!
       The data has already been loaded for you within the variable df.</p>
       <textarea contenteditable id="answer1b">import statsmodels.formula.api as smf
-      ols = smf.ols(formula='mpg ~ weight', data=df)
-      ols_result = ols.fit()
-      print(ols_result.summary())
+ols = smf.ols(formula='mpg ~ weight', data=df)
+ols_result = ols.fit()
+print(ols_result.summary())
       </textarea>
       <button class="w3-button w3-border" type="button" @click="submit1b()">Check Answer</button>
       <feedback :status="q1b.status" :correct="q1b.correct" :incorrect="q1b.incorrect"></feedback>

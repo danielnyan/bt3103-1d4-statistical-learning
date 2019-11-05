@@ -119,6 +119,7 @@ h1 {letter-spacing: 6px}
   <div class="w3-content" style="max-width:800px">
     <h1 class="w3-center w3-padding-large"><span class="w3-header" style="font-size:36px">Exercises</span></h5>
     <p>Write the code in order to generate a multiple linear regression model of MPG against cylinders, displacement, horsepower, weight, acceleration, year, and origin. Print the summary.</p>
+    <!-- Avoid the urge to indent this. The whitespace here is kept -->
     <textarea contenteditable id="answer2a">import pandas as pd
 df = pd.read_csv("dataset.csv")
 import statsmodels.formula.api as smf
@@ -133,9 +134,10 @@ import statsmodels.formula.api as smf
 <div class="w3-panel" id="next" style="padding:64px 16px">
   <div class="w3-content w3-opacity" style="max-width:800px">
     <h1 class="w3-center w3-padding-large"><span class="w3-header" style="font-size:36px">To the next exercise!</span></h1>
-    <p>Done with the exercises? The next section is also on multiple linear regression but
-    <a class="w3-button w3-border next" href="multiple_regression2.html">Next Page</a> 
-    we will be focusing on something different, the p-value! Click the button and let's go!</p>
+    <p>Done with the exercises? The next section is also on multiple linear regression but <a class="w3-button w3-border next" @click="nextPage()">Next Page</a></br>
+    we will be focusing on something different, the p-value! Click the button and let's go! </p>
+    <div id="prompt" style="display:none ; color:red">You have not completed all the exercises, are you sure you want to move on? Click Next Page again to confirm.
+    </div>
   </div>
 </div>
 
