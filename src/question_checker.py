@@ -79,6 +79,28 @@ def question_1b(postReq):
             "answer": answer
         })
     } 
+    
+def question_2a(postReq):
+    answer = json.loads(postReq["answer"])
+    expected = {'response': 'mpg', 'predictors': ['Intercept', 'cylinders', 'displacement', 'horsepower','weight','acceleration','year','origin']}
+    gotten = get_output(answer, "import scipy\n", "", '{"response":ols_result.model.endog_names, "predictors":ols_result.model.exog_names}')
+    gotten = json.loads(gotten)
+    solved = (expected == gotten["output"])
+    return {
+        "statusCode": 200,
+        "headers": {
+            "Content-Type": "application/json",
+            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Headers": "Content-Type",
+            "Access-Control-Allow-Methods": "OPTIONS,POST,GET"
+        },
+        "body":  json.dumps({
+            "correct": solved,
+            "expected": expected,
+            "gotten": gotten,
+            "answer": answer
+        })
+    }  
 
 def question_2b(postReq):
     answer = json.loads(postReq["answer"])
