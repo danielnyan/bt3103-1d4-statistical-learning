@@ -19,7 +19,7 @@ Parameters:
     Default: 40
   LogTableName:
     Type: String
-    Default: 'lambdalogs'
+    Default: 'regressionanalysislogs'
     Description: (Required) The name of the DynamoDB table containing usage logs of your serverless application. Minimum 3 characters
     MinLength: 3
     MaxLength: 50
