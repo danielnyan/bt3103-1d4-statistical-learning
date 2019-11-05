@@ -88,6 +88,17 @@ let fuee = new Vue({
             } else {
                 this.q1b.status = "incorrect";
             }
+        },
+        nextPage() {
+            if ((this.q1a.solved && this.q1b.solved) || $("#prompt").css("display") !== "none") {
+                window.location.href = "multiple_regression.html"
+            } else {
+                $("#prompt").slideDown(500);
+                setTimeout(this.hidePrompt, 5000)
+            }
+        },
+        hidePrompt() {
+            $("#prompt").slideUp(500);
         }
     },
     mounted() {

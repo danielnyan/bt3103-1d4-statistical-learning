@@ -153,13 +153,24 @@
       <h1 class="w3-center w3-padding-large"><span :class="{'w3-header':true, 'correct':q1b.solved}" style="font-size:36px">Exercise 2</span></h5>
       <p>Perform a simple linear regression with MPG as the dependent variable and Acceleration as the indepedent variable!
       The data has already been loaded for you within the variable df.</p>
-<textarea contenteditable id="answer1b">import statsmodels.formula.api as smf
-ols = smf.ols(formula='mpg ~ weight', data=df)
-ols_result = ols.fit()
-print(ols_result.summary())
-</textarea>
+      <textarea contenteditable id="answer1b">import statsmodels.formula.api as smf
+      ols = smf.ols(formula='mpg ~ weight', data=df)
+      ols_result = ols.fit()
+      print(ols_result.summary())
+      </textarea>
       <button class="w3-button w3-border" type="button" @click="submit1b()">Check Answer</button>
       <feedback :status="q1b.status" :correct="q1b.correct" :incorrect="q1b.incorrect"></feedback>
+    </div>
+  </div>
+
+  <!-- Next Page Button -->
+  <div class="w3-panel" id="next" style="padding:64px 16px">
+    <div class="w3-content w3-opacity" style="max-width:800px">
+      <h1 class="w3-center w3-padding-large"><span class="w3-header" style="font-size:36px">To the next exercise!</span></h1>
+      <p>If you have completed all the exercises, and or would like to move on, <a class="w3-button w3-border next" @click="nextPage()">Next Page</a></br>
+      click on the button to move onto the next page, Multiple Linear Regression. </p>
+      <div id="prompt" style="display:none ; color:red">You have not completed all the exercises, are you sure you want to move on? Click Next Page again to confirm.
+      </div>
     </div>
   </div>
     

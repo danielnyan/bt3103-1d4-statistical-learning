@@ -65,6 +65,10 @@ a {
     background-color: transparent
 }
 
+a.next {
+    float: right
+}
+
 a:active,
 a:hover {
     outline-width: 0
