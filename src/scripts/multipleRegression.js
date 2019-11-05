@@ -11,7 +11,7 @@ let fuee = new Vue({
     methods: {
         submit2a: async function() {
             let entered = parseCode("answer2a");
-            this.q1b.status = "checking";
+            this.q2a.status = "checking";
             let result = await new Promise((resolve, reject) => {
                 const nekoUrl = window.location.origin + "/Prod/lambda_handler"
                 const xmlHttp = new XMLHttpRequest();
