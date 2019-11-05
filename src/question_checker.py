@@ -22,7 +22,6 @@ def alset_api(postReq):
     userToken = postReq["userToken"]
     
     
-    
     # Calculate different feedbacks
     allFeedback = {
       "isComplete": True,
