@@ -9,8 +9,6 @@ def question_checker(postReq):
         return question_1a(postReq)
     elif question_id == "1b":
         return question_1b(postReq)
-    elif question_id == "2a":
-        return question_2a(postReq)
     elif question_id == "2b":
         return question_2b(postReq)
 
