@@ -27,6 +27,7 @@ let fuee = new Vue({
                 }));
             });
             let resultInfo = JSON.parse(result);
+            console.log(resultInfo)
             if (resultInfo.correct) {
                 this.q2a.status = "correct";
                 this.q2a.solved = true;
