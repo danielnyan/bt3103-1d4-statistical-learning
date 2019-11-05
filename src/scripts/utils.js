@@ -249,6 +249,7 @@ Vue.component("feedback", {
     },
 });
 
+
 const parseCode = function(id) {
     let lines = $("#" + id).next().find(".codemirror-line");
     let output = ""
