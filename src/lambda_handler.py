@@ -18,14 +18,15 @@ class DecimalEncoder(json.JSONEncoder):
 dynamodb = boto3.resource('dynamodb')
 
 def save_logs(logData):
-    timestamp = str(datetime.utcnow().timestamp())
+    timestamp = datetime.utcnow()
 
     table_name = os.environ['LOG_TABLE_NAME']
     table = dynamodb.Table(table_name)
     
     log = logData.copy() 
-    log['logId'] = str(timestamp) 
-    log['createdAt'] = timestamp
+    log['logId'] = str(timestamp.timestamp())
+    log['userId'] = "HoshizoraRinyan"
+    log['createdAt'] = str(timestamp)
 
     table.put_item(Item=log)
     
