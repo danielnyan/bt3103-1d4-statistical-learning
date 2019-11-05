@@ -98,11 +98,15 @@ Resources:
       TableName: 
         Ref: LogTableName
       AttributeDefinitions:
+        - AttributeName: userId
+          AttributeType: S
         - AttributeName: logId
           AttributeType: S
       KeySchema:
-        - AttributeName: logId
+        - AttributeName: userId
           KeyType: HASH
+        - AttributeName: logId
+          KeyType: RANGE
       BillingMode: PAY_PER_REQUEST
   DynamoDBTableUser:
     Type: AWS::DynamoDB::Table
