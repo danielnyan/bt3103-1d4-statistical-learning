@@ -299,7 +299,8 @@ const submitToLambda = function(questionId, answer) {
     xmlHttp.send(JSON.stringify({
       questionId: questionId,
       answer: answer,
-      userId: sessionStorage.getItem("userID")
+      userId: sessionStorage.getItem("userID"),
+      operation: "checkAnswer"
     }));
   });
 }

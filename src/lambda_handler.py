@@ -25,7 +25,6 @@ def save_logs(logData):
     
     log = logData.copy() 
     log['logId'] = str(timestamp.timestamp())
-    log['userId'] = "HoshizoraRinyan"
     log['createdAt'] = str(timestamp)
 
     table.put_item(Item=log)
@@ -67,9 +66,13 @@ def lambda_handler(event, context):
         return content_parser(path)
     if method == 'POST':
         postReq = json.loads(event.get('body', {})) 
-        save_logs(postReq)
         if "userToken" in postReq or "questionId" in postReq:
-            return question_checker(postReq)
+            response = question_checker(postReq)
+            save_logs(response)
+            if postReq["operation"] == "checkAnswer":
+                if response["body"]["correct"]:
+                    # update_completed(postReq["questionId"], postReq["userId"])
+            return response
         elif "operation" in postReq:
             if postReq["operation"] == "generateId":
                 return generate_id()
