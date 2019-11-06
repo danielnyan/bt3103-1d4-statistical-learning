@@ -284,6 +284,28 @@ const initializeCodeblocks = function (codeblockNames) {
 	}
 }
 
+const retrieveProgress = function() {
+  return new Promise((resolve, reject) => {
+    const nekoUrl = window.location.origin + "/Prod/lambda_handler";
+    const xmlHttp = new XMLHttpRequest();
+    xmlHttp.onreadystatechange = function () {
+      if (xmlHttp.readyState == 4 && xmlHttp.status == 200) {
+        const response = JSON.parse(xmlHttp.responseText);
+        resolve(JSON.parse(response.completed));
+      }
+    }
+    xmlHttp.onerror = () => {
+      console.error("Error! Progress cannot be retrieved");
+      resolve([]);
+    };
+    xmlHttp.open("POST", nekoUrl, true);
+    xmlHttp.send(JSON.stringify({
+      userId: sessionStorage.getItem("userID"),
+      operation: "getProgress"
+    }));
+  });
+}
+
 // Usage: await submitToLambda(questionId, answer)
 const submitToLambda = function(questionId, answer) {
   return new Promise((resolve, reject) => {

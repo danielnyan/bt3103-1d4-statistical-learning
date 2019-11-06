@@ -55,5 +55,10 @@ let fuee = new Vue({
   },
   mounted() {
     initializeCodeblocks(["answer2a"]);
+    retrieveProgress().then((result) => {
+      if (result.includes("2a")) {
+        this.q2a.solved = true;
+      }
+    });
   }
 });

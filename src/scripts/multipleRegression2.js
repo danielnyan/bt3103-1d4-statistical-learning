@@ -36,11 +36,14 @@ let variables = new Vue({
     selected: [],
     properties: [],
     rSquared: 0,
-    target: 0.81825
+    target: 0.81825,
+    q2b: {
+      solved: false
+    }
   },
   methods: {
     nextPage() {
-      if ((this.rSquared >= this.target) || $("#prompt").css("display") !== "none") {
+      if (this.q2b.solved || $("#prompt").css("display") !== "none") {
         window.location.href = "index.html"
       } else {
         $("#prompt").slideDown(500);
@@ -76,7 +79,6 @@ let variables = new Vue({
         selectedNames.push(obj.name);
       }
       selectedNames.sort();
-      submitToLambda("2b", JSON.stringify(selectedNames));
       if (selectedNames.length === 0) {
         this.properties = [];
         this.rSquared = 0;
@@ -111,11 +113,25 @@ let variables = new Vue({
           val: selected[prop]
         });
       }
+      if (this.rSquared > this.target) {
+        this.q2b.solved = true;
+      }
+      submitToLambda("2b", JSON.stringify({
+        rSquared: this.rSquared,
+        selected: selectedNames
+      }));
     },
     initialise(e) {
       Vue.nextTick(() => {
         e.previousParent = e.$el.parentElement;
       })
     },
+  },
+  mounted() {
+    retrieveProgress().then((result) => {
+      if (result.includes("2b")) {
+        this.q2b.solved = true;
+      }
+    });
   }
 });
