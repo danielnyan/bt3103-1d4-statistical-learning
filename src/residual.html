@@ -45,12 +45,7 @@ h1 {letter-spacing: 6px}
       <p>After building a multiple linear regression model, we need to check the residual plot to validate the model. There are mathematical reasons behind it.</p>
       <p>In this section of the tutorial, we will cover the reason why we need to check the residual plot, the code to check, and some multiple-choice questions.</p>
     </div>
-    <img src="https://raw.githubusercontent.com/danielnyan/bt3103-1d4-statistical-learning/master/img/residual_plot.png" max-width:100% max-height:100% class="w3-image"></img>
-    <div class="w3-opacity">
-    <p>Above we have an residual plot for the multiple-regression model we generated from the drag-and-drop section.</p>
-    <p>We plot this in order to conduct residual analysis of the model generated.</p>
-    <p>From the plot, we can see the residual distribution of the model. The mathematics will be shown below to show how we get these residuals.</p>
-    </div>
+    
   </div>
 </div>
 
@@ -59,9 +54,16 @@ h1 {letter-spacing: 6px}
   <div class="w3-content" style="max-width:800px">
     <div class="w3-opacity  w3-center">
       <h1 class="w3-center w3-padding-large"><span class="w3-header" style="font-size:36px">The Mathematics Involved</span></h5>
-      <p>We can simply get the residuals for each data point with this equation. $${RESIDUAL = real_value - predicted_value}$$</p>
+      <p>We can simply get the residuals for each data point with this equation. $${RESIDUAL = realvalue - predictedvalue}$$</p>
       <p>For example, if a data point has a predicted value 15.2688 and the real MPG 18, we can get the residuals by</p>
       <p>$${RESIDUAL = 18 - 15.2688 = 2.7312}$$</p>
+      <p>Then we can get all rresiduals for each data point and plot it out as below:</p>
+      <img src="https://raw.githubusercontent.com/danielnyan/bt3103-1d4-statistical-learning/master/img/residual_plot.png" max-width:100% max-height:100% class="w3-image"></img>
+      <div class="w3-opacity">
+      <p>Above we have an residual plot for the multiple-regression model we generated from the drag-and-drop section.</p>
+      <p>We plot this in order to conduct residual analysis of the model generated.</p>
+      <p>From the plot, we can see the residual distribution of the model. The mathematics will be shown below to show how we get these residuals.</p>
+      </div>
     </div>
   </div>
 </div>
