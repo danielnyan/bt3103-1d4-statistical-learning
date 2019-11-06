@@ -44,7 +44,8 @@ def generate_id():
             generatedId = None
         else:
             table.put_item(Item={
-                "userId" : generatedId
+                "userId" : generatedId,
+                "completed" : json.dumps([])
             })
     return {
         "statusCode": 200,
@@ -59,6 +60,26 @@ def generate_id():
         })
     }
 
+def update_completed(questionId, userId):
+    table_name = os.environ['USER_TABLE_NAME']
+    table = dynamodb.Table(table_name)
+    userdata = table.get_item(
+        Key={"userId":userId}
+    )
+    new_completed = json.loads(userdata["Item"]["completed"])
+    if questionId not in new_completed:
+        new_completed.append(questionId)
+        new_completed.sort()
+    new_completed = json.dumps(new_completed)
+    table.update_item(
+        Key={"userId":userId},
+        UpdateExpression="SET completed = :newCompleted",
+        ExpressionAttributeValues={
+            ":newCompleted": new_completed
+        },
+        ReturnValues="UPDATED_NEW"
+    )
+
 def lambda_handler(event, context):
     method = event.get('httpMethod', {})
     if method == 'GET':
@@ -71,7 +92,7 @@ def lambda_handler(event, context):
             save_logs(response)
             if postReq["operation"] == "checkAnswer":
                 if response["body"]["correct"]:
-                    # update_completed(postReq["questionId"], postReq["userId"])
+                    update_completed(postReq["questionId"], postReq["userId"])
             return response
         elif "operation" in postReq:
             if postReq["operation"] == "generateId":
