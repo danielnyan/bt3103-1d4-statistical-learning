@@ -85,6 +85,14 @@ def question_2a(postReq):
     expected = {'response': 'mpg', 'predictors': ['Intercept', 'cylinders', 'displacement', 'horsepower','weight','acceleration','year','origin']}
     gotten = get_output(answer, "import scipy\n", "", '{"response":ols_result.model.endog_names, "predictors":ols_result.model.exog_names}')
     gotten = json.loads(gotten)
+    if "predictors" in expected:
+        if "Intercept" in expected["predictors"]:
+            expected["predictors"].remove("Intercept")
+        expected["predictors"] = sorted(expected["predictors"])
+    if "predictors" in gotten["output"]:
+        if "Intercept" in gotten["output"]["predictors"]:
+            gotten["output"]["predictors"].remove("Intercept")
+        gotten["output"]["predictors"] = sorted(gotten["output"]["predictors"])
     solved = (expected == gotten["output"])
     return {
         "statusCode": 200,

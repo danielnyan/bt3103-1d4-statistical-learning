@@ -34,7 +34,7 @@ let fuee = new Vue({
         .catch((err) => {
           errorMessage = err || "Network request failed";
         });
-      
+        
       if (errorMessage !== null) {
         this.q1b.status = "incorrect";
         this.q1b.incorrect = "There appears to be a network error. Message: " + errorMessage;
