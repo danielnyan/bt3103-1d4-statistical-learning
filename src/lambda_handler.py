@@ -86,13 +86,22 @@ def lambda_handler(event, context):
         path = event.get('path')
         return content_parser(path)
     if method == 'POST':
-        postReq = json.loads(event.get('body', {})) 
-        if "userToken" in postReq or "questionId" in postReq:
+        postReq = json.loads(event.get('body', {}))
+        if "userToken" in postReq:
             response = question_checker(postReq)
+            response["userId"] = postReq["userToken"]
             save_logs(response)
+            return response
+        elif "questionId" in postReq:
+            response = question_checker(postReq)
+            logged = response.copy()
+            logged["userId"] = postReq["userId"]
             if postReq["operation"] == "checkAnswer":
-                if response["body"]["correct"]:
+                logged["operation"] = "checkAnswer"
+                logged["questionId"] = postReq["questionId"]
+                if json.loads(logged["body"])["correct"]:
                     update_completed(postReq["questionId"], postReq["userId"])
+            save_logs(logged)
             return response
         elif "operation" in postReq:
             if postReq["operation"] == "generateId":
