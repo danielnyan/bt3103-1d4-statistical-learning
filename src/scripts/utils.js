@@ -259,6 +259,9 @@ Vue.component("feedback", {
 
 const parseCode = function (id) {
 	let lines = $("#" + id).next().find(".codemirror-line");
+  if (lines.length === 0) {
+    lines = $("#" + id).next().find(".CodeMirror-line");
+  }
 	let output = ""
 		for (let i = 0; i < lines.length; i++) {
 			let line = lines.eq(i).text();
@@ -291,7 +294,7 @@ const submitToLambda = function(questionId, answer) {
         resolve(xmlHttp.responseText);
       }
     }
-    xmlHttp.onerror = reject(xmlHttp.responseText);
+    xmlHttp.onerror = () => {reject(xmlHttp.responseText);};
     xmlHttp.open("POST", nekoUrl, true);
     xmlHttp.send(JSON.stringify({
       questionId: questionId,
