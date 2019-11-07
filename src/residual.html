@@ -74,11 +74,10 @@ h1 {letter-spacing: 6px}
   <div class="w3-content" style="max-width:800px">
     <div class="w3-opacity">
       <h1 class="w3-center w3-padding-large"><span class="w3-header" style="font-size:36px">The Python Code</span></h5>
-      <p>First, we have to load in the dataset.</p>
+      <p>First, we add a new column which stores the predicted value.</p>
       <pre class="w3-border">
       <code>
-        import pandas as pd
-        df = pd.read_csv("dataset.csv")
+        df['predicted'] = 0
       </code>
       </pre>
       <br>
