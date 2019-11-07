@@ -6,7 +6,7 @@ let app = new Vue({
     q3: false,
     q4: false,
     q5: false,
-  }
+  },
   mounted() {
     retrieveProgress().then((result) => {
       if (result.includes("1a") && result.includes("1b")) {
