@@ -49,21 +49,32 @@ let fuee = new Vue({
     },
     submitId() {
       this.existingUserStatus = "Querying database for user ID..."
-      this.restoreId($("#userid").val()).then(() => {
-        sessionStorage.setItem("userID", $("#userid").val());
-        this.existingUserStatus = "Save data loaded! You are being redirected."
-        window.location.href = "contents.html"
+      this.restoreId($("#userid").val()).then((userId) => {
+        sessionStorage.setItem("userID", userId);
+        if (userId === "debugnyan") {
+          this.existingUserStatus = "Nyan nya! You are now entering Debug Mode! Warning: Some stuff might break";
+        } else {
+          this.existingUserStatus = "Save data loaded! You are being redirected.";
+        }
+        window.setTimeout(() => {
+          window.location.href = "contents.html";
+        }, 1000);
       }).catch((error) => {
         this.existingUserStatus = error || "Network request failed.";
       });
     },
     restoreId(userId) {
+      if (userId === "debugnyan") {
+        return new Promise((resolve, reject) => {
+          resolve("debugnyan");
+        });
+      }
       return new Promise((resolve, reject) => {
         const nekoUrl = window.location.origin + "/Prod/lambda_handler";
         const xmlHttp = new XMLHttpRequest();
         xmlHttp.onreadystatechange = function () {
           if (xmlHttp.readyState === 4 && xmlHttp.status === 200) {
-            resolve(xmlHttp.responseText);
+            resolve(userId);
           } 
         }
         xmlHttp.onerror = () => {reject(xmlHttp.responseText);};
