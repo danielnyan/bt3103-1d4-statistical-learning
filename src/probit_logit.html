@@ -54,8 +54,7 @@
     <div class="w3-padding-16">
       <div class="w3-bar w3-border">
         <a href="#intro" class="w3-bar-item w3-button">Intro</a>
-        <a href="#probit" class="w3-bar-item w3-button">Probit</a>
-        <a href="#logit" class="w3-bar-item w3-button">Logit</a>
+        <a href="#probit" class="w3-bar-item w3-button">Probit/Logit</a>
         <a href="#code" class="w3-bar-item w3-button">The Code</a>
         <a href="#exercise1" class="w3-bar-item w3-light-grey">Exercise 1</a>
         <a href="#exercise2" class="w3-bar-item w3-light-grey">Exercise 2</a>
@@ -71,15 +70,22 @@
     <div class="w3-content" style="max-width:800px">
       <div class="w3-opacity">
         <h1 class="w3-center w3-padding-large"><span class="w3-header" style="font-size:36px">Introduction to binary response variables</span></h5>
-        <p>Recall all the datasets that we have gone through thus far. We have been predicting a continuous variable, that has a range of values. What happens if we want to predict a boolean variable, that is either true or false? Here, we will use the popular titanic dataset from kaggle. Let us try to plot out the rate of survival against the fare that each passneger paid.</p>
+        <p>Recall all the datasets that we have gone through thus far. We have been predicting a continuous variable, that 
+        has a range of values. What happens if we want to predict a boolean variable, that is either true or false? Here, 
+        Here, we set</p>
       </div>
-        <img src="https://raw.githubusercontent.com/danielnyan/bt3103-1d4-statistical-learning/master/img/titanic_bad1.png">
+        <img src="https://raw.githubusercontent.com/danielnyan/bt3103-1d4-statistical-learning/master/img/probit_logit_bad1.png" class="w3-image">
       <div class="w3-opacity">
-        <p>That looks absolutely dreadful, doesn't it? Survivalship is modelled as 1 if the passenger lives, and a zero if the passenger doesn't. How does one plot a best fit line for this? Let's give it a shot, shall we?</p>
+        <p>That looks hard to fit a linear regression on, doesn't it? Y has only two values, 0 and 1, where 0 is false and 1 is true. 
+        How does one plot a best fit line for this? Let's give it a shot, shall we?</p>
       </div>
-        <img src="https://raw.githubusercontent.com/danielnyan/bt3103-1d4-statistical-learning/master/img/titanic_bad2.png">
+        <img src="https://raw.githubusercontent.com/danielnyan/bt3103-1d4-statistical-learning/master/img/probit_logit_bad2.png" class="w3-image">
       <div class="w3-opacity">        
-        <p>Well, that looks incredibly bad now. Can you figure out what's wrong with the model? For one, the predicted survivorship variable is predicted as a continuous variable, goes past the ceiling of 1. We need to keep our model between the bounds of 0 and 1 somehow. This is where the probit and logit models come in. These models are statistical models used to model binary response variables, and are the preferred models for predicting such variables.</p>
+        <p>Hmm, that doesn't look good. Can you figure out what's wrong with the model? For one, the Y 
+        variable is predicted as a continuous variable, goes past the ceiling of 1. </p>
+        <p>We need to keep our model between the bounds of 0 and 1. This is where the probit 
+        and logit models come in. These models are statistical models used to model binary response 
+        variables, and are the preferred models for predicting such variables.</p>
       </div>
     </div>
   </div>
@@ -88,19 +94,22 @@
   <div class="w3-container" id="probit" style="padding:64px 16px">
     <div class="w3-content" style="max-width:800px">
       <div class="w3-opacity  w3-center">
-        <h1 class="w3-center w3-padding-large"><span class="w3-header" style="font-size:36px">The Probit Model</span></h5>
+        <h1 class="w3-center w3-padding-large"><span class="w3-header" style="font-size:36px">The Probit and Logit Model</span></h5>
       </div>
+      <img src="https://raw.githubusercontent.com/danielnyan/bt3103-1d4-statistical-learning/master/img/probit_logit_good.png" class="w3-image">
+      <div class="w3-opacity">
+        <p>The probit and logit functions are sigmoid functions. These functions have a characteristic 'S' shape, and in the case of the probit and logit functions,
+        are bound between 0 and 1. Essentially, what the probit and logit functions does is to transform the linear relationship between the variables and transform 
+        them into a non-linear relationship. For example, if a linear relationship between X and Y would look like: $${Y = intercept + coef*X}$$</p>
+        <p>The probit and logit relationship would look like: $${Y = f(intercept + coef*X)}$$</p>
+        <p>These two models implement this function ${f(*)}$ differently, but ultimately yield extremely similar results. However, the logit model is the more popular model
+        as its coefficients can be better interpretated as an odds ration. We will not go too in depth about these two functions in this tutorial.</p>
+        <div class="w3-panel w3-leftbar w3-light-grey">
+        <p>Do you know what probit and logit stands for? Probit is a shortened form for Probability Unit, and Logit is a blend of logistic + probit!</p>
+      </div>
+      </div>   
     </div>
   </div> 
-
-  <!-- Logit Container-->
-  <div class="w3-container" id="logit" style="padding:64px 16px">
-    <div class="w3-content" style="max-width:800px">
-      <div class="w3-opacity  w3-center">
-        <h1 class="w3-center w3-padding-large"><span class="w3-header" style="font-size:36px">The Logit Model</span></h5>
-      </div>
-    </div>
-  </div>
 
   <!-- Code Container-->
   <div class="w3-container" id="code" style="padding:64px 16px">
