@@ -1,11 +1,11 @@
 let app = new Vue({
   el : "#app",
   data: {
-    q1: false;
-    q2: false;
-    q3: false;
-    q4: false;
-    q5: false;
+    q1: false,
+    q2: false,
+    q3: false,
+    q4: false,
+    q5: false,
   }
   mounted() {
     retrieveProgress().then((result) => {
