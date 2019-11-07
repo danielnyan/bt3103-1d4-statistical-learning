@@ -56,4 +56,4 @@ const restoreId = async function (userId) {
   }
 }
 
-setup();
+generateId();
