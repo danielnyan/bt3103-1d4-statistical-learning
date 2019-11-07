@@ -14,7 +14,7 @@ let fuee = new Vue({
           this.savecode = response;
           window.location.href = "contents.html"
         }).catch((error) => {
-          this.savecode = error || "Network request failed";
+          this.savecode = error || "Network request failed. See Developer Logs for more details.";
           this.newUserHeader = "A network error has occurred";
         });
       });
@@ -38,6 +38,8 @@ let fuee = new Vue({
             let response = JSON.parse(xmlHttp.responseText);
             sessionStorage.setItem("userID", response.id);
             resolve(response.id);
+          } else if (xmlHttp.readyState === 4 && xmlHttp.status !== 200) {
+            reject(xmlHttp.status + ": " + xmlHttp)
           }
         }
         xmlHttp.onerror = () => {reject(xmlHttp.responseText);};
@@ -60,7 +62,7 @@ let fuee = new Vue({
           window.location.href = "contents.html";
         }, 1000);
       }).catch((error) => {
-        this.existingUserStatus = error || "Network request failed.";
+        this.existingUserStatus = error || "Network request failed. See Developer Logs for more details.";
       });
     },
     restoreId(userId) {
@@ -75,7 +77,13 @@ let fuee = new Vue({
         xmlHttp.onreadystatechange = function () {
           if (xmlHttp.readyState === 4 && xmlHttp.status === 200) {
             resolve(userId);
-          } 
+          } else if (xmlHttp.readyState === 4 && xmlHttp.status !== 200) {
+            if (xmlHttp.status === 401 && 
+              JSON.parse(xmlHttp.responseText).error === "The user cannot be found") {
+                reject("The save code that you entered is invalid.")
+            }
+            reject(xmlHttp.status + ": " + xmlHttp)
+          }            
         }
         xmlHttp.onerror = () => {reject(xmlHttp.responseText);};
         xmlHttp.open("POST", nekoUrl, true);
