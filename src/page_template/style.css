@@ -137,3 +137,11 @@
 .correct {
     color: #5c5;
 }
+
+.w3-button.correct-button {
+    background-color: #7e7;
+}
+
+.w3-button.correct-button:hover {
+    background-color: #5c5!important;
+}

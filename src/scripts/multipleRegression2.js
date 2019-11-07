@@ -44,7 +44,7 @@ let variables = new Vue({
   methods: {
     nextPage() {
       if (this.q2b.solved || $("#prompt").css("display") !== "none") {
-        window.location.href = "index.html"
+        window.location.href = "residual.html"
       } else {
         $("#prompt").slideDown(500);
         setTimeout(this.hidePrompt, 30000)

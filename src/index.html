@@ -26,10 +26,34 @@
   .w3-row-padding img {margin-bottom: 12px}
   </style>
   <body>
-    <header class="w3-panel w3-center w3-opacity" style="padding:64px 16px">
-      <h1 class="w3-xlarge">Regression Analysis</h1>
-      <h1>Select the activity you want to go to</h1>
-    </header>
+    <div id="app" style="height:300px">
+      <div id="login" style="position:relative;width:300%;left:-100%">
+        <div style="width:33.3%;display:inline-block;float:left">
+          <header class="w3-panel w3-center w3-opacity" style="padding:64px 16px">
+            <h1 class="w3-xlarge">{{newUserHeader}}</h1>
+            <h1>{{savecode}}</h1>
+            <p>You will be redirected shortly</p>
+          </header>
+        </div>
+        <div style="width:33.3%;display:inline-block;float:left">
+          <header class="w3-panel w3-center w3-opacity" style="padding:64px 16px">
+            <h1 class="w3-xlarge">Regression Analysis</h1>
+            <h1>Are you a new user or an existing user?</h1>
+            <button class="w3-button" @click="newuser">New User</button>
+            <button class="w3-button" @click="existinguser">Existing User</button>
+          </header>
+        </div>
+        <div style="width:33.3%;display:inline-block;float:left">
+          <header class="w3-panel w3-center w3-opacity" style="padding:64px 16px">
+            <h1>Please input your save code here</h1>
+            <input class="w3-input" id="userid" style="width:600px;margin:auto"></input>
+            <button class="w3-button" @click="submitId">Submit</button>
+            <button class="w3-button" @click="returntomain">Return</button>
+            <p> {{existingUserStatus}} </p>
+          </header>
+        </div>
+      </div>
+    </div>
     <footer class="w3-container w3-padding-64 w3-light-grey w3-center w3-large"> 
       <p>Tutorial created by Team 1d4 (Brandon, Daniel, Meng Yuan, Nelson) for our BT3103 Module Project</p>
       <p>Powered by <a href="https://www.w3schools.com/w3css/default.asp" target="_blank" class="w3-hover-text-green">w3.css</a></p>
