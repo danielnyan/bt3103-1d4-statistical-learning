@@ -81,10 +81,13 @@ h1 {letter-spacing: 6px}
       </code>
       </pre>
       <br>
-      <p>After that, we can take a quick peek at our dataset.</p>
+      <p>After that, we can do the residual plot by using seaborn package.</p>
       <pre class="w3-border">
         <code>
-          df.head(10)
+          import seaborn as sn
+          x = df['mpg']
+          y = df['predicted']
+          sn.residplot(x, y, color='g')
         </code>
       </pre>
       <br>
