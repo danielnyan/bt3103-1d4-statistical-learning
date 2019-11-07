@@ -79,6 +79,31 @@ def update_completed(questionId, userId):
         },
         ReturnValues="UPDATED_NEW"
     )
+    
+def getProgress(userId):
+    table_name = os.environ['USER_TABLE_NAME']
+    table = dynamodb.Table(table_name)
+    response = table.get_item(
+        Key={
+            'userId' : userId
+        }
+    )
+    if "Item" in response:
+        output = response["Item"]["completed"]
+    else:
+        output = json.dumps([])
+    return {
+        "statusCode": 200,
+        "headers": {
+            "Content-Type": "application/json",
+            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Headers": "Content-Type",
+            "Access-Control-Allow-Methods": "OPTIONS,POST,GET"
+        },
+        "body":  json.dumps({
+            "completed": output
+        })
+    }
 
 def lambda_handler(event, context):
     method = event.get('httpMethod', {})
@@ -106,6 +131,8 @@ def lambda_handler(event, context):
         elif "operation" in postReq:
             if postReq["operation"] == "generateId":
                 return generate_id()
+            elif postReq["operation"] == "getProgress":
+                return getProgress(postReq["userId"])
         else:
             return {
                 "statusCode": 200,

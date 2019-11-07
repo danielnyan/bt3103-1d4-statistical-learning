@@ -112,7 +112,8 @@ def question_2a(postReq):
 
 def question_2b(postReq):
     answer = json.loads(postReq["answer"])
-    properties = [log["name"] for log in answer]
+    rSquared = answer["rSquared"]
+    properties = answer["selected"]
     return {
         "statusCode": 200,
         "headers": {
@@ -122,6 +123,9 @@ def question_2b(postReq):
             "Access-Control-Allow-Methods": "OPTIONS,POST,GET"
         },
         "body":  json.dumps({
-            "result": properties
+            "rSquared": rSquared,
+            "correct": (rSquared > 0.81825),
+            "properties": json.dumps(properties),
+            "answer": answer
         })
     }
