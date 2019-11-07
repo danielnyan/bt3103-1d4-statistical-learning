@@ -89,21 +89,31 @@ def getProgress(userId):
         }
     )
     if "Item" in response:
-        output = response["Item"]["completed"]
+        return {
+            "statusCode": 200,
+            "headers": {
+                "Content-Type": "application/json",
+                "Access-Control-Allow-Origin": "*",
+                "Access-Control-Allow-Headers": "Content-Type",
+                "Access-Control-Allow-Methods": "OPTIONS,POST,GET"
+            },
+            "body":  json.dumps({
+                "completed": response["Item"]["completed"]
+            })
+        }
     else:
-        output = json.dumps([])
-    return {
-        "statusCode": 200,
-        "headers": {
-            "Content-Type": "application/json",
-            "Access-Control-Allow-Origin": "*",
-            "Access-Control-Allow-Headers": "Content-Type",
-            "Access-Control-Allow-Methods": "OPTIONS,POST,GET"
-        },
-        "body":  json.dumps({
-            "completed": output
-        })
-    }
+        return {
+            "statusCode": 401,
+            "headers": {
+                "Content-Type": "application/json",
+                "Access-Control-Allow-Origin": "*",
+                "Access-Control-Allow-Headers": "Content-Type",
+                "Access-Control-Allow-Methods": "OPTIONS,POST,GET"
+            },
+            "body":  json.dumps({
+                "error": "The user cannot be found"
+            })
+        }
 
 def lambda_handler(event, context):
     method = event.get('httpMethod', {})
