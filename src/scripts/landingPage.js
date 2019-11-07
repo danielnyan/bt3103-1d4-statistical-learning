@@ -48,12 +48,13 @@ let fuee = new Vue({
       });
     },
     submitId() {
+      this.existingUserStatus = "Querying database for user ID..."
       this.restoreId($("#userid").val()).then(() => {
         sessionStorage.setItem("userID", $("#userid").val());
-        existingUserStatus: "Save data loaded! You are being redirected."
+        this.existingUserStatus = "Save data loaded! You are being redirected."
         window.location.href = "contents.html"
       }).catch((error) => {
-        this.existingUserStatus = error || "Network request failed";
+        this.existingUserStatus = error || "Network request failed.";
       });
     },
     restoreId(userId) {
