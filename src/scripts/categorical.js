@@ -11,7 +11,7 @@ let fuee = new Vue({
     methods: {
         submit6a: async function() {
             let entered = parseCode("answer6a");
-            this.q5a.status = "checking";
+            this.q6a.status = "checking";
 
             let errorMessage = null;
             let result = await submitToLambda("6a", JSON.stringify(entered))
@@ -20,28 +20,28 @@ let fuee = new Vue({
                 });
 
             if (errorMessage !== null) {
-                this.q5a.status = "incorrect";
-                this.q5a.incorrect = "There appears to be a network error. Message: " + errorMessage;
+                this.q6a.status = "incorrect";
+                this.q6a.incorrect = "There appears to be a network error. Message: " + errorMessage;
             }
 
             let resultInfo = JSON.parse(result);
             console.log(resultInfo);
             if (resultInfo.correct) {
-                this.q5a.status = "correct";
-                this.q5a.solved = true;
+                this.q6a.status = "correct";
+                this.q6a.solved = true;
             } else {
-                this.q5a.status = "incorrect";
-                this.q5a.incorrect = "Incorrect!";
+                this.q6a.status = "incorrect";
+                this.q6a.incorrect = "Incorrect!";
             }
             if (resultInfo.gotten.error) {
-                this.q5a.incorrect += " It appears that there is an error. The message is as follows: ";
-                this.q5a.incorrect += resultInfo.gotten.output;
+                this.q6a.incorrect += " It appears that there is an error. The message is as follows: ";
+                this.q6a.incorrect += resultInfo.gotten.output;
             } else if (!resultInfo.correct) {
                 if (resultInfo.gotten.output.model) {
-                    this.q5a.incorrect += " You are regressing " + resultInfo.gotten.output.response + " against these variables: " +
+                    this.q6a.incorrect += " You are regressing " + resultInfo.gotten.output.response + " against these variables: " +
                         resultInfo.gotten.output.predictors;
                 } else {
-                    this.q5a.incorrect += " Are you sure you are using the correct model?";
+                    this.q6a.incorrect += " Are you sure you are using the correct model?";
                 }
             }
         },
