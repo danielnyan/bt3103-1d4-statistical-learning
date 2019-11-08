@@ -37,8 +37,8 @@ let fuee = new Vue({
                 this.q2a.incorrect += " It appears that there is an error. The message is as follows: ";
                 this.q2a.incorrect += resultInfo.gotten.output;
             } else if (!resultInfo.correct) {
-                this.q2a.incorrect += " You are regressing " + resultInfo.gotten.output.response + " against these variables: "
-                resultInfo.gotten.output.predictors;
+                this.q2a.incorrect += " You are regressing " + resultInfo.gotten.output.response + " against these variables: " +
+                    resultInfo.gotten.output.predictors;
             }
         },
         nextPage() {

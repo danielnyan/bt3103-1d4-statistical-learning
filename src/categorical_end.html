@@ -104,8 +104,29 @@
                         Unique ticket numbers: 681</br>
                         Unique cabins: 148</br>
                         Unique embarkment location: 4</p>
-                    <p>First, let's take a look at the 'Sex' column. There are two categories, male and female. There is a very convenient code in numpy that converts categorical variables into dummy numerical. Let's dive right into it, shall we?
+                    <p>Let's start simple and take a look at the 'Sex' column. There are two categories, male and female. There is a very convenient code in pandas that converts categorical variables into dummy numerical. Let's dive right into it, shall
+                        we?
                     </p>
+                    <pre class="w3-border">
+                        <code>
+                            df_sex = pd.get_dummies(df["Sex"])
+                            df.head(5) # Peek at the top 5 rows
+                        </code>
+                    </pre>
+                </div>
+                <img src="https://raw.githubusercontent.com/danielnyan/bt3103-1d4-statistical-learning/master/img/cate_var_preview.png" class="w3-image">
+                <div class="w3-opacity">
+                    <p>Since passengers can only either be male or female, we actually only need one of the columns, since if female = 0, it must mean male = 1. We can replace the 'Sex' column with our new column.</p>
+                    <pre class="w3-border">
+                        <code>
+                            df["Sex"] = df_sex["female"]
+                            df.head(5) # Peek at the top 5 rows
+                        </code>
+                    </pre>
+                </div>
+                <img src="https://raw.githubusercontent.com/danielnyan/bt3103-1d4-statistical-learning/master/img/cate_var_preview2.png" class="w3-image">
+                <div class="w3-opacity">
+                    <p>If the passenger's sex is male, they are now assigned a value of 0. If the passenger is female, they are assigned a value of 1.</p>
                 </div>
             </div>
 
