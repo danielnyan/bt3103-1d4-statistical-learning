@@ -39,7 +39,8 @@ let fuee = new Vue({
             sessionStorage.setItem("userID", response.id);
             resolve(response.id);
           } else if (xmlHttp.readyState === 4 && xmlHttp.status !== 200) {
-            reject(xmlHttp.status + ": " + xmlHttp)
+            console.error(xmlHttp);
+            reject(xmlHttp.status + ": " + (xmlHttp.responseText || "Network error occurred"));
           }
         }
         xmlHttp.onerror = () => {reject(xmlHttp.responseText);};
@@ -81,9 +82,11 @@ let fuee = new Vue({
             if (xmlHttp.status === 401 && 
               JSON.parse(xmlHttp.responseText).error === "The user cannot be found") {
                 reject("The save code that you entered is invalid.")
-            }
-            reject(xmlHttp.status + ": " + xmlHttp)
-          }            
+            } else {
+              console.error(xmlHttp);
+              reject(xmlHttp.status + ": " + (xmlHttp.responseText || "Network error occurred"));
+            }            
+          }
         }
         xmlHttp.onerror = () => {reject(xmlHttp.responseText);};
         xmlHttp.open("POST", nekoUrl, true);
@@ -94,4 +97,12 @@ let fuee = new Vue({
       });
     }
   }
+});
+
+$(document).ready(() => {
+  $("#userid").on('keyup', function (e) {
+    if (e.keyCode === 13) {
+      fuee.submitId();
+    }
+  });
 });

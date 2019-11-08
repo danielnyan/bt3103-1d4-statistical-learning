@@ -316,7 +316,10 @@ const submitToLambda = function(questionId, answer) {
                 resolve(xmlHttp.responseText);
             }
         }
-        xmlHttp.onerror = () => { reject(xmlHttp.responseText); };
+        xmlHttp.onerror = () => {
+          console.error(xmlHttp);
+          reject(xmlHttp.responseText); 
+        };
         xmlHttp.open("POST", nekoUrl, true);
         xmlHttp.send(JSON.stringify({
             questionId: questionId,
@@ -327,9 +330,9 @@ const submitToLambda = function(questionId, answer) {
     });
 }
 
-/* $(document).ready(() => {
+$(document).ready(() => {
 	if (sessionStorage.getItem("userID") === null) {
 		$("#nologin").show();
 		$("#app").hide();
 	}
-}); */
+});
