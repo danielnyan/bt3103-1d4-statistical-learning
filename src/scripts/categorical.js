@@ -52,7 +52,7 @@ let fuee = new Vue({
         },
         submit6b: async function() {
             let entered = parseCode("answer6b");
-            this.q5a.status = "checking";
+            this.q6b.status = "checking";
 
             let errorMessage = null;
             let result = await submitToLambda("6b", JSON.stringify(entered))
@@ -61,8 +61,8 @@ let fuee = new Vue({
                 });
 
             if (errorMessage !== null) {
-                this.q5a.status = "incorrect";
-                this.q5a.incorrect = "There appears to be a network error. Message: " + errorMessage;
+                this.q6b.status = "incorrect";
+                this.q6b.incorrect = "There appears to be a network error. Message: " + errorMessage;
             }
 
             let resultInfo = JSON.parse(result);
