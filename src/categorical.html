@@ -60,15 +60,13 @@
         <!-- Header -->
         <header class="w3-panel w3-center w3-opacity">
             <h1 class="w3-xlarge">Regression Analysis</h1>
-            <h1>Categorical Variables and Overall Summary</h1>
+            <h1>Categorical Variables</h1>
 
             <div class="w3-padding-16">
                 <div class="w3-bar w3-border">
                     <a href="#intro" class="w3-bar-item w3-button">Intro</a>
                     <a href="#cat" class="w3-bar-item w3-button">Categorical Variables</a>
-                    <a href="#summary" class="w3-bar-item w3-button">Using your models</a>
                     <a href="#exercise1" class="w3-bar-item w3-light-grey">Exercise 1</a>
-                    <a href="#exercise2" class="w3-bar-item w3-light-grey">Exercise 2</a>
                 </div>
             </div>
             <div>
@@ -179,10 +177,26 @@
                         </p>
                         <div class="w3-panel w3-leftbar w3-light-grey">
                             <p>What about variables like Ticket, with 681 categories? Are we still going to create 680 new columns and append them to our dataframe? In a case like this, it depends on the total amount of data you have. In this case, we have
-                                891 data points. This is almost a 1 to 1 mapping of tickets to each data point. Tickets here will not contribute much to our predictive model. However, what if we have 6800 data points?
-                            </p>
+                                891 data points. This is almost a 1 to 1 mapping of tickets to each data point! Tickets here will not contribute much to our predictive model.</p>
+                            <p>However, what if we have 6800 data points?</p>
                         </div>
                     </div>
+                </div>
+            </div>
+
+            <!-- Exercise Container -->
+            <div class="w3-container w3-opacity" id="exercise1" style="padding:64px 16px">
+                <div class="w3-content" style="max-width:800px">
+                    <h1 class="w3-center w3-padding-large"><span :class="{'w3-header':true, 'correct':q6a.solved}" style="font-size:36px">Exercises</span></h5>
+                        <p>Convert the cabin numbers into dummy numeric variables, and add them to the original dataframe. Drop the original 'Cabin' column.</p>
+                        <!-- Avoid the urge to indent this. The whitespace here is kept -->
+                        <textarea contenteditable id="answer6a">import pandas as pd
+        import numpy as np
+        df = pd.read_csv("data/titanic.csv")
+        // to-do
+          </textarea>
+                        <button class="w3-button w3-border" type="button" @click="submit6a()">Run code</button>
+                        <feedback :status="q6a.status" :correct="q6a.correct" :incorrect="q6a.incorrect"></feedback>
                 </div>
             </div>
 
@@ -199,6 +213,6 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/vue"></script>
 <script src="./scripts/utils.js"></script>
-<script src="./scripts/probit_logit.js"></script>
+<script src="./scripts/categorical.js"></script>
 
 </html>
