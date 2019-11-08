@@ -17,6 +17,8 @@ def question_checker(postReq):
         return question_5a(postReq)
     elif question_id == '6a':
         return question_6a(postReq)
+    elif question_id == '6b':
+        return question_6b(postReq)
 
 def alset_api(postReq):
     # Retrieve the contents from the request
@@ -207,3 +209,33 @@ def question_6a(postReq):
             "answer": answer
         })
     }  
+
+def question_6b(postReq):
+    answer = json.loads(postReq["answer"])
+    expected = {'response': 'Survived', 'predictors': ['Intercept', 'Sex[T.male]', 'Embarked[T.Q]', 'Embarked[T.S]'], 'model': True}
+    gotten = get_output(answer, "import scipy\nimport statsmodels\n", "", '{"response":result.model.endog_names, "predictors":result.model.exog_names, "model":isinstance(result.model,statsmodels.discrete.discrete_model.Logit)}')
+    gotten = json.loads(gotten)
+    if "predictors" in expected:
+        if "Intercept" in expected["predictors"]:
+            expected["predictors"].remove("Intercept")
+        expected["predictors"] = sorted(expected["predictors"])
+    if "predictors" in gotten["output"]:
+        if "Intercept" in gotten["output"]["predictors"]:
+            gotten["output"]["predictors"].remove("Intercept")
+        gotten["output"]["predictors"] = sorted(gotten["output"]["predictors"])
+    solved = (expected == gotten["output"])
+    return {
+        "statusCode": 200,
+        "headers": {
+            "Content-Type": "application/json",
+            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Headers": "Content-Type",
+            "Access-Control-Allow-Methods": "OPTIONS,POST,GET"
+        },
+        "body":  json.dumps({
+            "correct": solved,
+            "expected": expected,
+            "gotten": gotten,
+            "answer": answer
+        })
+    }

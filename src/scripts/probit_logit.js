@@ -47,7 +47,7 @@ let fuee = new Vue({
         },
         nextPage() {
             if ((this.q5a.solved) || $("#prompt").css("display") !== "none") {
-                window.location.href = "contents.html"
+                window.location.href = "categorical.html"
             } else {
                 $("#prompt").slideDown(500);
                 setTimeout(this.hidePrompt, 5000)
