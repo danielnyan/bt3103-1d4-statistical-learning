@@ -89,12 +89,12 @@
                         can put into a mathematical equation! But before that, we should first take a look at the number of unique categories each variable has.</p>
                     <pre class="w3-border">
           <code>
-            print(df.shape)
-            print("Unique names:" , len(df["Name"].unique()))
-            print("Unique genders:" , len(df["Sex"].unique()))
-            print("Unique ticket numbers:" , len(df["Ticket"].unique()))
-            print("Unique cabins:" , len(df["Cabin"].unique()))
-            print("Unique embarkment location:" , len(df["Embarked"].unique()))
+    print(df.shape)
+    print("Unique names:" , len(df["Name"].unique()))
+    print("Unique genders:" , len(df["Sex"].unique()))
+    print("Unique ticket numbers:" , len(df["Ticket"].unique()))
+    print("Unique cabins:" , len(df["Cabin"].unique()))
+    print("Unique embarkment location:" , len(df["Embarked"].unique()))
           </code>
         </pre>
                     <p>We will get the following output.</p>
@@ -109,8 +109,8 @@
                     </p>
                     <pre class="w3-border">
                         <code>
-                            df_sex = pd.get_dummies(df["Sex"])
-                            df.head(5) # Peek at the top 5 rows
+    df_sex = pd.get_dummies(df["Sex"])
+    df_sex.head(5) # Peek at the top 5 rows
                         </code>
                     </pre>
                 </div>
@@ -119,24 +119,64 @@
                     <p>Since passengers can only either be male or female, we actually only need one of the columns, since if female = 0, it must mean male = 1. We can replace the 'Sex' column with our new column.</p>
                     <pre class="w3-border">
                         <code>
-                            df["Sex"] = df_sex["female"]
-                            df.head(5) # Peek at the top 5 rows
+    df["Sex"] = df_sex["female"]
+    df.head(5) # Peek at the top 5 rows
                         </code>
                     </pre>
                 </div>
                 <img src="https://raw.githubusercontent.com/danielnyan/bt3103-1d4-statistical-learning/master/img/cate_var_preview2.png" class="w3-image">
                 <div class="w3-opacity">
                     <p>If the passenger's sex is male, they are now assigned a value of 0. If the passenger is female, they are assigned a value of 1.</p>
+                    <p>That was rather simple, wasn't it? But as the number of unique categories get larger, things start to get slighly messier.</p>
                 </div>
             </div>
 
-            <!-- Next Page Button -->
-            <div class="w3-panel" id="next" style="padding:64px 16px">
-                <div class="w3-content w3-opacity" style="max-width:800px">
-                    <h1 class="w3-center w3-padding-large"><span class="w3-header" style="font-size:36px">To the next exercise!</span></h1>
-                    <p>If you have completed all the exercises, and or would like to move on, click on the button! <a class="w3-button w3-border next" @click="nextPage()">Next Page</a></br>
-                    </p>
-                    <div id="prompt" style="display:none ; color:red">You have not completed all the exercises, are you sure you want to move on? Click Next Page again to confirm.
+            <!-- Cat Container -->
+            <div class="w3-container" id="cat" style="padding:64px 16px">
+                <div class="w3-content" style="max-width:800px">
+                    <div class="w3-opacity">
+                        <h1 class="w3-center w3-padding-large"><span class="w3-header" style="font-size:36px">Non-binary categorical values</span></h5>
+                            <p>Let's take a look at 'Embarked'. </p>
+                            <pre class="w3-border">
+                            <code>
+    print(df["Embarked"].unique())
+                            </code>
+                        </pre>
+                            <p>The output we get is: </p>
+                            <h5 style="text-align:center;">['S' 'C' 'Q' nan]</h5>
+                            <p>Can we simply replace each location with a different number from 1 to 4? S = 1, C = 2, Q = 3, nan = 4. Is this okay? No, it is not. </br>
+                                ...</br>
+                                What is to say that each embarkment location has the same constant effect on survivorship? Using an example, assume \({survivorship = coef*embarkment}}\). Can we really say changing from location S to location C increases survivorship by the same coefficient,
+                                as changing from C to Q?
+                            </p>
+                            <p>We cannot.</p>
+                            <p>The proper method of modelling such categorical data is to model each category as a boolean variable. In fact, we have already done this in our 'Sex' example in the intro.</p>
+                            <pre class="w3-border">
+                                    <code>
+    df_embarked = pd.get_dummies(data = df["Embarked"], dummy_na = True)
+    df_embarked.head(5) # Peek at the top 5 rows
+                                    </code>
+                                </pre>
+                    </div>
+                    <img src="https://raw.githubusercontent.com/danielnyan/bt3103-1d4-statistical-learning/master/img/cate_var_preview3.png" class="w3-image">
+                    <div class="w3-opacity">
+                        <p>The get_dummies() function does not consider nan values by default. If you want to include nan values in the table, you have to add in the argument dummy_na=True when calling the function.
+                        </p>
+                        <p>We can't simply replace the Embarked column any more, like we did with Sex. In this case, we can append this new df_embarked table to the original table!</p>
+                        <pre class="w3-border">
+                                <code>
+    df_embarked = df_embarked.drop(np.nan,axis = 1)
+    df = pd.concat([df,df_embarked], axis = 1)
+    df.head(5)
+                                </code>
+                            </pre>
+                    </div>
+                    <img src="https://raw.githubusercontent.com/danielnyan/bt3103-1d4-statistical-learning/master/img/cate_var_preview4.png" class="w3-image">
+                    <div class="w3-opacity">
+                        <p>Wait, why did we drop one of the columns?</p>
+                        <p>In this case, Embarked can either be C, Q, S, or nan. What happens when C, Q, S = 0? That's right, it's implied that nan = 1 in that case. Including the nan column is redundant here. In fact, this is the same case for all categorical
+                            values. You do not need to include the last column, as the last category is implied if all the other categories have the value of 0.
+                        </p>
                     </div>
                 </div>
             </div>
