@@ -7,6 +7,12 @@ let fuee = new Vue({
             status: "none",
             solved: false
         },
+        q6b: {
+            correct: "Correct!",
+            incorrect: "Incorrect!",
+            status: "none",
+            solved: false
+        },
     },
     methods: {
         submit6a: async function() {
