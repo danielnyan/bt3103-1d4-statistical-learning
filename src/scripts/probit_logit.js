@@ -38,8 +38,8 @@ let fuee = new Vue({
                 this.q5a.incorrect += resultInfo.gotten.output;
             } else if (!resultInfo.correct) {
                 if (resultInfo.gotten.output.model) {
-                    this.q5a.incorrect += " You are regressing " + resultInfo.gotten.output.response + " against these variables: "
-                    resultInfo.gotten.output.predictors;
+                    this.q5a.incorrect += " You are regressing " + resultInfo.gotten.output.response + " against these variables: " +
+                        resultInfo.gotten.output.predictors;
                 } else {
                     this.q5a.incorrect += " Are you sure you are using the correct model?";
                 }
