@@ -13,6 +13,8 @@ def question_checker(postReq):
         return question_2a(postReq)
     elif question_id == "2b":
         return question_2b(postReq)
+    elif question_id == "5a":
+        return question_5a(postReq)
 
 def alset_api(postReq):
     # Retrieve the contents from the request
@@ -129,3 +131,33 @@ def question_2b(postReq):
             "answer": answer
         })
     }
+
+def question_5a(postReq):
+    answer = json.loads(postReq["answer"])
+    expected = {'response': 'Survived', 'predictors': ['Intercept', 'Fare', 'Pclass', 'Age']}
+    gotten = get_output(answer, "import scipy\n", "", '{"response":result.model.endog_names, "predictors":result.model.exog_names}')
+    gotten = json.loads(gotten)
+    if "predictors" in expected:
+        if "Intercept" in expected["predictors"]:
+            expected["predictors"].remove("Intercept")
+        expected["predictors"] = sorted(expected["predictors"])
+    if "predictors" in gotten["output"]:
+        if "Intercept" in gotten["output"]["predictors"]:
+            gotten["output"]["predictors"].remove("Intercept")
+        gotten["output"]["predictors"] = sorted(gotten["output"]["predictors"])
+    solved = (expected == gotten["output"])
+    return {
+        "statusCode": 200,
+        "headers": {
+            "Content-Type": "application/json",
+            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Headers": "Content-Type",
+            "Access-Control-Allow-Methods": "OPTIONS,POST,GET"
+        },
+        "body":  json.dumps({
+            "correct": solved,
+            "expected": expected,
+            "gotten": gotten,
+            "answer": answer
+        })
+    }  

@@ -1,0 +1,138 @@
+<html>
+
+<head>
+    <title>Categorical Variables and Summary</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Keep these in head -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.32.0/codemirror.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.48.4/mode/python/python.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.32.0/codemirror.min.css" />
+    <link rel="stylesheet" href="https://codemirror.net/theme/night.css">
+    <script src="https://cdn.jsdelivr.net/npm/vue-codemirror@4.0.6/dist/vue-codemirror.min.js"></script>
+
+    <link rel="stylesheet" href="page_template/w3.css">
+    <link rel="stylesheet" href="page_template/style.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-147552064-1"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+        dataLayer.push(arguments);
+    }
+    gtag('js', new Date());
+    gtag('config', 'UA-147552064-1');
+</script>
+
+<style>
+    body,
+    h1 {
+        font-family: "Raleway", Arial, sans-serif
+    }
+    
+    h1 {
+        letter-spacing: 6px
+    }
+    
+    .w3-row-padding img {
+        margin-bottom: 12px
+    }
+</style>
+
+<body>
+
+    <div id="nologin" style="display:none">
+        <h1 class="w3-content w3-center">
+            You have not logged in to our page. Please click
+            <a href="index.html"> here</a> to return.
+        </h1>
+    </div>
+
+    <!-- !PAGE CONTENT! -->
+    <div class="w3-content" id="app" style="max-width:1500px">
+
+        <!-- Header -->
+        <header class="w3-panel w3-center w3-opacity">
+            <h1 class="w3-xlarge">Regression Analysis</h1>
+            <h1>Categorical Variables and Overall Summary</h1>
+
+            <div class="w3-padding-16">
+                <div class="w3-bar w3-border">
+                    <a href="#intro" class="w3-bar-item w3-button">Intro</a>
+                    <a href="#cat" class="w3-bar-item w3-button">Categorical Variables</a>
+                    <a href="#summary" class="w3-bar-item w3-button">Using your models</a>
+                    <a href="#exercise1" class="w3-bar-item w3-light-grey">Exercise 1</a>
+                    <a href="#exercise2" class="w3-bar-item w3-light-grey">Exercise 2</a>
+                </div>
+            </div>
+            <div>
+                Your save code is {{sessionStorage.getItem("userID")}}
+            </div>
+        </header>
+
+        <!-- Intro Container -->
+        <div class="w3-container" id="intro" style="padding:64px 16px">
+            <div class="w3-content" style="max-width:800px">
+                <div class="w3-opacity">
+                    <h1 class="w3-center w3-padding-large"><span class="w3-header" style="font-size:36px">Introduction</span></h5>
+                        <p>Remember the titanic data set from the previous section? Let's take a quick peek at it again.</p>
+                </div>
+                <img src="https://raw.githubusercontent.com/danielnyan/bt3103-1d4-statistical-learning/master/img/titanic_head.png" class="w3-image">
+                <div class="w3-opacity">
+                    <p>If we also want to use columns like 'Name', 'Sex', 'Ticket', 'Cabin', and 'Embarked' in our predictive model, can we just put them in our model? No we can't! If we want to use them, we first have to convert them into numbers that we
+                        can put into a mathematical equation! But before that, we should first take a look at the number of unique categories each variable has.</p>
+                    <pre class="w3-border">
+          <code>
+            print(df.shape)
+            print("Unique names:" , len(df["Name"].unique()))
+            print("Unique genders:" , len(df["Sex"].unique()))
+            print("Unique ticket numbers:" , len(df["Ticket"].unique()))
+            print("Unique cabins:" , len(df["Cabin"].unique()))
+            print("Unique embarkment location:" , len(df["Embarked"].unique()))
+          </code>
+        </pre>
+                    <p>We will get the following output.</p>
+                    <p>(891, 12)</br>
+                        Unique names: 891</br>
+                        Unique genders: 2</br>
+                        Unique ticket numbers: 681</br>
+                        Unique cabins: 148</br>
+                        Unique embarkment location: 4</p>
+                    <p>First, let's take a look at the 'Sex' column. There are two categories, male and female. There is a very convenient code in numpy that converts categorical variables into dummy numerical. Let's dive right into it, shall we?
+                    </p>
+                </div>
+            </div>
+
+            <!-- Next Page Button -->
+            <div class="w3-panel" id="next" style="padding:64px 16px">
+                <div class="w3-content w3-opacity" style="max-width:800px">
+                    <h1 class="w3-center w3-padding-large"><span class="w3-header" style="font-size:36px">To the next exercise!</span></h1>
+                    <p>If you have completed all the exercises, and or would like to move on, click on the button! <a class="w3-button w3-border next" @click="nextPage()">Next Page</a></br>
+                    </p>
+                    <div id="prompt" style="display:none ; color:red">You have not completed all the exercises, are you sure you want to move on? Click Next Page again to confirm.
+                    </div>
+                </div>
+            </div>
+
+            <!-- End Page Content -->
+        </div>
+
+        <!-- Footer -->
+        <footer class="w3-container w3-padding-64 w3-light-grey w3-center w3-large">
+            <p>Tutorial created by Team 1d4 (Brandon, Daniel, Meng Yuan, Nelson) for our BT3103 Module Project</p>
+            <p>Powered by <a href="https://www.w3schools.com/w3css/default.asp" target="_blank" class="w3-hover-text-green">w3.css</a></p>
+        </footer>
+
+</body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+<script src="./scripts/utils.js"></script>
+<script src="./scripts/probit_logit.js"></script>
+
+</html>

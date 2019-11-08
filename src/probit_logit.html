@@ -1,127 +1,133 @@
 <html>
-  <head>
+
+<head>
     <title>The Probit and Logit Model</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Keep these in head -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.32.0/codemirror.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.48.4/mode/python/python.min.js"></script>
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.32.0/codemirror.min.css"
-    />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.32.0/codemirror.min.css" />
     <link rel="stylesheet" href="https://codemirror.net/theme/night.css">
     <script src="https://cdn.jsdelivr.net/npm/vue-codemirror@4.0.6/dist/vue-codemirror.min.js"></script>
-  
+
     <link rel="stylesheet" href="page_template/w3.css">
     <link rel="stylesheet" href="page_template/style.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-  </head>
-  <!-- Global site tag (gtag.js) - Google Analytics -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-147552064-1"></script>
-  <script>
+</head>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-147552064-1"></script>
+<script>
     window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
+
+    function gtag() {
+        dataLayer.push(arguments);
+    }
     gtag('js', new Date());
     gtag('config', 'UA-147552064-1');
-  </script>
+</script>
 
-  <style>
-  body,h1 {font-family: "Raleway", Arial, sans-serif}
-  h1 {letter-spacing: 6px}
-  .w3-row-padding img {margin-bottom: 12px}
-  </style>
-  <body>
-
-  <div id="nologin" style="display:none">
-    <h1 class="w3-content w3-center">
-      You have not logged in to our page. Please click 
-      <a href="index.html"> here</a> to return.
-    </h1>
-  </div>
-
-  <!-- !PAGE CONTENT! -->
-  <div class="w3-content" id="app" style="max-width:1500px">
-
-  <!-- Header -->
-  <header class="w3-panel w3-center w3-opacity">
-    <h1 class="w3-xlarge">Regression Analysis</h1>
-    <h1>The Probit and Logit Model</h1>
+<style>
+    body,
+    h1 {
+        font-family: "Raleway", Arial, sans-serif
+    }
     
-    <div class="w3-padding-16">
-      <div class="w3-bar w3-border">
-        <a href="#intro" class="w3-bar-item w3-button">Intro</a>
-        <a href="#probit" class="w3-bar-item w3-button">Probit/Logit</a>
-        <a href="#code" class="w3-bar-item w3-button">The Code</a>
-        <a href="#exercise1" class="w3-bar-item w3-light-grey">Exercise 1</a>
-        <a href="#exercise2" class="w3-bar-item w3-light-grey">Exercise 2</a>
-      </div>
-    </div>
-    <div>
-      Your save code is {{sessionStorage.getItem("userID")}}
-    </div>
-  </header>
+    h1 {
+        letter-spacing: 6px
+    }
+    
+    .w3-row-padding img {
+        margin-bottom: 12px
+    }
+</style>
 
-  <!-- Intro Container -->
-  <div class="w3-container" id="intro" style="padding:64px 16px">
-    <div class="w3-content" style="max-width:800px">
-      <div class="w3-opacity">
-        <h1 class="w3-center w3-padding-large"><span class="w3-header" style="font-size:36px">Introduction to binary response variables</span></h5>
-        <p>Recall all the datasets that we have gone through thus far. We have been predicting a continuous variable, that 
-        has a range of values. What happens if we want to predict a boolean variable, that is either true or false? Here, 
-        Here, we set</p>
-      </div>
-        <img src="https://raw.githubusercontent.com/danielnyan/bt3103-1d4-statistical-learning/master/img/probit_logit_bad1.png" class="w3-image">
-      <div class="w3-opacity">
-        <p>That looks hard to fit a linear regression on, doesn't it? Y has only two values, 0 and 1, where 0 is false and 1 is true. 
-        How does one plot a best fit line for this? Let's give it a shot, shall we?</p>
-      </div>
-        <img src="https://raw.githubusercontent.com/danielnyan/bt3103-1d4-statistical-learning/master/img/probit_logit_bad2.png" class="w3-image">
-      <div class="w3-opacity">        
-        <p>Hmm, that doesn't look good. Can you figure out what's wrong with the model? For one, the Y 
-        variable is predicted as a continuous variable, goes past the ceiling of 1. </p>
-        <p>We need to keep our model between the bounds of 0 and 1. This is where the probit 
-        and logit models come in. These models are statistical models used to model binary response 
-        variables, and are the preferred models for predicting such variables.</p>
-      </div>
-    </div>
-  </div>
+<body>
 
-  <!-- Probit Container-->
-  <div class="w3-container" id="probit" style="padding:64px 16px">
-    <div class="w3-content" style="max-width:800px">
-      <div class="w3-opacity  w3-center">
-        <h1 class="w3-center w3-padding-large"><span class="w3-header" style="font-size:36px">The Probit and Logit Model</span></h5>
-      </div>
-      <img src="https://raw.githubusercontent.com/danielnyan/bt3103-1d4-statistical-learning/master/img/probit_logit_good.png" class="w3-image">
-      <div class="w3-opacity">
-        <p>The probit and logit functions are sigmoid functions. These functions have a characteristic 'S' shape, and in the case of the probit and logit functions,
-        are bound between 0 and 1. Essentially, what the probit and logit functions does is to transform the linear relationship between the variables and transform 
-        them into a non-linear relationship. For example, if a linear relationship between X and Y would look like: $${Y = intercept + coef*X}$$</p>
-        <p>The probit and logit relationship would look like: $${Y = f(intercept + coef*X)}$$</p>
-        <p>These two models implement this function \({f(*)}\) differently, but ultimately yield extremely similar results. However, the logit model is the more popular model
-        as its coefficients can be better interpreted as an odds ration. We will not go too in depth about these two functions in this tutorial.</p>
-        <div class="w3-panel w3-leftbar w3-light-grey">
-        <p>Do you know what probit and logit stands for? Probit is a shortened form for Probability Unit, and Logit is a blend of logistic + probit!</p>
-      </div>
-      </div>   
+    <div id="nologin" style="display:none">
+        <h1 class="w3-content w3-center">
+            You have not logged in to our page. Please click
+            <a href="index.html"> here</a> to return.
+        </h1>
     </div>
-  </div> 
 
-  <!-- Code Container-->
-  <div class="w3-container" id="code" style="padding:64px 16px">
-    <div class="w3-content" style="max-width:800px">
-      <div class="w3-opacity">
-        <h1 class="w3-center w3-padding-large"><span class="w3-header" style="font-size:36px">The Python Code</span></h5>
-        <p>Let us use an actual dataset to provide a better example. Here, we will use the titanic dataset from Kaggle. Let's take a quick look at it, shall we?</p>
-      </div>
-      <img src="https://raw.githubusercontent.com/danielnyan/bt3103-1d4-statistical-learning/master/img/titanic_head.png" class="w3-image">
-      <div class="w3-opacity">
-        <p>We are interested in modelling the survival rate against the passenger's class. Let's create a logit model.</p>
-        <pre class="w3-border">
+    <!-- !PAGE CONTENT! -->
+    <div class="w3-content" id="app" style="max-width:1500px">
+
+        <!-- Header -->
+        <header class="w3-panel w3-center w3-opacity">
+            <h1 class="w3-xlarge">Regression Analysis</h1>
+            <h1>The Probit and Logit Model</h1>
+
+            <div class="w3-padding-16">
+                <div class="w3-bar w3-border">
+                    <a href="#intro" class="w3-bar-item w3-button">Intro</a>
+                    <a href="#probit" class="w3-bar-item w3-button">Probit/Logit</a>
+                    <a href="#code" class="w3-bar-item w3-button">The Code</a>
+                    <a href="#exercise1" class="w3-bar-item w3-light-grey">Exercise 1</a>
+                </div>
+            </div>
+            <div>
+                Your save code is {{sessionStorage.getItem("userID")}}
+            </div>
+        </header>
+
+        <!-- Intro Container -->
+        <div class="w3-container" id="intro" style="padding:64px 16px">
+            <div class="w3-content" style="max-width:800px">
+                <div class="w3-opacity">
+                    <h1 class="w3-center w3-padding-large"><span class="w3-header" style="font-size:36px">Introduction to binary response variables</span></h5>
+                        <p>Recall all the datasets that we have gone through thus far. We have been predicting a continuous variable, that has a range of values. What happens if we want to predict a boolean variable, that is either true or false? Here, Here,
+                            we set</p>
+                </div>
+                <img src="https://raw.githubusercontent.com/danielnyan/bt3103-1d4-statistical-learning/master/img/probit_logit_bad1.png" class="w3-image">
+                <div class="w3-opacity">
+                    <p>That looks hard to fit a linear regression on, doesn't it? Y has only two values, 0 and 1, where 0 is false and 1 is true. How does one plot a best fit line for this? Let's give it a shot, shall we?</p>
+                </div>
+                <img src="https://raw.githubusercontent.com/danielnyan/bt3103-1d4-statistical-learning/master/img/probit_logit_bad2.png" class="w3-image">
+                <div class="w3-opacity">
+                    <p>Hmm, that doesn't look good. Can you figure out what's wrong with the model? For one, the Y variable is predicted as a continuous variable, goes past the ceiling of 1. </p>
+                    <p>We need to keep our model between the bounds of 0 and 1. This is where the probit and logit models come in. These models are statistical models used to model binary response variables, and are the preferred models for predicting such
+                        variables.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Probit Container-->
+        <div class="w3-container" id="probit" style="padding:64px 16px">
+            <div class="w3-content" style="max-width:800px">
+                <div class="w3-opacity  w3-center">
+                    <h1 class="w3-center w3-padding-large"><span class="w3-header" style="font-size:36px">The Probit and Logit Model</span></h5>
+                </div>
+                <img src="https://raw.githubusercontent.com/danielnyan/bt3103-1d4-statistical-learning/master/img/probit_logit_good.png" class="w3-image">
+                <div class="w3-opacity">
+                    <p>The probit and logit functions are sigmoid functions. These functions have a characteristic 'S' shape, and in the case of the probit and logit functions, are bound between 0 and 1. Essentially, what the probit and logit functions does
+                        is to transform the linear relationship between the variables and transform them into a non-linear relationship. For example, if a linear relationship between X and Y would look like: $${Y = intercept + coef*X}$$</p>
+                    <p>The probit and logit relationship would look like: $${Y = f(intercept + coef*X)}$$</p>
+                    <p>These two models implement this function \({f(*)}\) differently, but ultimately yield extremely similar results. However, the logit model is the more popular model as its coefficients can be better interpreted as an odds ration. We
+                        will not go too in depth about these two functions in this tutorial.</p>
+                    <div class="w3-panel w3-leftbar w3-light-grey">
+                        <p>Do you know what probit and logit stands for? Probit is a shortened form for Probability Unit, and Logit is a blend of logistic + probit!</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Code Container-->
+        <div class="w3-container" id="code" style="padding:64px 16px">
+            <div class="w3-content" style="max-width:800px">
+                <div class="w3-opacity">
+                    <h1 class="w3-center w3-padding-large"><span class="w3-header" style="font-size:36px">The Python Code</span></h5>
+                        <p>Let us use an actual dataset to provide a better example. Here, we will use the titanic dataset from Kaggle. Let's take a quick look at it, shall we?</p>
+                </div>
+                <img src="https://raw.githubusercontent.com/danielnyan/bt3103-1d4-statistical-learning/master/img/titanic_head.png" class="w3-image">
+                <div class="w3-opacity">
+                    <p>We are interested in modelling the survival rate against the passenger's class. Let's create a logit model.</p>
+                    <pre class="w3-border">
           <code>
             import statsmodels.formula.api as smf
             import pandas as pd
@@ -134,21 +140,21 @@
             print(result.summary())
           </code>
         </pre>
-      </div>
-      <img src="https://raw.githubusercontent.com/danielnyan/bt3103-1d4-statistical-learning/master/img/logit_example.png" class="w3-image">
-      <div class="w3-opacity">
-        <p>Simple, wasn't it?</p>
-      </div>
-    </div>
-  </div>
+                </div>
+                <img src="https://raw.githubusercontent.com/danielnyan/bt3103-1d4-statistical-learning/master/img/logit_example.png" class="w3-image">
+                <div class="w3-opacity">
+                    <p>Simple, wasn't it?</p>
+                </div>
+            </div>
+        </div>
 
 
-  <!-- Exercise1 Container -->
-  <div class="w3-container w3-opacity" id="exercise1" style="padding:64px 16px">
-    <div class="w3-content" style="max-width:800px">
-      <h1 class="w3-center w3-padding-large"><span :class="{'w3-header':true, 'correct':q5a.solved}" style="font-size:36px">Exercise 1</span></h5>
-      <p>Create a <b>probit</b> model of the survival rate against the fare each passenger paid.</p>
-      <textarea contenteditable id="answer5a">import statsmodels.formula.api as smf
+        <!-- Exercise1 Container -->
+        <div class="w3-container w3-opacity" id="exercise1" style="padding:64px 16px">
+            <div class="w3-content" style="max-width:800px">
+                <h1 class="w3-center w3-padding-large"><span :class="{'w3-header':true, 'correct':q5a.solved}" style="font-size:36px">Exercise 1</span></h5>
+                    <p>Create a <b>probit</b> model of the survival rate against the fare each passenger paid, their passenger class, and age.</p>
+                    <textarea contenteditable id="answer5a">import statsmodels.formula.api as smf
 import pandas as pd
 import numpy as np
             
@@ -156,51 +162,35 @@ df = pd.read_csv("titanic.csv")
 
 // put your code here
       </textarea>
-      <button class="w3-button w3-border" type="button" @click="submit5a()">Check Answer</button>
-      <feedback :status="q5a.status" :correct="q5a.correct" :incorrect="q5a.incorrect"></feedback>
+                    <button class="w3-button w3-border" type="button" @click="submit5a()">Check Answer</button>
+                    <feedback :status="q5a.status" :correct="q5a.correct" :incorrect="q5a.incorrect"></feedback>
+            </div>
+        </div>
+
+        <!-- Next Page Button -->
+        <div class="w3-panel" id="next" style="padding:64px 16px">
+            <div class="w3-content w3-opacity" style="max-width:800px">
+                <h1 class="w3-center w3-padding-large"><span class="w3-header" style="font-size:36px">To the next exercise!</span></h1>
+                <p>If you have completed all the exercises, and or would like to move on, click on the button! <a class="w3-button w3-border next" @click="nextPage()">Next Page</a></br>
+                </p>
+                <div id="prompt" style="display:none ; color:red">You have not completed all the exercises, are you sure you want to move on? Click Next Page again to confirm.
+                </div>
+            </div>
+        </div>
+
+        <!-- End Page Content -->
     </div>
-  </div>
 
-  <!-- Exercise2 Container -->
-  <div class="w3-container w3-opacity" id="exercise2" style="padding:64px 16px">
-    <div class="w3-content" style="max-width:800px">
-      <h1 class="w3-center w3-padding-large"><span :class="{'w3-header':true, 'correct':q5b.solved}" style="font-size:36px">Exercise 2</span></h5>
-      <p>Create a <b>logit</b> model of the survival rate against the fare each passenger paid, their passenger class, and age.</p>
-      <textarea contenteditable id="answer5b">import statsmodels.formula.api as smf
-import pandas as pd
-import numpy as np
-            
-df = pd.read_csv("titanic.csv")
+    <!-- Footer -->
+    <footer class="w3-container w3-padding-64 w3-light-grey w3-center w3-large">
+        <p>Tutorial created by Team 1d4 (Brandon, Daniel, Meng Yuan, Nelson) for our BT3103 Module Project</p>
+        <p>Powered by <a href="https://www.w3schools.com/w3css/default.asp" target="_blank" class="w3-hover-text-green">w3.css</a></p>
+    </footer>
 
-// put your code here
-      </textarea>
-      <button class="w3-button w3-border" type="button" @click="submit5b()">Check Answer</button>
-      <feedback :status="q5b.status" :correct="q5b.correct" :incorrect="q5b.incorrect"></feedback>
-    </div>
-  </div>
+</body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+<script src="./scripts/utils.js"></script>
+<script src="./scripts/probit_logit.js"></script>
 
-  <!-- Next Page Button -->
-  <div class="w3-panel" id="next" style="padding:64px 16px">
-    <div class="w3-content w3-opacity" style="max-width:800px">
-      <h1 class="w3-center w3-padding-large"><span class="w3-header" style="font-size:36px">To the next exercise!</span></h1>
-      <p>If you have completed all the exercises, and or would like to move on, click on the button! <a class="w3-button w3-border next" @click="nextPage()">Next Page</a></br></p>
-      <div id="prompt" style="display:none ; color:red">You have not completed all the exercises, are you sure you want to move on? Click Next Page again to confirm.
-      </div>
-    </div>
-  </div>
-    
-  <!-- End Page Content -->
-  </div>
-
-  <!-- Footer -->
-  <footer class="w3-container w3-padding-64 w3-light-grey w3-center w3-large"> 
-    <p>Tutorial created by Team 1d4 (Brandon, Daniel, Meng Yuan, Nelson) for our BT3103 Module Project</p>
-    <p>Powered by <a href="https://www.w3schools.com/w3css/default.asp" target="_blank" class="w3-hover-text-green">w3.css</a></p>
-  </footer>
-
-  </body>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/vue"></script>
-  <script src="./scripts/utils.js"></script>
-  <script src="./scripts/probit_logit.js"></script>
 </html>

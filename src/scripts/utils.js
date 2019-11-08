@@ -317,8 +317,8 @@ const submitToLambda = function(questionId, answer) {
             }
         }
         xmlHttp.onerror = () => {
-          console.error(xmlHttp);
-          reject(xmlHttp.responseText); 
+            console.error(xmlHttp);
+            reject(xmlHttp.responseText);
         };
         xmlHttp.open("POST", nekoUrl, true);
         xmlHttp.send(JSON.stringify({
@@ -331,8 +331,8 @@ const submitToLambda = function(questionId, answer) {
 }
 
 $(document).ready(() => {
-	if (sessionStorage.getItem("userID") === null) {
-		$("#nologin").show();
-		$("#app").hide();
-	}
+    if (sessionStorage.getItem("userID") === null) {
+        $("#nologin").show();
+        $("#app").hide();
+    }
 });
