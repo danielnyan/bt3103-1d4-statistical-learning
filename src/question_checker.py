@@ -185,8 +185,10 @@ def question_6a(postReq):
        'E121', 'D11', 'E77', 'F38', 'B3', 'D6', 'B82 B84', 'D17', 'A36',
        'B102', 'B69', 'E49', 'C47', 'D28', 'E17', 'A24', 'C50', 'B42',
        'C148']}
+    print("Before get_output()")
     gotten = get_output(answer, "import scipy\nimport statsmodels\n", "", '{"cols":df.columns.unique()}')
     gotten = json.loads(gotten)
+    print("After get_output")
     if "cols" in expected:
         expected["cols"] = sorted(expected["cols"])
     if "cols" in gotten["output"]:
