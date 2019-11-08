@@ -185,8 +185,12 @@ def question_6a(postReq):
        'E121', 'D11', 'E77', 'F38', 'B3', 'D6', 'B82 B84', 'D17', 'A36',
        'B102', 'B69', 'E49', 'C47', 'D28', 'E17', 'A24', 'C50', 'B42',
        'C148']}
-    gotten = get_output(answer, "", "", '{"cols":df.columns.unique()}')
+    gotten = get_output(answer, "", "", '{"cols":df.columns.unique().tolist()}')
     gotten = json.loads(gotten)
+    if "cols" in expected:
+            expected["cols"] = sorted(expected["cols"])
+    if "cols" in gotten["output"]:
+        gotten["output"]["cols"] = sorted(gotten["output"]["cols"])
     solved = (expected == gotten["output"])
     return {
         "statusCode": 200,
