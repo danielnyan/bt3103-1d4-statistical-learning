@@ -37,11 +37,10 @@ let fuee = new Vue({
                 this.q6a.incorrect += " It appears that there is an error. The message is as follows: ";
                 this.q6a.incorrect += resultInfo.gotten.output;
             } else if (!resultInfo.correct) {
-                if (resultInfo.gotten.output.model) {
-                    this.q6a.incorrect += " You are regressing " + resultInfo.gotten.output.response + " against these variables: " +
-                        resultInfo.gotten.output.predictors;
-                } else {
-                    this.q6a.incorrect += " Are you sure you are using the correct model?";
+                if (resultInfo.gotten.output.cabin) {
+                    this.q6a.incorrect += " Have you dropped the Cabin column?";
+                } else if (resultInfo.gotten.output.cabin) {
+                    this.q6a.incorrect += " Did you drop the nan column? If you dropped another cabin category, please go back and change your code to drop nan instead.";
                 }
             }
         },

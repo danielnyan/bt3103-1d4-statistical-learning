@@ -166,7 +166,7 @@ def question_5a(postReq):
 
 def question_6a(postReq):
     answer = json.loads(postReq["answer"])
-    expected = {'cols':['PassengerId', 'Survived', 'Pclass', 'Name', 'Sex', 'Age', 'SibSp',
+    expected = {'cabin': False, 'nan': False, 'cols':['PassengerId', 'Survived', 'Pclass', 'Name', 'Sex', 'Age', 'SibSp',
        'Parch', 'Ticket', 'Fare', 'Embarked', 'C85', 'C123', 'E46', 'G6', 'C103', 'D56', 'A6',
        'C23 C25 C27', 'B78', 'D33', 'B30', 'C52', 'B28', 'C83', 'F33',
        'F G73', 'E31', 'A5', 'D10 D12', 'D26', 'C110', 'B58 B60', 'E101',
@@ -185,7 +185,7 @@ def question_6a(postReq):
        'E121', 'D11', 'E77', 'F38', 'B3', 'D6', 'B82 B84', 'D17', 'A36',
        'B102', 'B69', 'E49', 'C47', 'D28', 'E17', 'A24', 'C50', 'B42',
        'C148']}
-    gotten = get_output(answer, "", "", '{"cols":df.columns.unique().tolist()}')
+    gotten = get_output(answer, "", "", '{"cabin": True if "Cabin" in df.columns.unique().tolist() else False , "nan": True if np.nan in df.columns.unique().tolist() else False , "cols":df.columns.unique().tolist()}')
     gotten = json.loads(gotten)
     if "cols" in expected:
             expected["cols"] = sorted(expected["cols"])
