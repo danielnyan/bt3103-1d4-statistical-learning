@@ -146,7 +146,7 @@
                             <h5 style="text-align:center;">['S' 'C' 'Q' nan]</h5>
                             <p>Can we simply replace each location with a different number from 1 to 4? S = 1, C = 2, Q = 3, nan = 4. Is this okay? No, it is not. </br>
                                 ...</br>
-                                What is to say that each embarkment location has the same constant effect on survivorship? Using an example, assume \({survivorship = coef*embarkment}}\). Can we really say changing from location S to location C increases survivorship by the same coefficient,
+                                What is to say that each embarkment location has the same constant effect on survivorship? Using an example, assume \({survivorship = coef*embarkment}\). Can we really say changing from location S to location C increases survivorship by the same coefficient,
                                 as changing from C to Q?
                             </p>
                             <p>We cannot.</p>
@@ -162,7 +162,7 @@
                     <div class="w3-opacity">
                         <p>The get_dummies() function does not consider nan values by default. If you want to include nan values in the table, you have to add in the argument dummy_na=True when calling the function.
                         </p>
-                        <p>We can't simply replace the Embarked column any more, like we did with Sex. In this case, we can append this new df_embarked table to the original table!</p>
+                        <p>We can't simply replace the Embarked column, like we did with Sex. In this case, we can append this new df_embarked table to the original table!</p>
                         <pre class="w3-border">
                                 <code>
     df_embarked = df_embarked.drop(np.nan,axis = 1)
@@ -177,6 +177,11 @@
                         <p>In this case, Embarked can either be C, Q, S, or nan. What happens when C, Q, S = 0? That's right, it's implied that nan = 1 in that case. Including the nan column is redundant here. In fact, this is the same case for all categorical
                             values. You do not need to include the last column, as the last category is implied if all the other categories have the value of 0.
                         </p>
+                        <div class="w3-panel w3-leftbar w3-light-grey">
+                            <p>What about variables like Ticket, with 681 categories? Are we still going to create 680 new columns and append them to our dataframe? In a case like this, it depends on the total amount of data you have. In this case, we have
+                                891 data points. This is almost a 1 to 1 mapping of tickets to each data point. Tickets here will not contribute much to our predictive model. However, what if we have 6800 data points?
+                            </p>
+                        </div>
                     </div>
                 </div>
             </div>
