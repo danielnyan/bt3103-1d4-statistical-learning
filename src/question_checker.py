@@ -134,8 +134,8 @@ def question_2b(postReq):
 
 def question_5a(postReq):
     answer = json.loads(postReq["answer"])
-    expected = {'response': 'Survived', 'predictors': ['Intercept', 'Fare', 'Pclass', 'Age']}
-    gotten = get_output(answer, "import scipy\n", "", '{"response":result.model.endog_names, "predictors":result.model.exog_names}')
+    expected = {'response': 'Survived', 'predictors': ['Intercept', 'Fare', 'Pclass', 'Age'], 'model': True}
+    gotten = get_output(answer, "import scipy\nimport statsmodels\n", "", '{"response":result.model.endog_names, "predictors":result.model.exog_names, "model":isinstance(result.model,statsmodels.discrete.discrete_model.Probit)}')
     gotten = json.loads(gotten)
     if "predictors" in expected:
         if "Intercept" in expected["predictors"]:

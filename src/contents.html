@@ -1,6 +1,7 @@
 <!DOCTYPE HTML>
 <html>
-    <head>
+
+<head>
     <title>Regression Analysis by Team 1d4</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -10,58 +11,68 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-  </head>
-  <!-- Global site tag (gtag.js) - Google Analytics -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-147552064-1"></script>
-  <script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'UA-147552064-1');
-  </script>
-  
-  <style>
-  body,h1 {font-family: "Raleway", Arial, sans-serif}
-  h1 {letter-spacing: 6px}
-  .w3-row-padding img {margin-bottom: 12px}
-  </style>
-  <body>
+</head>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-147552064-1"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+        dataLayer.push(arguments);
+    }
+    gtag('js', new Date());
+    gtag('config', 'UA-147552064-1');
+</script>
+
+<style>
+    body,
+    h1 {
+        font-family: "Raleway", Arial, sans-serif
+    }
+    
+    h1 {
+        letter-spacing: 6px
+    }
+    
+    .w3-row-padding img {
+        margin-bottom: 12px
+    }
+</style>
+
+<body>
     <div id="nologin" style="display:none">
-    <h1 class="w3-content w3-center">
-      You have not logged in to our page. Please click 
-      <a href="index.html"> here</a> to return.
-      </h1>
+        <h1 class="w3-content w3-center">
+            You have not logged in to our page. Please click
+            <a href="index.html"> here</a> to return.
+        </h1>
     </div>
     <div id="app">
-      <header class="w3-panel w3-center w3-opacity" style="padding:64px 16px">
-        <h1 class="w3-xlarge">Regression Analysis</h1>
-        <h1>Select the activity you want to go to</h1>
-        <div class="w3-padding-16">
-          <div class="w3-bar w3-border">
-            <a href="simple_regression.html" class="w3-bar-item w3-button" 
-              :class="{'correct-button':q1}">Simple Regression</a>
-            <a href="multiple_regression.html" class="w3-bar-item w3-button"
-              :class="{'correct-button':q2}">Multiple Regression</a>
-            <a href="residual.html" class="w3-bar-item w3-button"
-              :class="{'correct-button':q3}">Residual Analysis</a>
-            <a href="probit_logit.html" class="w3-bar-item w3-button"
-              :class="{'correct-button':q5}">Categorical Variables</a>
-          </div>
-        </div>
-        <div>
-          Your save code is {{sessionStorage.getItem("userID")}}
-        </div>
-        <a href="index.html" class="w3-bar-item w3-button" style="margin-top:20px; border:1px solid #bbb">
+        <header class="w3-panel w3-center w3-opacity" style="padding:64px 16px">
+            <h1 class="w3-xlarge">Regression Analysis</h1>
+            <h1>Select the activity you want to go to</h1>
+            <div class="w3-padding-16">
+                <div class="w3-bar w3-border">
+                    <a href="simple_regression.html" class="w3-bar-item w3-button" :class="{'correct-button':q1}">Simple Regression</a>
+                    <a href="multiple_regression.html" class="w3-bar-item w3-button" :class="{'correct-button':q2}">Multiple Regression</a>
+                    <a href="residual.html" class="w3-bar-item w3-button" :class="{'correct-button':q3}">Residual Analysis</a>
+                    <a href="probit_logit.html" class="w3-bar-item w3-button" :class="{'correct-button':q5}">Probit/Logit</a>
+                </div>
+            </div>
+            <div>
+                Your save code is {{sessionStorage.getItem("userID")}}
+            </div>
+            <a href="index.html" class="w3-bar-item w3-button" style="margin-top:20px; border:1px solid #bbb">
           Logout</a>
-      </header>
+        </header>
     </div>
-    <footer class="w3-container w3-padding-64 w3-light-grey w3-center w3-large"> 
-      <p>Tutorial created by Team 1d4 (Brandon, Daniel, Meng Yuan, Nelson) for our BT3103 Module Project</p>
-      <p>Powered by <a href="https://www.w3schools.com/w3css/default.asp" target="_blank" class="w3-hover-text-green">w3.css</a></p>
+    <footer class="w3-container w3-padding-64 w3-light-grey w3-center w3-large">
+        <p>Tutorial created by Team 1d4 (Brandon, Daniel, Meng Yuan, Nelson) for our BT3103 Module Project</p>
+        <p>Powered by <a href="https://www.w3schools.com/w3css/default.asp" target="_blank" class="w3-hover-text-green">w3.css</a></p>
     </footer>
-  </body>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/vue"></script>
-  <script src="./scripts/utils.js"></script>
-  <script src="./scripts/contents.js"></script>
+</body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+<script src="./scripts/utils.js"></script>
+<script src="./scripts/contents.js"></script>
+
 </html>
