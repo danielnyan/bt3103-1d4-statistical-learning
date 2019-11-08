@@ -135,9 +135,13 @@
 
 
         <!-- Exercise Container -->
-        <div class="w3-container w3-opacity" id="exercises" style="padding:64px 16px">
+        <div class="w3-container" id="exercises" style="padding:64px 16px">
             <div class="w3-content" style="max-width:800px">
-                <h1 class="w3-center w3-padding-large"><span :class="{'w3-header':true, 'correct':q4.solved}" style="font-size:36px">Exercises</span></h5>
+                <div class="w3-opacity">
+                    <h1 class="w3-center w3-padding-large"><span :class="{'w3-header':true, 'correct':q4.solved}" style="font-size:36px">Exercises</span></h5>
+                </div>
+                <img src="https://raw.githubusercontent.com/danielnyan/bt3103-1d4-statistical-learning/master/img/interaction4.png">
+                <div class="w3-opacity">
                     <p>Student is a boolean variable, with 0 indicating that they are not a student, and 1 indicating that they are. What is the effect that rating has on balance when: </p>
                     <p>a) The person is not a student?</p>
                     <input id="answer4a" size="40"></input>
@@ -147,32 +151,32 @@
                     <input id="answer4b" size="40"></input>
                     <button class="w3-button w3-border" type="button" @click="submit4b()">Check Answer</button>
                     <feedback :status="q4b.status" :correct="q4b.correct" :incorrect="q4b.incorrect"></feedback>
-            </div>
-        </div>
-
-        <!-- Next Page Button -->
-        <div class="w3-panel" id="next" style="padding:64px 16px">
-            <div class="w3-content w3-opacity" style="max-width:800px">
-                <h1 class="w3-center w3-padding-large"><span class="w3-header" style="font-size:36px">To the next exercise!</span></h1>
-                <p>Done with the exercises? Simple, weren't they? The next section will be on a new model type, <a class="w3-button w3-border next" @click="nextPage()">Next Page</a></br> the probit and logit regression!
-                </p>
-                <div id="prompt" style="display:none ; color:red">You have not completed all the exercises, are you sure you want to move on? Click Next Page again to confirm.
                 </div>
             </div>
+
+            <!-- Next Page Button -->
+            <div class="w3-panel" id="next" style="padding:64px 16px">
+                <div class="w3-content w3-opacity" style="max-width:800px">
+                    <h1 class="w3-center w3-padding-large"><span class="w3-header" style="font-size:36px">To the next exercise!</span></h1>
+                    <p>Done with the exercises? Simple, weren't they? The next section will be on a new model type, <a class="w3-button w3-border next" @click="nextPage()">Next Page</a></br> the probit and logit regression!
+                    </p>
+                    <div id="prompt" style="display:none ; color:red">You have not completed all the exercises, are you sure you want to move on? Click Next Page again to confirm.
+                    </div>
+                </div>
+            </div>
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+            <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+            <script src="./scripts/utils.js"></script>
+            <script src="./scripts/interaction.js"></script>
+
+            <!-- End Page Content -->
         </div>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/vue"></script>
-        <script src="./scripts/utils.js"></script>
-        <script src="./scripts/multipleRegression.js"></script>
 
-        <!-- End Page Content -->
-    </div>
-
-    <!-- Footer -->
-    <footer class="w3-container w3-padding-64 w3-light-grey w3-center w3-large">
-        <p>Tutorial created by Team 1d4 (Brandon, Daniel, Meng Yuan, Nelson) for our BT3103 Module Project</p>
-        <p>Powered by <a href="https://www.w3schools.com/w3css/default.asp" target="_blank" class="w3-hover-text-green">w3.css</a></p>
-    </footer>
+        <!-- Footer -->
+        <footer class="w3-container w3-padding-64 w3-light-grey w3-center w3-large">
+            <p>Tutorial created by Team 1d4 (Brandon, Daniel, Meng Yuan, Nelson) for our BT3103 Module Project</p>
+            <p>Powered by <a href="https://www.w3schools.com/w3css/default.asp" target="_blank" class="w3-hover-text-green">w3.css</a></p>
+        </footer>
 
 </body>
 

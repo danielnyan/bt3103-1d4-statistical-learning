@@ -21,25 +21,33 @@ let fuee = new Vue({
         submit4a: async function() {
             let answer = $("#answer4a").val();
             submitToLambda("4a", JSON.stringify(answer));
-            if (answer === "") {
-                this.q1a.status = "correct";
-                this.q1a.solved = true;
+            if (answer === "3.9565") {
+                this.q4a.status = "correct";
+                this.q4a.solved = true;
+                if (this.q4b.solved) {
+                    this.q4.solved = true;
+                }
             } else {
-                this.q1a.status = "incorrect";
+                this.q4a.status = "incorrect";
+                this.q4a.incorrect += " When the value of a regressor increases by 1, the dependent variable's value will change by the coefficient of the regressor."
             }
         },
         submit4b: async function() {
             let answer = $("#answer1b").val();
             submitToLambda("4b", JSON.stringify(answer));
-            if (answer === "7.82") {
-                this.q1a.status = "correct";
-                this.q1a.solved = true;
+            if (answer === "4.372") {
+                this.q4b.status = "correct";
+                this.q4b.solved = true;
+                if (this.q4a.solved) {
+                    this.q4.solved = true;
+                }
             } else {
-                this.q1a.status = "incorrect";
+                this.q4b.status = "incorrect";
+                this.q4b.incorrect += " Try calculating the change in Balance when Student = 1 and Rating increases by 1."
             }
         },
         nextPage() {
-            if ((this.q1a.solved && this.q1b.solved) || $("#prompt").css("display") !== "none") {
+            if ((this.q4a.solved && this.q4b.solved) || $("#prompt").css("display") !== "none") {
                 window.location.href = "multiple_regression.html"
             } else {
                 $("#prompt").slideDown(500);
@@ -51,12 +59,11 @@ let fuee = new Vue({
         }
     },
     mounted() {
-        initializeCodeblocks(["answer1b"]);
         retrieveProgress().then((result) => {
-            if (result.includes("1a")) {
+            if (result.includes("4a")) {
                 this.q1a.solved = true;
             }
-            if (result.includes("1b")) {
+            if (result.includes("4b")) {
                 this.q1b.solved = true;
             }
         });

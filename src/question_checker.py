@@ -13,6 +13,10 @@ def question_checker(postReq):
         return question_2a(postReq)
     elif question_id == "2b":
         return question_2b(postReq)
+    elif question_id == "4a":
+        return question_2a(postReq)
+    elif question_id == "4b":
+        return question_2b(postReq)
     elif question_id == "5a":
         return question_5a(postReq)
     elif question_id == '6a':
@@ -133,6 +137,34 @@ def question_2b(postReq):
             "correct": (rSquared > 0.81825),
             "properties": json.dumps(properties),
             "answer": answer
+        })
+    }
+
+def question_4a(postReq):
+    return {
+        "statusCode": 200,
+        "headers": {
+            "Content-Type": "application/json",
+            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Headers": "Content-Type",
+            "Access-Control-Allow-Methods": "OPTIONS,POST,GET"
+        },
+        "body":  json.dumps({
+            "correct": True
+        })
+    }
+
+def question_4b(postReq):
+    return {
+        "statusCode": 200,
+        "headers": {
+            "Content-Type": "application/json",
+            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Headers": "Content-Type",
+            "Access-Control-Allow-Methods": "OPTIONS,POST,GET"
+        },
+        "body":  json.dumps({
+            "correct": True
         })
     }
 
