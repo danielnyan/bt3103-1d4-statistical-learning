@@ -1,7 +1,7 @@
 <html>
 
 <head>
-    <title>Categorical Variables and Summary</title>
+    <title>Categorical Variables</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Keep these in head -->
@@ -67,6 +67,7 @@
                     <a href="#intro" class="w3-bar-item w3-button">Intro</a>
                     <a href="#cat" class="w3-bar-item w3-button">Categorical Variables</a>
                     <a href="#exercise1" class="w3-bar-item w3-light-grey">Exercise 1</a>
+                    <a href="#exercise2" class="w3-bar-item w3-light-grey">Exercise 2</a>
                 </div>
             </div>
             <div>
@@ -221,9 +222,21 @@ df = pd.read_csv("data/titanic.csv")
                 <!-- Next Page Button -->
                 <div class="w3-panel" id="next" style="padding:64px 16px">
                     <div class="w3-content w3-opacity" style="max-width:800px">
-                        <h1 class="w3-center w3-padding-large"><span class="w3-header" style="font-size:36px">To the next exercise!</span></h1>
-                        <p>If you have completed all the exercises, and or would like to move on, click on the button! <a class="w3-button w3-border next" @click="nextPage()">Next Page</a></br>
+                        <h1 class="w3-center w3-padding-large"><span class="w3-header" style="font-size:36px">The End</span></h1>
+                        <p>Congratulations! You have come to the end of the tutorial. This marks the end of the statistical analysis using python tutorial! So far, you have learnt:
+                            <ul>
+                                <li>What is a simple linear regression and how to perform it.</li>
+                                <li>What is a multiple linear regression and how to perform it.</li>
+                                <li>How to choose a suitable model for regression analysis using a quick residual plot.</li>
+                                <li>What an interaction term is and why you should consider using them.</li>
+                                <li>What to do when the variable you are trying to model is a boolean variable.</li>
+                                <li>How to convert your categorical data into dummy numeric to use in regression analysis.</li>
+                            </ul>
                         </p>
+                        <p>The important takeaway from this tutorial is to know how to perform regression analysis, to know the extent of the effect that each regressor has on the dependent variable. What does a change in X have in Y? What happens to Y if
+                            X increases by a hundred units? This is what this tutorial aims to teach, and we hope that you have learnt them well.
+                        </p>
+                        <a class="w3-button w3-border next" @click="nextPage()">Home</a>
                         <div id="prompt" style="display:none ; color:red">You have not completed all the exercises, are you sure you want to move on? Click Next Page again to confirm.
                         </div>
                     </div>

@@ -38,13 +38,13 @@ let fuee = new Vue({
                 this.q2a.incorrect += " It appears that there is an error. The message is as follows: ";
                 this.q2a.incorrect += resultInfo.gotten.output;
             } else if (!resultInfo.correct) {
-                this.q2a.incorrect += " You are regressing " + resultInfo.gotten.output.response + " against these variables: "
-                resultInfo.gotten.output.predictors;
+                this.q2a.incorrect += " You are regressing " + resultInfo.gotten.output.response + " against these variables: " +
+                    resultInfo.gotten.output.predictors;
             }
         },
         nextPage() {
             if (this.q2a.solved || $("#prompt").css("display") !== "none") {
-                window.location.href = "multiple_regression2.html"
+                window.location.href = "probit_logit.html"
             } else {
                 $("#prompt").slideDown(500);
                 setTimeout(this.hidePrompt, 5000)
@@ -55,6 +55,7 @@ let fuee = new Vue({
         }
     },
     mounted() {
+
         initializeCodeblocks(["answer2a"]);
         retrieveProgress().then((result) => {
             if (result.includes("2a")) {

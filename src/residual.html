@@ -3,86 +3,116 @@
 <title>Residual Analysis</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Keep these in head -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.32.0/codemirror.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.48.4/mode/python/python.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.32.0/codemirror.min.css" />
+<link rel="stylesheet" href="https://codemirror.net/theme/night.css">
+<script src="https://cdn.jsdelivr.net/npm/vue-codemirror@4.0.6/dist/vue-codemirror.min.js"></script>
+
 <link rel="stylesheet" href="page_template/w3.css">
+<link rel="stylesheet" href="page_template/style.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
 <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-147552064-1"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+        dataLayer.push(arguments);
+    }
+    gtag('js', new Date());
+    gtag('config', 'UA-147552064-1');
+</script>
+
 <style>
-body,h1 {font-family: "Raleway", Arial, sans-serif}
-h1 {letter-spacing: 6px}
-.w3-row-padding img {margin-bottom: 12px}
+    body,
+    h1 {
+        font-family: "Raleway", Arial, sans-serif
+    }
+    
+    h1 {
+        letter-spacing: 6px
+    }
+    
+    .w3-row-padding img {
+        margin-bottom: 12px
+    }
 </style>
+
 <body>
 
-<!-- !PAGE CONTENT! -->
-<div class="w3-content" style="max-width:1500px">
+    <!-- !PAGE CONTENT! -->
+    <div class="w3-content" id="app" style="max-width:1500px">
 
-<!-- Header -->
-<header class="w3-panel w3-center w3-opacity" style="padding:64px 16px">
-  <h1 class="w3-xlarge">Regression Analysis</h1>
-  <h1>Residual Analysis</h1>
-  
-  <div class="w3-padding-16">
-    <div class="w3-bar w3-border">
-      <a href="#intro" class="w3-bar-item w3-button">Introduction</a>
-      <a href="#math" class="w3-bar-item w3-button">The Mathematics</a>
-      <a href="#code" class="w3-bar-item w3-button">The Code</a>
-      <a href="#analysis" class="w3-bar-item w3-button">Analysis</a>
-      <a href="#exercise1" class="w3-bar-item w3-light-grey">Exercise 1</a>
-    </div>
-  </div>
-  <div>
-    Your save code is {{sessionStorage.getItem("userID")}}
-  </div>
-</header>
+        <!-- Header -->
+        <header class="w3-panel w3-center w3-opacity" style="padding:64px 16px">
+            <h1 class="w3-xlarge">Regression Analysis</h1>
+            <h1>Residual Analysis</h1>
 
-<!-- Introduction Container -->
-<div class="w3-container" id="intro" style="padding:64px 16px">
-  <div class="w3-content" style="max-width:800px">
-    <div class="w3-opacity">
-      <h1 class="w3-center w3-padding-large"><span class="w3-header" style="font-size:36px">Residual Analysis</span></h5>
-      <p>The model we built in the drag-and-drop sction is as follow</p>
-      <img src="https://raw.githubusercontent.com/danielnyan/bt3103-1d4-statistical-learning/master/img/residual_multiple_linear_model.png" max-width:100% max-height:100% class="w3-image"></img>
-      <p>$${MPG = -15.8379 - 0.4715\cdot cylinders - 0.0229\cdot horsepower + 0.0190\cdot displacement
-      - 0.0063 \cdot weight + 1.4229 \cdot origin + 0.7525 \cdot year}$$</p>
-      <p style="text-align:center; font-style:italic">If the equation is too long, click on the variables to hide them.</p>
-      <p>After building a multiple linear regression model, we need to check the residual plot to validate the model. There are mathematical reasons behind it.</p>
-      <p>In this section of the tutorial, we will cover the reason why we need to check the residual plot, the code to check, and some multiple-choice questions.</p>
-    </div>
-    
-  </div>
-</div>
+            <div class="w3-padding-16">
+                <div class="w3-bar w3-border">
+                    <a href="#intro" class="w3-bar-item w3-button">Introduction</a>
+                    <a href="#math" class="w3-bar-item w3-button">The Mathematics</a>
+                    <a href="#code" class="w3-bar-item w3-button">The Code</a>
+                    <a href="#analysis" class="w3-bar-item w3-button">Analysis</a>
+                    <a href="#exercise1" class="w3-bar-item w3-light-grey">Exercise 1</a>
+                </div>
+            </div>
+            <div>
+                Your save code is {{sessionStorage.getItem("userID")}}
+            </div>
+        </header>
 
-<!-- Mathematics Container-->
-<div class="w3-container" id="math" style="padding:64px 16px">
-  <div class="w3-content" style="max-width:800px">
-    <div class="w3-opacity">
-      <h1 class="w3-center w3-padding-large"><span class="w3-header" style="font-size:36px">The Mathematics Involved</span></h5>
-      <p>We can simply get the residuals for each data point with this equation. $${\text{RESIDUAL} = y_{observed} - y_{predicted}}$$</p>
-      <p>For example, if a data point has a predicted value 15.2688 and the true observed MPG of 18, we can get the residuals by</p>
-      <p>$${\text{RESIDUAL} = 18 - 15.2688 = 2.7312}$$</p>
-      <p>Then we can get all residuals for each data point and plot it out as below:</p>
-      <img src="https://raw.githubusercontent.com/danielnyan/bt3103-1d4-statistical-learning/master/img/residual_plot.png" max-width:100% max-height:100% class="w3-image"></img>
-      <p>From the plot, we can see the residual distribution of the model.</p>
-    </div>
-  </div>
-</div>
+        <!-- Introduction Container -->
+        <div class="w3-container" id="intro" style="padding:64px 16px">
+            <div class="w3-content" style="max-width:800px">
+                <div class="w3-opacity">
+                    <h1 class="w3-center w3-padding-large"><span class="w3-header" style="font-size:36px">Residual Analysis</span></h5>
+                        <p>The model we built in the drag-and-drop sction is as follow</p>
+                        <img src="https://raw.githubusercontent.com/danielnyan/bt3103-1d4-statistical-learning/master/img/residual_multiple_linear_model.png" max-width:100% max-height:100% class="w3-image"></img>
+                        <p>$${MPG = -15.8379 - 0.4715\cdot cylinders - 0.0229\cdot horsepower + 0.0190\cdot displacement - 0.0063 \cdot weight + 1.4229 \cdot origin + 0.7525 \cdot year}$$</p>
+                        <p style="text-align:center; font-style:italic">If the equation is too long, click on the variables to hide them.</p>
+                        <p>After building a multiple linear regression model, we need to check the residual plot to validate the model. There are mathematical reasons behind it.</p>
+                        <p>In this section of the tutorial, we will cover the reason why we need to check the residual plot, the code to check, and some multiple-choice questions.</p>
+                </div>
 
-<!-- Code Container-->
-<div class="w3-container" id="code" style="padding:64px 16px">
-  <div class="w3-content" style="max-width:800px">
-    <div class="w3-opacity">
-      <h1 class="w3-center w3-padding-large"><span class="w3-header" style="font-size:36px">The Python Code</span></h5>
-      <p>First, we add a new column which stores the predicted value.</p>
-      <pre class="w3-border">
+            </div>
+        </div>
+
+        <!-- Mathematics Container-->
+        <div class="w3-container" id="math" style="padding:64px 16px">
+            <div class="w3-content" style="max-width:800px">
+                <div class="w3-opacity">
+                    <h1 class="w3-center w3-padding-large"><span class="w3-header" style="font-size:36px">The Mathematics Involved</span></h5>
+                        <p>We can simply get the residuals for each data point with this equation. $${\text{RESIDUAL} = y_{observed} - y_{predicted}}$$</p>
+                        <p>For example, if a data point has a predicted value 15.2688 and the true observed MPG of 18, we can get the residuals by</p>
+                        <p>$${\text{RESIDUAL} = 18 - 15.2688 = 2.7312}$$</p>
+                        <p>Then we can get all residuals for each data point and plot it out as below:</p>
+                        <img src="https://raw.githubusercontent.com/danielnyan/bt3103-1d4-statistical-learning/master/img/residual_plot.png" max-width:100% max-height:100% class="w3-image"></img>
+                        <p>From the plot, we can see the residual distribution of the model.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Code Container-->
+        <div class="w3-container" id="code" style="padding:64px 16px">
+            <div class="w3-content" style="max-width:800px">
+                <div class="w3-opacity">
+                    <h1 class="w3-center w3-padding-large"><span class="w3-header" style="font-size:36px">The Python Code</span></h5>
+                        <p>First, we add a new column which stores the predicted value.</p>
+                        <pre class="w3-border">
       <code>
         df['predicted'] = # predicted value from the formula
       </code>
       </pre>
-      <br>
-      <p>After that, we can do the residual plot by using seaborn package.</p>
-      <pre class="w3-border">
+                        <br>
+                        <p>After that, we can do the residual plot by using seaborn package.</p>
+                        <pre class="w3-border">
         <code>
           import seaborn as sn
           x = df['mpg']
@@ -90,32 +120,32 @@ h1 {letter-spacing: 6px}
           sn.residplot(x, y, color='g')
         </code>
       </pre>
-      <br>
-    </div>
-    <img src="https://raw.githubusercontent.com/danielnyan/bt3103-1d4-statistical-learning/master/img/residual_plot.png" max-width:100% max-height:100% class="w3-image"></img>
-    <p>So what does this plot mean? We will tell you the insights below!</p>
-  </div>
-</div>
+                        <br>
+                </div>
+                <img src="https://raw.githubusercontent.com/danielnyan/bt3103-1d4-statistical-learning/master/img/residual_plot.png" max-width:100% max-height:100% class="w3-image"></img>
+                <p>So what does this plot mean? We will tell you the insights below!</p>
+            </div>
+        </div>
 
 
-<!-- Analysis Container -->
-<div class="w3-container" id="analysis" style="padding:64px 16px">
-  <div class="w3-content" style="max-width:800px">
-    <h1 class="w3-center w3-padding-large"><span class="w3-header" style="font-size:36px">Analysis</span></h5>
-    <p>Given the residual plot, we can see the residuals show a U-shape pattern. That means linear model may not be the best model to fit the data.</p>
-    <p>If the residuals scatter randomly and show no pattern, then linear model will be a good fit.</p>
-    <p>However, if the residuals show some pattern(like U-Shape, etc.), then linear model will NOT be a good fit.</p>
-  </div>
-</div>
+        <!-- Analysis Container -->
+        <div class="w3-container" id="analysis" style="padding:64px 16px">
+            <div class="w3-content" style="max-width:800px">
+                <h1 class="w3-center w3-padding-large"><span class="w3-header" style="font-size:36px">Analysis</span></h5>
+                    <p>Given the residual plot, we can see the residuals show a U-shape pattern. That means linear model may not be the best model to fit the data.</p>
+                    <p>If the residuals scatter randomly and show no pattern, then linear model will be a good fit.</p>
+                    <p>However, if the residuals show some pattern(like U-Shape, etc.), then linear model will NOT be a good fit.</p>
+            </div>
+        </div>
 
-<!-- Exercise1 Container -->
-<div class="w3-container w3-opacity" id="exercise1" style="padding:64px 16px">
-  <div class="w3-content" style="max-width:800px">
-    <h1 class="w3-center w3-padding-large"><span class="w3-header" style="font-size:36px">Exercise 1</span></h5>
-    <p>Given a residual plot of a linear model as below, is a linear model a good fit for the data?</p>
-    <img src="https://raw.githubusercontent.com/danielnyan/bt3103-1d4-statistical-learning/master/img/residual_plot_good.png" max-width:100% max-height:100% class="w3-image"></img>
-    <p>The answer should be yes but I don't have time implementing it so far.</p>
-    <pre class="w3-border">
+        <!-- Exercise1 Container -->
+        <div class="w3-container w3-opacity" id="exercise1" style="padding:64px 16px">
+            <div class="w3-content" style="max-width:800px">
+                <h1 class="w3-center w3-padding-large"><span class="w3-header" style="font-size:36px">Exercise 1</span></h5>
+                    <p>Given a residual plot of a linear model as below, is a linear model a good fit for the data?</p>
+                    <img src="https://raw.githubusercontent.com/danielnyan/bt3103-1d4-statistical-learning/master/img/residual_plot_good.png" max-width:100% max-height:100% class="w3-image"></img>
+                    <p>The answer should be yes but I don't have time implementing it so far.</p>
+                    <pre class="w3-border">
       <code contenteditable>
         import statsmodels.formula.api as smf
         ols = smf.ols(formula='mpg ~ weight', data=df)
@@ -123,20 +153,37 @@ h1 {letter-spacing: 6px}
         print(ols_result.summary())
       </code>
     </pre>
-    <button class="w3-button w3-border">Check Answer</button>
-  </div>
-</div>
+                    <button class="w3-button w3-border">Check Answer</button>
+            </div>
+        </div>
 
-<script src="./scripts/utils.js"></script>
-<script src="./scripts/residual.js"></script>
-<!-- End Page Content -->
-</div>
+        <!-- Next Page Button -->
+        <div class="w3-panel" id="next" style="padding:64px 16px">
+            <div class="w3-content w3-opacity" style="max-width:800px">
+                <h1 class="w3-center w3-padding-large"><span class="w3-header" style="font-size:36px">To the next exercise!</span></h1>
+                <p>If you have completed all the exercises, and or would like to move on, click on the button! <a class="w3-button w3-border next" @click="nextPage()">Next Page</a></br>
+                </p>
+                <div id="prompt" style="display:none ; color:red">You have not completed all the exercises, are you sure you want to move on? Click Next Page again to confirm.
+                </div>
+            </div>
+        </div>
 
-<!-- Footer -->
-<footer class="w3-container w3-padding-64 w3-light-grey w3-center w3-large"> 
-  <p>Tutorial created by Team 1d4 for our BT3103 Module Project</p>
-  <p>Powered by <a href="https://www.w3schools.com/w3css/default.asp" target="_blank" class="w3-hover-text-green">w3.css</a></p>
-</footer>
+        <!-- End Page Content -->
+    </div>
+
+    <!-- End Page Content -->
+    </div>
+
+    <!-- Footer -->
+    <footer class="w3-container w3-padding-64 w3-light-grey w3-center w3-large">
+        <p>Tutorial created by Team 1d4 for our BT3103 Module Project</p>
+        <p>Powered by <a href="https://www.w3schools.com/w3css/default.asp" target="_blank" class="w3-hover-text-green">w3.css</a></p>
+    </footer>
 
 </body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+<script src="./scripts/utils.js"></script>
+<script src="./scripts/residual.js"></script>
+
 </html>
