@@ -33,6 +33,17 @@ let fuee = new Vue({
                 this.q5a.status = "incorrect";
                 this.q5a.incorrect = "Incorrect!";
             }
+            if (resultInfo.gotten.error) {
+                this.q5a.incorrect += " It appears that there is an error. The message is as follows: ";
+                this.q5a.incorrect += resultInfo.gotten.output;
+            } else if (!resultInfo.correct) {
+                if (resultInfo.gotten.output.model) {
+                    this.q5a.incorrect += " You are regressing " + resultInfo.gotten.output.response + " against these variables: "
+                    resultInfo.gotten.output.predictors;
+                } else {
+                    this.q5a.incorrect += " Are you sure you are using the correct model?";
+                }
+            }
         },
         nextPage() {
             if ((this.q5a.solved) || $("#prompt").css("display") !== "none") {
