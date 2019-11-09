@@ -1,4 +1,3 @@
-// Not yet implemented
 let fuee = new Vue({
     el: '#app',
     data: {
@@ -20,9 +19,9 @@ let fuee = new Vue({
         submit3a: async function() {
             let answer = this.q3a.status
             submitToLambda("3a", JSON.stringify(answer));
-            if (this.q3a.status == "no answer") {
+            if (this.q3a.status === "no answer") {
                 this.q3a.message = "You have not chosen an answer yet. Please choose one!"
-            } else if (this.q3a.status = "no") {
+            } else if (this.q3a.status === "no") {
                 this.q3a.message = "You have answered wrongly. There is no pattern in the plot, so linear model should be a good fit."
             } else {
                 this.q3a.message = "Congrats! Because there is no pattern in the plot, linear model should be a good fit. Please click next page for new section."
