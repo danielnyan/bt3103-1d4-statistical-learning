@@ -20,7 +20,7 @@ let fuee = new Vue({
             this.q3a.answer = "no"
             this.q3a.have_answer = true
         }
-        submit3a: async function() {
+        submit3a() {
             if (!this.q3a.have_answer) {
                 this.q3a.status = "You have not chosen an answer yet. Please choose one!"
             } else if (this.q3a.answer = "no") {
