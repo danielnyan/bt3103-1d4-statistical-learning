@@ -6,43 +6,30 @@ let fuee = new Vue({
             correct: "Correct!",
             incorrect: "Incorrect!",
             status: "none",
-            solved: false
+            solved: false,
+            have_answer: false,
+            answer = 'none'
         },
     },
     methods: {
-        /*
-        submit2a: async function() {
-            let entered = parseCode("answer2a");
-            this.q2a.status = "checking";
-
-            let errorMessage = null;
-            let result = await submitToLambda("2a", JSON.stringify(entered))
-                .catch((err) => {
-                    errorMessage = err || "Network request failed";
-                });
-
-            if (errorMessage !== null) {
-                this.q2a.status = "incorrect";
-                this.q2a.incorrect = "There appears to be a network error. Message: " + errorMessage;
-            }
-
-            let resultInfo = JSON.parse(result);
-            console.log(resultInfo);
-            if (resultInfo.correct) {
-                this.q2a.status = "correct";
-                this.q2a.solved = true;
+        chooseYes() {
+            this.q3a.answer = "yes"
+            this.q3a.have_answer = true
+        },
+        chooseNo() {
+            this.q3a.answer = "no"
+            this.q3a.have_answer = true
+        }
+        submit3a: async function() {
+            if (!this.q3a.have_answer) {
+                this.q3a.status = "You have not chosen an answer yet. Please choose one!"
+            } else if (this.q3a.answer = "no") {
+                this.q3a.status = "You have answered wrongly. There is no pattern in the plot. So linear model should be a good fit."
             } else {
-                this.q2a.status = "incorrect";
-                this.q2a.incorrect = "Incorrect!";
+                this.q3a.status = "Congrats! Because there is no pattern in the plot, linear model should be a good fit. Please click next page for new section."
+                this.q3a.solved = true
             }
-            if (resultInfo.gotten.error) {
-                this.q2a.incorrect += " It appears that there is an error. The message is as follows: ";
-                this.q2a.incorrect += resultInfo.gotten.output;
-            } else if (!resultInfo.correct) {
-                this.q2a.incorrect += " You are regressing " + resultInfo.gotten.output.response + " against these variables: " +
-                    resultInfo.gotten.output.predictors;
-            }
-        },*/
+        },
         nextPage() {
             if (this.q3a.solved || $("#prompt").css("display") !== "none") {
                 window.location.href = "interaction.html"
