@@ -6,6 +6,7 @@ let app = new Vue({
     q3: false,
     q4: false,
     q5: false,
+    q6: false
   },
   mounted() {
     retrieveProgress().then((result) => {
@@ -14,6 +15,18 @@ let app = new Vue({
       }
       if (result.includes("2a") && result.includes("2b")) {
         this.q2 = true;
+      }
+      if (result.includes("3a")) {
+        this.q3 = true;
+      }
+      if (result.includes("4a") && result.includes("4b")) {
+        this.q4 = true;
+      }
+      if (result.includes("5a")) {
+        this.q5 = true;
+      }
+      if (result.includes("6a") && result.includes("6b")) {
+        this.q6 = true;
       }
     });
   }

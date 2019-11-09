@@ -155,7 +155,7 @@
     <div class="w3-content" style="max-width:800px">
       <h1 class="w3-center w3-padding-large"><span :class="{'w3-header':true, 'correct':q1b.solved}" style="font-size:36px">Exercise 2</span></h5>
       <p>Perform a simple linear regression with MPG as the dependent variable and Acceleration as the indepedent variable!
-      The data has already been loaded for you within the variable df.</p>
+      The data has already been loaded for you within the variable df. Store the fitted model in the variable ols_result.</p>
       <textarea contenteditable id="answer1b">import statsmodels.formula.api as smf
 ols = smf.ols(formula='mpg ~ weight', data=df)
 ols_result = ols.fit()
@@ -178,6 +178,7 @@ print(ols_result.summary())
   </div>
     
   <!-- End Page Content -->
+  <footmenu></footmenu>
   </div>
 
   <!-- Footer -->

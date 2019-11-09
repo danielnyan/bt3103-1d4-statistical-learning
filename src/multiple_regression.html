@@ -121,7 +121,7 @@ h1 {letter-spacing: 6px}
 <div class="w3-container w3-opacity" id="exercises" style="padding:64px 16px">
   <div class="w3-content" style="max-width:800px">
     <h1 class="w3-center w3-padding-large"><span :class="{'w3-header':true, 'correct':q2a.solved}" style="font-size:36px">Exercises</span></h5>
-    <p>Write the code in order to generate a multiple linear regression model of MPG against cylinders, displacement, horsepower, weight, acceleration, year, and origin. Print the summary.</p>
+    <p>Write the code in order to generate a multiple linear regression model of MPG against cylinders, displacement, horsepower, weight, acceleration, year, and origin. Store your model in the variable ols_result.</p>
     <!-- Avoid the urge to indent this. The whitespace here is kept -->
     <textarea contenteditable id="answer2a">import pandas as pd
 df = pd.read_csv("data/dataset.csv")
@@ -143,6 +143,8 @@ import statsmodels.formula.api as smf
     </div>
   </div>
 </div>
+<footmenu></footmenu>
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/vue"></script>
 <script src="./scripts/utils.js"></script>

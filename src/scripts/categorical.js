@@ -81,6 +81,7 @@ let fuee = new Vue({
                 if (resultInfo.gotten.output.model) {
                     this.q6b.incorrect += " You are regressing " + resultInfo.gotten.output.response + " against these variables: " +
                         resultInfo.gotten.output.predictors;
+                    this.q6b.incorrect += ". By the way, there is no need to create dummy variables. You can just use Survived ~ Sex + Embarked."
                 } else {
                     this.q6b.incorrect += " Are you sure you are using the correct model?";
                 }

@@ -1,35 +1,36 @@
 <!DOCTYPE html>
 <html>
-<title>Interaction Terms</title>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<!-- Keep these in head -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.32.0/codemirror.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.48.4/mode/python/python.min.js"></script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.32.0/codemirror.min.css" />
-<link rel="stylesheet" href="https://codemirror.net/theme/night.css">
-<script src="https://cdn.jsdelivr.net/npm/vue-codemirror@4.0.6/dist/vue-codemirror.min.js"></script>
+  <head>
+    <title>Interaction Terms</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Keep these in head -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.32.0/codemirror.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.48.4/mode/python/python.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.32.0/codemirror.min.css" />
+    <link rel="stylesheet" href="https://codemirror.net/theme/night.css">
+    <script src="https://cdn.jsdelivr.net/npm/vue-codemirror@4.0.6/dist/vue-codemirror.min.js"></script>
 
-<link rel="stylesheet" href="page_template/w3.css">
-<link rel="stylesheet" href="page_template/style.css">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-</head>
-<!-- Global site tag (gtag.js) - Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-147552064-1"></script>
-<script>
-    window.dataLayer = window.dataLayer || [];
+    <link rel="stylesheet" href="page_template/w3.css">
+    <link rel="stylesheet" href="page_template/style.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  </head>
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-147552064-1"></script>
+  <script>
+      window.dataLayer = window.dataLayer || [];
 
-    function gtag() {
-        dataLayer.push(arguments);
-    }
-    gtag('js', new Date());
-    gtag('config', 'UA-147552064-1');
-</script>
+      function gtag() {
+          dataLayer.push(arguments);
+      }
+      gtag('js', new Date());
+      gtag('config', 'UA-147552064-1');
+  </script>
 
-<style>
+  <style>
     body,
     h1 {
         font-family: "Raleway", Arial, sans-serif
@@ -42,10 +43,9 @@
     .w3-row-padding img {
         margin-bottom: 12px
     }
-</style>
-
-<body>
-
+  </style>
+  
+  <body>
     <div id="nologin" style="display:none">
         <h1 class="w3-content w3-center">
             You have not logged in to our page. Please click
@@ -56,128 +56,128 @@
     <!-- !PAGE CONTENT! -->
     <div class="w3-content" id="app" style="max-width:1500px">
 
-        <!-- Header -->
-        <header class="w3-panel w3-center w3-opacity" style="padding:64px 16px">
-            <h1 class="w3-xlarge">Regression Analysis</h1>
-            <h1>Interaction Terms</h1>
-            <div class="w3-padding-16">
-                <div class="w3-bar w3-border">
-                    <a href="#interaction" class="w3-bar-item w3-button">Interaction</a>
-                    <a href="#code" class="w3-bar-item w3-button">Code</a>
-                    <a href="#exercises" class="w3-bar-item w3-light-grey">Exercise</a>
-                </div>
-            </div>
-            <div>
-                Your save code is {{sessionStorage.getItem("userID")}}
-            </div>
-        </header>
+      <!-- Header -->
+      <header class="w3-panel w3-center w3-opacity" style="padding:64px 16px">
+        <h1 class="w3-xlarge">Regression Analysis</h1>
+        <h1>Interaction Terms</h1>
+        <div class="w3-padding-16">
+          <div class="w3-bar w3-border">
+            <a href="#interaction" class="w3-bar-item w3-button">Interaction</a>
+            <a href="#code" class="w3-bar-item w3-button">Code</a>
+            <a href="#exercises" class="w3-bar-item w3-light-grey">Exercise</a>
+          </div>
+        </div>
+        <div>
+          Your save code is {{sessionStorage.getItem("userID")}}
+        </div>
+      </header>
 
-        <!-- Interaction Container -->
-        <div class="w3-container" id="interaction" style="padding:64px 16px">
-            <div class="w3-content" style="max-width:800px">
-                <div class="w3-opacity">
-                    <h1 class="w3-center w3-padding-large"><span class="w3-header" style="font-size:36px">Interaction Terms</span></h5>
-                        <p>So far we have assumed that all the regressors have been independent from each other. That is to say, that the value of regressor #1 does not affect the value of regressor #2. In real life, is this always the case? Suppose we are
-                            modelling the sales of an ice-cream vendor. We are regressing Sales against Weather and Temperature. Can we claim that the current weather has no effect on the temperature? No, we cannot!
-                        </p>
-                        <p>This is where the interaction term comes into play. Assume that bad weather has a value of 0, while good weather has a value of 1. We can model this regression with $${Sales = a*Weather + b*Temperature + c*(Weather*Temperature)}$$
-                            Mathematically, this causes the coefficient of temperature to change depending on the weather. In other words, the current weather will determine the effect of temperature on sales. (Or vice versa). If this confuses you, have
-                            no fear! We will go into actual numerical analysis in the coding section below.
-                        </p>
-                </div>
+      <!-- Interaction Container -->
+      <div class="w3-container" id="interaction" style="padding:64px 16px">
+        <div class="w3-content" style="max-width:800px">
+          <div class="w3-opacity">
+            <h1 class="w3-center w3-padding-large"><span class="w3-header" style="font-size:36px">Interaction Terms</span></h1>
+              <p>So far we have assumed that all the regressors have been independent from each other. That is to say, that the value of regressor #1 does not affect the value of regressor #2. In real life, is this always the case? Suppose we are
+                modelling the sales of an ice-cream vendor. We are regressing Sales against Weather and Temperature. Can we claim that the current weather has no effect on the temperature? No, we cannot!
+              </p>
+              <p>This is where the interaction term comes into play. Assume that bad weather has a value of 0, while good weather has a value of 1. We can model this regression with $${Sales = a*Weather + b*Temperature + c*(Weather*Temperature)}$$
+                Mathematically, this causes the coefficient of temperature to change depending on the weather. In other words, the current weather will determine the effect of temperature on sales. (Or vice versa). If this confuses you, have
+                no fear! We will go into actual numerical analysis in the coding section below.
+              </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Code Container -->
+      <div class="w3-container" id="code" style="padding:64px 16px">
+        <div class="w3-content" style="max-width:800px">
+          <div class="w3-opacity">
+            <h1 class="w3-center w3-padding-large"><span class="w3-header" style="font-size:36px">Code</span></h1>
+            <p>Let us take a look at the following dataset.</p>
+          </div>
+          <img src="https://raw.githubusercontent.com/danielnyan/bt3103-1d4-statistical-learning/master/img/interaction1.png">
+          <div class="w3-opacity">
+            Let's create a multiple linear regression model.
+            <pre class="w3-border">
+              <code>ols = smf.ols(formula='Sales ~ TV + Radio + Newspaper', data=df)
+result = ols.fit()
+print(result.summary())
+              </code>
+            </pre>
+          </div>
+          <img src="https://raw.githubusercontent.com/danielnyan/bt3103-1d4-statistical-learning/master/img/interaction2.png">
+          <div class="w3-opacity">
+            <p>Notice how this model predicts a unit change in TV advertisements increases sales by 0.0458, and a unit change in Radio advertisements increases sales by 0.1885? Let's add in an interaction term between TV and Radio now. You can specify
+                an interaction term with the statsmodels package with the ":" symbol.
+            </p>
+            <pre class="w3-border">
+              <code>ols = smf.ols(formula='Sales ~ TV + Radio + Newspaper + TV:Radio', data=df)
+result = ols.fit()
+print(result.summary())
+              </code>
+            </pre>
+          </div>
+          <img src="https://raw.githubusercontent.com/danielnyan/bt3103-1d4-statistical-learning/master/img/interaction3.png">
+          <div class="w3-opacity">
+            <p>The coefficients for the variables seemed to have drastically changed! Compare Radio's coefficient now, and in the previous model! It has dropped from 0.1885 to 0.0280! The interaction term between TV and Radio comes in at 0.0011.
+                What does this mean?</p>
+            <p>A unit change in Radio advertisements causes the effectiveness of TV's advertisements to increase (Or vice versa)! The p-value of the interaction term is also
+              &lt; 0.05, and the R-squared value of the model also rises from 0.897 to 0.968! This is almost a 70% increase in remaining variance that is now explained by the new and superior model!</p>
+            <p>It turns out that a lot of Radio's effect on sales is actually indirectly caused by Radio's effect on TV!</p>
+            <p>Interaction terms can occur with anything. When performing a regression analysis, it is advisable to use logic and intuition to figure out if some of your chosen variables might interact with each other, and create multiple
+              models to check your assumptions.
+            </p>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Exercise Container -->
+      <div class="w3-container" id="exercises" style="padding:64px 16px">
+        <div class="w3-content" style="max-width:800px">
+            <div class="w3-opacity">
+                <h1 class="w3-center w3-padding-large"><span :class="{'w3-header':true, 'correct':q4.solved}" style="font-size:36px">Exercises</span></h5>
+            </div>
+            <img src="https://raw.githubusercontent.com/danielnyan/bt3103-1d4-statistical-learning/master/img/interaction4.png">
+            <div class="w3-opacity">
+                <p>Student is a boolean variable, with 0 indicating that they are not a student, and 1 indicating that they are. Given everything else is constant, how much would a unit 
+                change in rating affect balance when: </p>
+                <p>a) The person is not a student?</p>
+                <input id="answer4a" size="40"></input>
+                <button class="w3-button w3-border" type="button" @click="submit4a()">Check Answer</button>
+                <feedback :status="q4a.status" :correct="q4a.correct" :incorrect="q4a.incorrect"></feedback>
+                <p>b) The person is a student?</p>
+                <input id="answer4b" size="40"></input>
+                <button class="w3-button w3-border" type="button" @click="submit4b()">Check Answer</button>
+                <feedback :status="q4b.status" :correct="q4b.correct" :incorrect="q4b.incorrect"></feedback>
             </div>
         </div>
 
-        <!-- Code Container -->
-        <div class="w3-container" id="code" style="padding:64px 16px">
-            <div class="w3-content" style="max-width:800px">
-                <div class="w3-opacity">
-                    <h1 class="w3-center w3-padding-large"><span class="w3-header" style="font-size:36px">Code</span></h1>
-                    <p>Let us take a look at the following dataset.</p>
-                </div>
-                <img src="https://raw.githubusercontent.com/danielnyan/bt3103-1d4-statistical-learning/master/img/interaction1.png">
-                <div class="w3-opacity">
-                    Let's create a multiple linear regression model.
-                    <pre class="w3-border">
-      <code>
-    ols = smf.ols(formula='Sales ~ TV + Radio + Newspaper', data=df)
-    result = ols.fit()
-    print(result.summary())
-      </code>
-      </pre>
-                </div>
-                <img src="https://raw.githubusercontent.com/danielnyan/bt3103-1d4-statistical-learning/master/img/interaction2.png">
-                <div class="w3-opacity">
-                    <p>Notice how this model predicts a unit change in TV advertisements increases sales by 0.0458, and a unit change in Radio advertisements increases sales by 0.1885? Let's add in an interaction term between TV and Radio now. You can specify
-                        an interaction term with the statsmodels package with the ":" symbol.
-                    </p>
-                    <pre class="w3-border">
-      <code>
-      ols = smf.ols(formula='Sales ~ TV + Radio + Newspaper + TV:Radio', data=df)
-      result = ols.fit()
-      print(result.summary())
-      </code>
-      </pre>
-                </div>
-                <img src="https://raw.githubusercontent.com/danielnyan/bt3103-1d4-statistical-learning/master/img/interaction3.png">
-                <div class="w3-opacity">
-                    <p>The coefficients for the variables seemed to have drastically changed! Compare Radio's coefficient now, and in the previous model! It has dropped from 0.1885 to 0.0280! The interaction term between TV and Radio comes in at 0.0011.
-                        What does this mean?</p>
-                    <p>A unit change in Radio advertisements causes the effectiveness of TV's advertisements to increase (Or vice versa)! The p-value of the interaction term is also
-                        < 0.05, and the R-squared value of the model also rises from 0.897 to 0.968! This is almost a 70% increase in remaining variance that is now explained by the new and superior model!</p>
-                            <p>It turns out that a lot of Radio's effect on sales is actually indirectly caused by Radio's effect on TV!</p>
-                            <p>Interaction terms can occur with anything. When performing a regression analysis, it is advisable to use logic and intuition to figure out if some of your chosen variables might interact with each other, and create multiple
-                                models to check your assumptions.
-                            </p>
+        <!-- Next Page Button -->
+        <div class="w3-panel" id="next" style="padding:64px 16px">
+            <div class="w3-content w3-opacity" style="max-width:800px">
+                <h1 class="w3-center w3-padding-large"><span class="w3-header" style="font-size:36px">To the next exercise!</span></h1>
+                <p>Done with the exercises? Simple, weren't they? The next section will be on a new model type, <a class="w3-button w3-border next" @click="nextPage()">Next Page</a></br> the probit and logit regression!
+                </p>
+                <div id="prompt" style="display:none ; color:red">You have not completed all the exercises, are you sure you want to move on? Click Next Page again to confirm.
                 </div>
             </div>
         </div>
+        <footmenu></footmenu>
+        <!-- End Page Content -->
+        
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+        <script src="./scripts/utils.js"></script>
+        <script src="./scripts/interaction.js"></script>
+      </div>
+    </div>
 
+    <!-- Footer -->
+    <footer class="w3-container w3-padding-64 w3-light-grey w3-center w3-large">
+        <p>Tutorial created by Team 1d4 (Brandon, Daniel, Meng Yuan, Nelson) for our BT3103 Module Project</p>
+        <p>Powered by <a href="https://www.w3schools.com/w3css/default.asp" target="_blank" class="w3-hover-text-green">w3.css</a></p>
+    </footer>
 
-        <!-- Exercise Container -->
-        <div class="w3-container" id="exercises" style="padding:64px 16px">
-            <div class="w3-content" style="max-width:800px">
-                <div class="w3-opacity">
-                    <h1 class="w3-center w3-padding-large"><span :class="{'w3-header':true, 'correct':q4.solved}" style="font-size:36px">Exercises</span></h5>
-                </div>
-                <img src="https://raw.githubusercontent.com/danielnyan/bt3103-1d4-statistical-learning/master/img/interaction4.png">
-                <div class="w3-opacity">
-                    <p>Student is a boolean variable, with 0 indicating that they are not a student, and 1 indicating that they are. What is the effect that rating has on balance when: </p>
-                    <p>a) The person is not a student?</p>
-                    <input id="answer4a" size="40"></input>
-                    <button class="w3-button w3-border" type="button" @click="submit4a()">Check Answer</button>
-                    <feedback :status="q4a.status" :correct="q4a.correct" :incorrect="q4a.incorrect"></feedback>
-                    <p>b) The person is a student?</p>
-                    <input id="answer4b" size="40"></input>
-                    <button class="w3-button w3-border" type="button" @click="submit4b()">Check Answer</button>
-                    <feedback :status="q4b.status" :correct="q4b.correct" :incorrect="q4b.incorrect"></feedback>
-                </div>
-            </div>
-
-            <!-- Next Page Button -->
-            <div class="w3-panel" id="next" style="padding:64px 16px">
-                <div class="w3-content w3-opacity" style="max-width:800px">
-                    <h1 class="w3-center w3-padding-large"><span class="w3-header" style="font-size:36px">To the next exercise!</span></h1>
-                    <p>Done with the exercises? Simple, weren't they? The next section will be on a new model type, <a class="w3-button w3-border next" @click="nextPage()">Next Page</a></br> the probit and logit regression!
-                    </p>
-                    <div id="prompt" style="display:none ; color:red">You have not completed all the exercises, are you sure you want to move on? Click Next Page again to confirm.
-                    </div>
-                </div>
-            </div>
-            <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-            <script src="https://cdn.jsdelivr.net/npm/vue"></script>
-            <script src="./scripts/utils.js"></script>
-            <script src="./scripts/interaction.js"></script>
-
-            <!-- End Page Content -->
-        </div>
-
-        <!-- Footer -->
-        <footer class="w3-container w3-padding-64 w3-light-grey w3-center w3-large">
-            <p>Tutorial created by Team 1d4 (Brandon, Daniel, Meng Yuan, Nelson) for our BT3103 Module Project</p>
-            <p>Powered by <a href="https://www.w3schools.com/w3css/default.asp" target="_blank" class="w3-hover-text-green">w3.css</a></p>
-        </footer>
-
-</body>
+  </body>
 
 </html>

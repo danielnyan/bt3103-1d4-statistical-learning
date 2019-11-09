@@ -189,7 +189,7 @@
             <div class="w3-container w3-opacity" id="exercise1" style="padding:64px 16px">
                 <div class="w3-content" style="max-width:800px">
                     <h1 class="w3-center w3-padding-large"><span :class="{'w3-header':true, 'correct':q6a.solved}" style="font-size:36px">Exercise 1</span></h5>
-                        <p>Convert the cabin numbers into dummy numeric variables, and add them to the original dataframe. Drop the original 'Cabin' column.</p>
+                        <p>Convert the cabin numbers into dummy numeric variables, and add them to the original dataframe named "df" that is created for you. Drop the original 'Cabin' column.</p>
                         <!-- Avoid the urge to indent this. The whitespace here is kept -->
                         <textarea contenteditable id="answer6a">import pandas as pd
 import numpy as np
@@ -206,7 +206,7 @@ df = pd.read_csv("data/titanic.csv")
                 <div class="w3-content" style="max-width:800px">
                     <div class="w3-opacity">
                         <h1 class="w3-center w3-padding-large"><span :class="{'w3-header':true, 'correct':q6b.solved}" style="font-size:36px">Exercise 2</span></h5>
-                            <p>Did you know, the statsmodels package automatically detects and deals with categorical variables for you? Create a logit model of survivorship regressed against Sex and Embarked!</p>
+                            <p>Did you know, the statsmodels package automatically detects and deals with categorical variables for you? Create a logit model of survivorship regressed against Sex and Embarked! Store your model under the variable named "result".</p>
                             <!-- Avoid the urge to indent this. The whitespace here is kept -->
                             <textarea contenteditable id="answer6b">import statsmodels.formula.api as smf
 import pandas as pd
@@ -246,6 +246,8 @@ df = pd.read_csv("data/titanic.csv")
             </div>
             <!-- End Page Content -->
         </div>
+        <footmenu></footmenu>
+    </div>
 
         <!-- Footer -->
         <footer class="w3-container w3-padding-64 w3-light-grey w3-center w3-large">

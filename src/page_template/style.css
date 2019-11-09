@@ -145,3 +145,24 @@
 .w3-button.correct-button:hover {
     background-color: #5c5!important;
 }
+
+.footmenu {
+    overflow: hidden;
+    position: fixed;
+    height: 20px;
+    transition: height 0.6s ease;
+    width: 100%;
+    background-color: #aaa;
+    bottom: 0%;
+}
+
+.footmenu-button {
+    background-color: #eee;
+    height: 20px;
+    width: 100%;
+}
+
+.footmenu-button:hover {
+    cursor: pointer;
+    background-color: #eea;
+}

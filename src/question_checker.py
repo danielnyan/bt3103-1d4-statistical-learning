@@ -13,10 +13,12 @@ def question_checker(postReq):
         return question_2a(postReq)
     elif question_id == "2b":
         return question_2b(postReq)
+    elif question_id == "3a":
+        return question_3a(postReq)
     elif question_id == "4a":
-        return question_2a(postReq)
+        return question_4a(postReq)
     elif question_id == "4b":
-        return question_2b(postReq)
+        return question_4b(postReq)
     elif question_id == "5a":
         return question_5a(postReq)
     elif question_id == '6a':
@@ -55,6 +57,7 @@ def alset_api(postReq):
     }
 
 def question_1a(postReq):
+    answer = json.loads(postReq["answer"])
     return {
         "statusCode": 200,
         "headers": {
@@ -64,7 +67,7 @@ def question_1a(postReq):
             "Access-Control-Allow-Methods": "OPTIONS,POST,GET"
         },
         "body":  json.dumps({
-            "correct": True
+            "correct": answer == "7.82"
         })
     }
 
@@ -140,7 +143,8 @@ def question_2b(postReq):
         })
     }
 
-def question_4a(postReq):
+def question_3a(postReq):
+    answer = json.loads(postReq["answer"])
     return {
         "statusCode": 200,
         "headers": {
@@ -150,11 +154,27 @@ def question_4a(postReq):
             "Access-Control-Allow-Methods": "OPTIONS,POST,GET"
         },
         "body":  json.dumps({
-            "correct": True
+            "correct": answer == "Yes"
+        })
+    }
+
+def question_4a(postReq):
+    answer = json.loads(postReq["answer"])
+    return {
+        "statusCode": 200,
+        "headers": {
+            "Content-Type": "application/json",
+            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Headers": "Content-Type",
+            "Access-Control-Allow-Methods": "OPTIONS,POST,GET"
+        },
+        "body":  json.dumps({
+            "correct": answer == "3.9565"
         })
     }
 
 def question_4b(postReq):
+    answer = json.loads(postReq["answer"])
     return {
         "statusCode": 200,
         "headers": {
@@ -164,7 +184,7 @@ def question_4b(postReq):
             "Access-Control-Allow-Methods": "OPTIONS,POST,GET"
         },
         "body":  json.dumps({
-            "correct": True
+            "correct": answer == "4.372"
         })
     }
 
