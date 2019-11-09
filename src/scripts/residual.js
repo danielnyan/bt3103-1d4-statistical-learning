@@ -10,11 +10,12 @@ let fuee = new Vue({
     },
     methods: {
         chooseYes() {
-            this.q3a.status = "correct"
+            this.q3a.status = "correct";
+            this.q3a.solved = true;
             submitToLambda("3a", JSON.stringify("Yes"));
         },
         chooseNo() {
-            this.q3a.status = "incorrect"
+            this.q3a.status = "incorrect";
             submitToLambda("3a", JSON.stringify("No"));
         },
 
