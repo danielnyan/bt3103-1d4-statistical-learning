@@ -149,7 +149,7 @@
                     <button class="w3-button w3-border" type="button" @click="chooseYes()">Yes, linear model will be a good fit</button>
                     <button class="w3-button w3-border" type="button" @click="chooseNo()">No, linear model will NOT be a good fit</button>
                     <button class="w3-button w3-border" type="button" @click="submit3a()">Check Answer</button>
-                    <feedback :solved="q3a.solved" :true="q3a.status" :incorrect="q3a.status"></feedback>
+                    <feedback :status="q3a.status" :yes="q3a.message" :no="q3a.message"></feedback>
                     <pre class="w3-border">
       
     </pre>
