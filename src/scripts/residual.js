@@ -12,6 +12,7 @@ let fuee = new Vue({
         },
     },
     methods: {
+        /*
         chooseYes() {
             this.q3a.answer = "yes"
             this.q3a.have_answer = true
@@ -30,6 +31,7 @@ let fuee = new Vue({
                 this.q3a.solved = true
             }
         },
+        */
         nextPage() {
             if (this.q3a.solved || $("#prompt").css("display") !== "none") {
                 window.location.href = "interaction.html"
