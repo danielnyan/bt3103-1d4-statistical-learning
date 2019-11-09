@@ -2,8 +2,8 @@ let fuee = new Vue({
     el: '#app',
     data: {
         q3a: {
-            correct: "Correct! Because there is no pattern in the plot, linear model should be a good fit. Please click next page for new section.",
-            incorrect: "Incorrect! There is no pattern in the plot, so linear model should be a good fit.",
+            correct: "Correct! Because there is no pattern in the plot, linear model should be a good fit.",
+            incorrect: "Incorrect! Try again!",
             status: "none",
             solved: false
         },
