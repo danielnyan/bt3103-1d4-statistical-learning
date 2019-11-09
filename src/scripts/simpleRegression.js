@@ -41,12 +41,20 @@ let fuee = new Vue({
             }
 
             let resultInfo = JSON.parse(result);
+            console.log(resultInfo);
             if (resultInfo.correct) {
                 this.q1b.status = "correct";
                 this.q1b.solved = true;
             } else {
                 this.q1b.status = "incorrect";
                 this.q1b.incorrect = "Incorrect!";
+            }
+            if (resultInfo.gotten.error) {
+                this.q1b.incorrect += " It appears that there is an error. The message is as follows: ";
+                this.q1b.incorrect += resultInfo.gotten.output;
+            } else if (!resultInfo.correct) {
+                this.q1b.incorrect += " You are regressing " + resultInfo.gotten.output.response + " against these variables: " +
+                    resultInfo.gotten.output.predictors;
             }
         },
         nextPage() {

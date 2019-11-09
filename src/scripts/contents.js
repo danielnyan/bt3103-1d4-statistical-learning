@@ -16,7 +16,7 @@ let app = new Vue({
       if (result.includes("2a") && result.includes("2b")) {
         this.q2 = true;
       }
-      if (result.includes("3a") && result.includes("3b")) {
+      if (result.includes("3a")) {
         this.q3 = true;
       }
       if (result.includes("4a") && result.includes("4b")) {
