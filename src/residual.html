@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+<head>
 <title>Residual Analysis</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -72,9 +73,9 @@
         <div class="w3-container" id="intro" style="padding:64px 16px">
             <div class="w3-content" style="max-width:800px">
                 <div class="w3-opacity">
-                    <h1 class="w3-center w3-padding-large"><span class="w3-header" style="font-size:36px">Residual Analysis</span></h5>
+                    <h1 class="w3-center w3-padding-large"><span class="w3-header" style="font-size:36px">Residual Analysis</span></h1>
                         <p>The model we built in the drag-and-drop sction is as follow</p>
-                        <img src="https://raw.githubusercontent.com/danielnyan/bt3103-1d4-statistical-learning/master/img/residual_multiple_linear_model.png" max-width:100% max-height:100% class="w3-image"></img>
+                        <img src="https://raw.githubusercontent.com/danielnyan/bt3103-1d4-statistical-learning/master/img/residual_multiple_linear_model.png" style="max-width:100%; max-height:100%" class="w3-image">
                         <p>$${MPG = -15.8379 - 0.4715\cdot cylinders - 0.0229\cdot horsepower + 0.0190\cdot displacement - 0.0063 \cdot weight + 1.4229 \cdot origin + 0.7525 \cdot year}$$</p>
                         <p style="text-align:center; font-style:italic">If the equation is too long, click on the variables to hide them.</p>
                         <p>After building a multiple linear regression model, we need to check the residual plot to validate the model. There are mathematical reasons behind it.</p>
@@ -88,12 +89,12 @@
         <div class="w3-container" id="math" style="padding:64px 16px">
             <div class="w3-content" style="max-width:800px">
                 <div class="w3-opacity">
-                    <h1 class="w3-center w3-padding-large"><span class="w3-header" style="font-size:36px">The Mathematics Involved</span></h5>
+                    <h1 class="w3-center w3-padding-large"><span class="w3-header" style="font-size:36px">The Mathematics Involved</span></h1>
                         <p>We can simply get the residuals for each data point with this equation. $${\text{RESIDUAL} = y_{observed} - y_{predicted}}$$</p>
                         <p>For example, if a data point has a predicted value 15.2688 and the true observed MPG of 18, we can get the residuals by</p>
                         <p>$${\text{RESIDUAL} = 18 - 15.2688 = 2.7312}$$</p>
                         <p>Then we can get all residuals for each data point and plot it out as below:</p>
-                        <img src="https://raw.githubusercontent.com/danielnyan/bt3103-1d4-statistical-learning/master/img/residual_plot.png" max-width:100% max-height:100% class="w3-image"></img>
+                        <img src="https://raw.githubusercontent.com/danielnyan/bt3103-1d4-statistical-learning/master/img/residual_plot.png" style="max-width:100%; max-height:100%" class="w3-image">
                         <p>From the plot, we can see the residual distribution of the model.</p>
                 </div>
             </div>
@@ -103,7 +104,7 @@
         <div class="w3-container" id="code" style="padding:64px 16px">
             <div class="w3-content" style="max-width:800px">
                 <div class="w3-opacity">
-                    <h1 class="w3-center w3-padding-large"><span class="w3-header" style="font-size:36px">The Python Code</span></h5>
+                    <h1 class="w3-center w3-padding-large"><span class="w3-header" style="font-size:36px">The Python Code</span></h1>
                         <p>First, we add a new column which stores the predicted value.</p>
                         <pre class="w3-border">
       <code>
@@ -122,7 +123,7 @@
       </pre>
                         <br>
                 </div>
-                <img src="https://raw.githubusercontent.com/danielnyan/bt3103-1d4-statistical-learning/master/img/residual_plot.png" max-width:100% max-height:100% class="w3-image"></img>
+                <img src="https://raw.githubusercontent.com/danielnyan/bt3103-1d4-statistical-learning/master/img/residual_plot.png" style="max-width:100%; max-height:100%" class="w3-image">
                 <p>So what does this plot mean? We will tell you the insights below!</p>
             </div>
         </div>
@@ -131,7 +132,7 @@
         <!-- Analysis Container -->
         <div class="w3-container" id="analysis" style="padding:64px 16px">
             <div class="w3-content" style="max-width:800px">
-                <h1 class="w3-center w3-padding-large"><span class="w3-header" style="font-size:36px">Analysis</span></h5>
+                <h1 class="w3-center w3-padding-large"><span class="w3-header" style="font-size:36px">Analysis</span></h1>
                     <p>Given the residual plot, we can see the residuals show a U-shape pattern. That means linear model may not be the best model to fit the data.</p>
                     <p>If the residuals scatter randomly and show no pattern, then linear model will be a good fit.</p>
                     <p>However, if the residuals show some pattern(like U-Shape, etc.), then linear model will NOT be a good fit.</p>
@@ -141,9 +142,9 @@
         <!-- Exercise1 Container -->
         <div class="w3-container w3-opacity" id="exercise1" style="padding:64px 16px">
             <div class="w3-content" style="max-width:800px">
-                <h1 class="w3-center w3-padding-large"><span class="w3-header" style="font-size:36px">Exercise 1</span></h5>
+                <h1 class="w3-center w3-padding-large"><span class="w3-header" style="font-size:36px">Exercise 1</span></h1>
                     <p>Given a residual plot of a linear model as below, is a linear model a good fit for the data?</p>
-                    <img src="https://raw.githubusercontent.com/danielnyan/bt3103-1d4-statistical-learning/master/img/residual_plot_good.png" max-width:100% max-height:100% class="w3-image"></img>
+                    <img src="https://raw.githubusercontent.com/danielnyan/bt3103-1d4-statistical-learning/master/img/residual_plot_good.png" style="max-width:100%; max-height:100%" class="w3-image">
                     <p>The answer should be yes but I don't have time implementing it so far.</p>
                     <pre class="w3-border">
       <code contenteditable>
@@ -167,9 +168,6 @@
                 </div>
             </div>
         </div>
-
-        <!-- End Page Content -->
-    </div>
 
     <!-- End Page Content -->
     </div>

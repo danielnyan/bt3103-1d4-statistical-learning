@@ -2,7 +2,7 @@
 let fuee = new Vue({
     el: '#app',
     data: {
-        q2a: {
+        q3a: {
             correct: "Correct!",
             incorrect: "Incorrect!",
             status: "none",
@@ -10,6 +10,7 @@ let fuee = new Vue({
         },
     },
     methods: {
+        /*
         submit2a: async function() {
             let entered = parseCode("answer2a");
             this.q2a.status = "checking";
@@ -41,10 +42,10 @@ let fuee = new Vue({
                 this.q2a.incorrect += " You are regressing " + resultInfo.gotten.output.response + " against these variables: " +
                     resultInfo.gotten.output.predictors;
             }
-        },
+        },*/
         nextPage() {
-            if (this.q2a.solved || $("#prompt").css("display") !== "none") {
-                window.location.href = "probit_logit.html"
+            if (this.q3a.solved || $("#prompt").css("display") !== "none") {
+                window.location.href = "interaction.html"
             } else {
                 $("#prompt").slideDown(500);
                 setTimeout(this.hidePrompt, 5000)
@@ -55,11 +56,10 @@ let fuee = new Vue({
         }
     },
     mounted() {
-
-        initializeCodeblocks(["answer2a"]);
+        // initializeCodeblocks(["answer3a"]);
         retrieveProgress().then((result) => {
-            if (result.includes("2a")) {
-                this.q2a.solved = true;
+            if (result.includes("3a")) {
+                this.q3a.solved = true;
             }
         });
     }
