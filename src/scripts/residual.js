@@ -16,9 +16,12 @@ let fuee = new Vue({
         chooseNo() {
             this.q3a.status = "no"
         },
+        /*
         submit3a: async function() {
             let answer = this.q3a.status
             submitToLambda("3a", JSON.stringify(answer));
+        */
+        submit3a() {
             if (this.q3a.status === "no answer") {
                 this.q3a.message = "You have not chosen an answer yet. Please choose one!"
             } else if (this.q3a.status === "no") {
