@@ -22,7 +22,7 @@ let app = new Vue({
       if (result.includes("4a") && result.includes("4b")) {
         this.q4 = true;
       }
-      if (result.includes("5a") && result.includes("5b")) {
+      if (result.includes("5a")) {
         this.q5 = true;
       }
       if (result.includes("6a") && result.includes("6b")) {
