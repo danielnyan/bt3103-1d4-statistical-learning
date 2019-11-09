@@ -139,9 +139,9 @@
         </div>
 
         <!-- Exercise1 Container -->
-        <div class="w3-container w3-opacity" id="exercise1" style="padding:64px 16px">
+        <div class="w3-container w3-opacity" style="padding:64px 16px">
             <div class="w3-content w3-center" style="max-width:800px">
-                <h1 class="w3-center w3-padding-large"><span class="w3-header" style="font-size:36px">Exercise 1</span></h1>
+                <h1 class="w3-center w3-padding-large"><span :class="{'w3-header':true, 'correct':q3a.solved}" style="font-size:36px">Exercise 1</span></h1>
                     <p>Given a residual plot of a linear model as below, is a linear model a good fit for the data?</p>
                     <img src="https://raw.githubusercontent.com/danielnyan/bt3103-1d4-statistical-learning/master/img/residual_plot_good.png" style="max-width:100%; max-height:100%" class="w3-image">
                     <p> </p>

@@ -14,7 +14,7 @@ def question_checker(postReq):
     elif question_id == "2b":
         return question_2b(postReq)
     elif question_id == "3a":
-        return question_2b(postReq)
+        return question_3a(postReq)
     elif question_id == "4a":
         return question_4a(postReq)
     elif question_id == "4b":
