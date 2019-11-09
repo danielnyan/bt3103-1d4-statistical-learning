@@ -27,7 +27,7 @@ let fuee = new Vue({
                 if (this.q4b.solved) {
                     this.q4.solved = true;
                 }
-            } else if (answer === "4.372" or answer === "3.541") {
+            } else if (answer === "4.372" || answer === "3.541") {
                 this.q4a.status = "incorrect";
                 this.q4a.incorrect = "Incorrect! The person is not a student, so the value of Rating is 0.";
             } else if (answer === "-7.9129") {
