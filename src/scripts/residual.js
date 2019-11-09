@@ -17,7 +17,7 @@ let fuee = new Vue({
         chooseNo() {
             this.q3a.status = "no"
         }
-        submit4a: async function() {
+        submit3a: async function() {
             let answer = this.q3a.status
             submitToLambda("3a", JSON.stringify(answer));
             if (this.q3a.status == "no answer") {
