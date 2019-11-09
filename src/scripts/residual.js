@@ -6,7 +6,7 @@ let fuee = new Vue({
             incorrect: "Incorrect!",
             status: "no answer",
             solved: false,
-            message = ""
+            message: " "
         },
     },
     methods: {
