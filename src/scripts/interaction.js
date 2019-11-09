@@ -48,7 +48,7 @@ let fuee = new Vue({
         },
         nextPage() {
             if ((this.q4a.solved && this.q4b.solved) || $("#prompt").css("display") !== "none") {
-                window.location.href = "multiple_regression.html"
+                window.location.href = "probit_logit.html"
             } else {
                 $("#prompt").slideDown(500);
                 setTimeout(this.hidePrompt, 5000)
