@@ -33,8 +33,7 @@ let fuee = new Vue({
             } else if (answer === "-7.9129") {
                 this.q4a.status = "incorrect";
                 this.q4a.incorrect = "Incorrect! Are you sure you're looking at the correct variable?";
-            }
-            else {
+            } else {
                 this.q4a.status = "incorrect";
                 this.q4a.incorrect = "Incorrect! When the value of a regressor increases by 1, the dependent variable's value will change by the coefficient of the regressor.";
             }
@@ -54,8 +53,7 @@ let fuee = new Vue({
             } else if (answer === "3.541") {
                 this.q4b.status = "incorrect";
                 this.q4b.incorrect = "Incorrect! You're close, but you should be adding instead of subtracting.";
-            }
-            else {
+            } else {
                 this.q4b.status = "incorrect";
                 this.q4b.incorrect = "Incorrect! Try calculating the change in Balance when Student = 1 and Rating increases by 1.";
             }

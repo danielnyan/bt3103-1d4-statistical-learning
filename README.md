@@ -30,6 +30,6 @@ AWS_SESSION_TOKEN and AWS_ACCESS_KEY_ID with the new values. Your credentials ex
 Search for CloudFormation on AWS Console and delete the stack called StatisticalLearning, if it exists. 
 Then rerun the checks again. Usually deleting and recreating the stack rectifies the problem.
 
-**Other stuff**
+**Other stuff**  
 When the build fails, you can open up the logs for the failing build. 
 Search for ResourceStatusReason. The reasons for failure should be there. 
