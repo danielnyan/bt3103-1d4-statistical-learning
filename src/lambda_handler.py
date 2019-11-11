@@ -143,6 +143,20 @@ def lambda_handler(event, context):
                 return generate_id()
             elif postReq["operation"] == "getProgress":
                 return getProgress(postReq["userId"])
+            elif postReq["operation"] == "navigate":
+                save_logs(postReq)
+                return {
+                    "statusCode": 200,
+                    "headers": {
+                        "Content-Type": "application/json",
+                        "Access-Control-Allow-Origin": "*",
+                        "Access-Control-Allow-Headers": "Content-Type",
+                        "Access-Control-Allow-Methods": "OPTIONS,POST,GET"
+                    },
+                    "body":  json.dumps({
+                        "content" : "Operation successful"
+                    })
+                }
         else:
             return {
                 "statusCode": 200,
