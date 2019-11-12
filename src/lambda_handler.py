@@ -125,7 +125,7 @@ def lambda_handler(event, context):
         if "userToken" in postReq:
             response = question_checker(postReq)
             response["userId"] = postReq["userToken"]
-            save_logs(postReq)
+            save_logs(response)
             return response
         elif "questionId" in postReq:
             response = question_checker(postReq)
