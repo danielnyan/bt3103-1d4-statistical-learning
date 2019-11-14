@@ -197,6 +197,8 @@ df = pd.read_csv("data/titanic.csv")
 // to-do
           </textarea>
                         <button class="w3-button w3-border" type="button" @click="submit6a()">Run code</button>
+                        <hint :openheight="'60'" :title="'Hint!'" :wrong_attempts="q6a.wrong_attempts">Use the code in the examples above to create your dummy variables. Then, remember to drop the nan column! After that, add the new variables to your original dataframe. The code for this is df = pd.concat([df,"name of your cabin
+                            table"], axis = 1). Once you've done that, remember to drop the cabin variable from your table as well!</hint>
                         <feedback :status="q6a.status" :correct="q6a.correct" :incorrect="q6a.incorrect"></feedback>
                 </div>
             </div>
@@ -215,6 +217,8 @@ df = pd.read_csv("data/titanic.csv")
 // to-do
               </textarea>
                             <button class="w3-button w3-border" type="button" @click="submit6b()">Run code</button>
+                            <hint :openheight="'60'" :title="'Hint!'" :wrong_attempts="q6b.wrong_attempts">Statsmodel is a very convenient package. It automatically detects any categorical variables, converts them to dummies, and then regresses using those dummies. The only code you need to use is what you have already been doing
+                                for the past 5 exercises! If you need a reference to the old code, feel free to hit the back button on your browser to take a look at it again!</hint>
                             <feedback :status="q6b.status" :correct="q6b.correct" :incorrect="q6b.incorrect"></feedback>
                     </div>
                 </div>
@@ -249,11 +253,11 @@ df = pd.read_csv("data/titanic.csv")
         <footmenu></footmenu>
     </div>
 
-        <!-- Footer -->
-        <footer class="w3-container w3-padding-64 w3-light-grey w3-center w3-large">
-            <p>Tutorial created by Team 1d4 (Brandon, Daniel, Meng Yuan, Nelson) for our BT3103 Module Project</p>
-            <p>Powered by <a href="https://www.w3schools.com/w3css/default.asp" target="_blank" class="w3-hover-text-green">w3.css</a></p>
-        </footer>
+    <!-- Footer -->
+    <footer class="w3-container w3-padding-64 w3-light-grey w3-center w3-large">
+        <p>Tutorial created by Team 1d4 (Brandon, Daniel, Meng Yuan, Nelson) for our BT3103 Module Project</p>
+        <p>Powered by <a href="https://www.w3schools.com/w3css/default.asp" target="_blank" class="w3-hover-text-green">w3.css</a></p>
+    </footer>
 
 </body>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>

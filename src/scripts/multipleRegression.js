@@ -5,7 +5,8 @@ let fuee = new Vue({
             correct: "Correct!",
             incorrect: "Incorrect!",
             status: "none",
-            solved: false
+            solved: false,
+            wrong_attempts: 0
         },
     },
     methods: {
@@ -32,6 +33,7 @@ let fuee = new Vue({
             } else {
                 this.q2a.status = "incorrect";
                 this.q2a.incorrect = "Incorrect!";
+                this.q2a.wrong_attempts += 1;
             }
             if (resultInfo.gotten.error) {
                 this.q2a.incorrect += " It appears that there is an error. The message is as follows: ";

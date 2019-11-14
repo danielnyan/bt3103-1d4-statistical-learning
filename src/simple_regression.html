@@ -159,7 +159,8 @@
                     <p>Given the following equation, estimate the value <strong>MPG</strong> will take if the <strong>Weight</strong> provided is <strong>5000</strong>! $${MPG = 46.32 + -0.0077*Weight}$$</p>
                     <input id="answer1a" size="40"></input>
                     <button class="w3-button w3-border" type="button" @click="submit1a()">Check Answer</button>
-                    <hint :questionid='"q1a"' :openheight="'60'" :title="'Hint!'" :wrong_attempts="q1a.wrong_attempts"></hint>
+                    <hint :openheight="'60'" :title="'Hint!'" :wrong_attempts="q1a.wrong_attempts">It's simple algebra, do you really need a hint for this?
+                    </hint>
                     <feedback :status="q1a.status" :correct="q1a.correct" :incorrect="q1a.incorrect"></feedback>
             </div>
         </div>
@@ -175,6 +176,7 @@ ols_result = ols.fit()
 print(ols_result.summary())
       </textarea>
                     <button class="w3-button w3-border" type="button" @click="submit1b()">Check Answer</button>
+                    <hint :openheight="'60'" :title="'Hint!'" :wrong_attempts="q1b.wrong_attempts">Remember the sample code from earlier? We regressed mpg against weight with the formula 'mpg ~ weight'. Now, we want to regress mpg against acceleration! What is the formula for this?</hint>
                     <feedback :status="q1b.status" :correct="q1b.correct" :incorrect="q1b.incorrect"></feedback>
             </div>
         </div>

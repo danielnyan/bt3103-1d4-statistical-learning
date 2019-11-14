@@ -285,12 +285,13 @@ Vue.component("footmenu", {
 });
 
 Vue.component("hint", {
-    props: ["questionid", "openheight", "title", "wrong_attempts"],
+    props: ["openheight", "title", "wrong_attempts"],
     template: `
-    <div style='display:none'>
-      <div class='hint-button' @click="toggleExpand">{{title}}</div>
-      <div style="height:0px;overflow:hidden">
-        <slot></slot>
+    <div>
+    </br>
+      <div style="display:none;" class='hint-button' @click="toggleExpand">{{title}}</div>
+      <div style="height:0px;overflow:hidden;color:red">
+		<p><slot></slot></p>
       </div>
     </div>
   `,
@@ -301,7 +302,7 @@ Vue.component("hint", {
     watch: {
         wrong_attempts(newValue, oldValue) {
             if (newValue >= 2) {
-                q1a.setAttribute("style", "display:inline");
+                $(this.$el.children[1]).slideDown(500);
             }
         }
     },
@@ -311,10 +312,11 @@ Vue.component("hint", {
                 this.clicked = true;
                 this.sendData();
             }
+            console.log(this.$el.children);
             if (this.opened) {
-                $(this.$el.children[1]).animate({ height: 0 }, 500);
+                $(this.$el.children[2]).animate({ height: 0 }, 500);
             } else {
-                $(this.$el.children[1]).animate({ height: this.openheight }, 500);
+                $(this.$el.children[2]).animate({ height: this.openheight }, 500);
             }
             this.opened = !this.opened;
         },
@@ -416,9 +418,9 @@ const submitToLambda = function(questionId, answer) {
     }));
 }
 
-// $(document).ready(() => {
-// 	if (sessionStorage.getItem("userID") === null) {
-// 		$("#nologin").show();
-// 		$("#app").hide();
-// 	}
-// });
+$(document).ready(() => {
+    if (sessionStorage.getItem("userID") === null) {
+        $("#nologin").show();
+        $("#app").hide();
+    }
+});

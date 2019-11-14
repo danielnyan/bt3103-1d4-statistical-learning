@@ -81,7 +81,8 @@
                 <div class="w3-opacity">
                     <h1 class="w3-center w3-padding-large"><span class="w3-header" style="font-size:36px">Introduction to binary response variables</span></h5>
                         <p>Recall all the datasets that we have gone through thus far. We have been predicting a continuous variable, that has a range of values. What happens if we want to predict a boolean variable, that is either true or false? Here, we
-                            set</p>
+                            set
+                        </p>
                 </div>
                 <img src="https://raw.githubusercontent.com/danielnyan/bt3103-1d4-statistical-learning/master/img/probit_logit_bad1.png" class="w3-image">
                 <div class="w3-opacity">
@@ -153,8 +154,7 @@
         <div class="w3-container w3-opacity" id="exercise1" style="padding:64px 16px">
             <div class="w3-content" style="max-width:800px">
                 <h1 class="w3-center w3-padding-large"><span :class="{'w3-header':true, 'correct':q5a.solved}" style="font-size:36px">Exercise 1</span></h5>
-                    <p>Create a <b>probit</b> model of the survival rate against the fare each passenger paid, their passenger class, and age. Store your model under the 
-                    variable named "result". You may scroll up to see the names of each column. </p>
+                    <p>Create a <b>probit</b> model of the survival rate against the fare each passenger paid, their passenger class, and age. Store your model under the variable named "result". You may scroll up to see the names of each column. </p>
                     <textarea contenteditable id="answer5a">import statsmodels.formula.api as smf
 import pandas as pd
 import numpy as np
@@ -164,6 +164,7 @@ df = pd.read_csv("data/titanic.csv")
 // put your code here
       </textarea>
                     <button class="w3-button w3-border" type="button" @click="submit5a()">Check Answer</button>
+                    <hint :openheight="'60'" :title="'Hint!'" :wrong_attempts="q5a.wrong_attempts">smf.logit(formula='Survived ~ Pclass', data=df) calls the logit function. To call the probit function instead of the logit function, what do you think needs to be changed?</hint>
                     <feedback :status="q5a.status" :correct="q5a.correct" :incorrect="q5a.incorrect"></feedback>
             </div>
         </div>
@@ -178,7 +179,7 @@ df = pd.read_csv("data/titanic.csv")
                 </div>
             </div>
         </div>
-    <footmenu></footmenu>
+        <footmenu></footmenu>
         <!-- End Page Content -->
     </div>
 

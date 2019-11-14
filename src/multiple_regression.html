@@ -3,90 +3,101 @@
 <title>Multiple Linear Regression</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-  <!-- Keep these in head -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.32.0/codemirror.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.48.4/mode/python/python.min.js"></script>
-  <link
-    rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.32.0/codemirror.min.css"
-  />
-  <link rel="stylesheet" href="https://codemirror.net/theme/night.css">
-  <script src="https://cdn.jsdelivr.net/npm/vue-codemirror@4.0.6/dist/vue-codemirror.min.js"></script>
+<!-- Keep these in head -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.32.0/codemirror.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.48.4/mode/python/python.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.32.0/codemirror.min.css" />
+<link rel="stylesheet" href="https://codemirror.net/theme/night.css">
+<script src="https://cdn.jsdelivr.net/npm/vue-codemirror@4.0.6/dist/vue-codemirror.min.js"></script>
 
-  <link rel="stylesheet" href="page_template/w3.css">
-  <link rel="stylesheet" href="page_template/style.css">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<link rel="stylesheet" href="page_template/w3.css">
+<link rel="stylesheet" href="page_template/style.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 </head>
 <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-147552064-1"></script>
 <script>
-window.dataLayer = window.dataLayer || [];
-function gtag(){dataLayer.push(arguments);}
-gtag('js', new Date());
-gtag('config', 'UA-147552064-1');
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+        dataLayer.push(arguments);
+    }
+    gtag('js', new Date());
+    gtag('config', 'UA-147552064-1');
 </script>
 
 <style>
-body,h1 {font-family: "Raleway", Arial, sans-serif}
-h1 {letter-spacing: 6px}
-.w3-row-padding img {margin-bottom: 12px}
+    body,
+    h1 {
+        font-family: "Raleway", Arial, sans-serif
+    }
+    
+    h1 {
+        letter-spacing: 6px
+    }
+    
+    .w3-row-padding img {
+        margin-bottom: 12px
+    }
 </style>
+
 <body>
 
-<div id="nologin" style="display:none">
-  <h1 class="w3-content w3-center">
-    You have not logged in to our page. Please click 
-    <a href="index.html"> here</a> to return.
-  </h1>
-</div>
-
-<!-- !PAGE CONTENT! -->
-<div class="w3-content" id="app" style="max-width:1500px">
-
-<!-- Header -->
-<header class="w3-panel w3-center w3-opacity" style="padding:64px 16px">
-  <h1 class="w3-xlarge">Regression Analysis</h1>
-  <h1>Multiple Linear Regression</h1>
-  <div class="w3-padding-16">
-    <div class="w3-bar w3-border">
-      <a href="#learn" class="w3-bar-item w3-button">Learn More</a>
-      <a href="#code" class="w3-bar-item w3-button">Code</a>
-      <a href="#exercises" class="w3-bar-item w3-light-grey">Exercise</a>
+    <div id="nologin" style="display:none">
+        <h1 class="w3-content w3-center">
+            You have not logged in to our page. Please click
+            <a href="index.html"> here</a> to return.
+        </h1>
     </div>
-  </div>
-  <div>
-    Your save code is {{sessionStorage.getItem("userID")}}
-  </div>
-</header>
 
-<!-- Learn Container -->
-<div class="w3-container" id="learn" style="padding:64px 16px">
-  <div class="w3-content" style="max-width:800px">
-    <div class="w3-opacity">
-      <h1 class="w3-center w3-padding-large"><span class="w3-header" style="font-size:36px">Learn</span></h5>
-      <p>How well can a single independent variable explain our dependent variable? A case where a single independent variable is good enough is rare. More commonly, analysts will attempt explain the dependent variable with more than one independent variables.</p>
-      <p>We can once again refer to the dataset used in our simple linear regression.</p>
-    </div>
-    <img src="https://raw.githubusercontent.com/danielnyan/bt3103-1d4-statistical-learning/master/img/simple_linear_ex_peek.png">
-    <div class="w3-opacity">
-    <p>Let's try to explain MPG using the horsepower and weight. $${MPG = intercept + coefficient_{horsepower}*HorsePower + coefficient_{weight}*Weight}$$</p>
-      <div class="w3-panel w3-leftbar w3-light-grey">
-        <p>Ask yourself, why did we not plot a graphical relationship for this equation?</p>
-      </div>
-    </div>
-  </div>
-</div>
+    <!-- !PAGE CONTENT! -->
+    <div class="w3-content" id="app" style="max-width:1500px">
 
-<!-- Code Container -->
-<div class="w3-container" id="code" style="padding:64px 16px">
-  <div class="w3-content" style="max-width:800px">
-    <div class="w3-opacity">
-      <h1 class="w3-center w3-padding-large"><span class="w3-header" style="font-size:36px">Code</span></h5>
-      <p>Remember the code for creating a simple regression model? Here's a refresher if you forgot.</p>
-      <pre class="w3-border">
+        <!-- Header -->
+        <header class="w3-panel w3-center w3-opacity" style="padding:64px 16px">
+            <h1 class="w3-xlarge">Regression Analysis</h1>
+            <h1>Multiple Linear Regression</h1>
+            <div class="w3-padding-16">
+                <div class="w3-bar w3-border">
+                    <a href="#learn" class="w3-bar-item w3-button">Learn More</a>
+                    <a href="#code" class="w3-bar-item w3-button">Code</a>
+                    <a href="#exercises" class="w3-bar-item w3-light-grey">Exercise</a>
+                </div>
+            </div>
+            <div>
+                Your save code is {{sessionStorage.getItem("userID")}}
+            </div>
+        </header>
+
+        <!-- Learn Container -->
+        <div class="w3-container" id="learn" style="padding:64px 16px">
+            <div class="w3-content" style="max-width:800px">
+                <div class="w3-opacity">
+                    <h1 class="w3-center w3-padding-large"><span class="w3-header" style="font-size:36px">Learn</span></h5>
+                        <p>How well can a single independent variable explain our dependent variable? A case where a single independent variable is good enough is rare. More commonly, analysts will attempt explain the dependent variable with more than one
+                            independent variables.</p>
+                        <p>We can once again refer to the dataset used in our simple linear regression.</p>
+                </div>
+                <img src="https://raw.githubusercontent.com/danielnyan/bt3103-1d4-statistical-learning/master/img/simple_linear_ex_peek.png">
+                <div class="w3-opacity">
+                    <p>Let's try to explain MPG using the horsepower and weight. $${MPG = intercept + coefficient_{horsepower}*HorsePower + coefficient_{weight}*Weight}$$</p>
+                    <div class="w3-panel w3-leftbar w3-light-grey">
+                        <p>Ask yourself, why did we not plot a graphical relationship for this equation?</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Code Container -->
+        <div class="w3-container" id="code" style="padding:64px 16px">
+            <div class="w3-content" style="max-width:800px">
+                <div class="w3-opacity">
+                    <h1 class="w3-center w3-padding-large"><span class="w3-header" style="font-size:36px">Code</span></h5>
+                        <p>Remember the code for creating a simple regression model? Here's a refresher if you forgot.</p>
+                        <pre class="w3-border">
       <code>
         import statsmodels.formula.api as smf
         ols = smf.ols(formula='mpg ~ weight', data=df)
@@ -94,8 +105,8 @@ h1 {letter-spacing: 6px}
         print(ols_result.summary())
       </code>
       </pre>
-      <p>So how do we include more than one independent variable? The code for a multiple regression for MPG against weight and acceleration is actual very simple. Spot the difference!</p>
-      <pre class="w3-border">
+                        <p>So how do we include more than one independent variable? The code for a multiple regression for MPG against weight and acceleration is actual very simple. Spot the difference!</p>
+                        <pre class="w3-border">
       <code>
         import statsmodels.formula.api as smf
         ols = smf.ols(formula='mpg ~ weight + acceleration', data=df)
@@ -103,61 +114,63 @@ h1 {letter-spacing: 6px}
         print(ols_result.summary())
       </code>
       </pre>
-      <p>If you were unable to spot the difference, we've highlighted it for you below.</p>
-    </div>
-    <img src="https://raw.githubusercontent.com/danielnyan/bt3103-1d4-statistical-learning/master/img/simple_multiple_difference.png">
-    <div class="w3-opacity">
-      <p>Simple, right? The output from the code is below for you to take a look.</p>
-    </div>
-    <img src="https://raw.githubusercontent.com/danielnyan/bt3103-1d4-statistical-learning/master/img/multiple_linear_ex_summary.png">
-    <div class="w3-opacity">
-      <p>Notice the new line with the variable acceleration below weight?</p>
-      <p>Now that we have understood how the code works, let's get started with the some problems.</p>
-    </div>
-  </div>
-</div>
+                        <p>If you were unable to spot the difference, we've highlighted it for you below.</p>
+                </div>
+                <img src="https://raw.githubusercontent.com/danielnyan/bt3103-1d4-statistical-learning/master/img/simple_multiple_difference.png">
+                <div class="w3-opacity">
+                    <p>Simple, right? The output from the code is below for you to take a look.</p>
+                </div>
+                <img src="https://raw.githubusercontent.com/danielnyan/bt3103-1d4-statistical-learning/master/img/multiple_linear_ex_summary.png">
+                <div class="w3-opacity">
+                    <p>Notice the new line with the variable acceleration below weight?</p>
+                    <p>Now that we have understood how the code works, let's get started with the some problems.</p>
+                </div>
+            </div>
+        </div>
 
-<!-- Exercise Container -->
-<div class="w3-container w3-opacity" id="exercises" style="padding:64px 16px">
-  <div class="w3-content" style="max-width:800px">
-    <h1 class="w3-center w3-padding-large"><span :class="{'w3-header':true, 'correct':q2a.solved}" style="font-size:36px">Exercises</span></h5>
-    <p>Write the code in order to generate a multiple linear regression model of MPG against cylinders, displacement, horsepower, weight, acceleration, year, and origin. Store your model in the variable ols_result.</p>
-    <!-- Avoid the urge to indent this. The whitespace here is kept -->
-    <textarea contenteditable id="answer2a">import pandas as pd
+        <!-- Exercise Container -->
+        <div class="w3-container w3-opacity" id="exercises" style="padding:64px 16px">
+            <div class="w3-content" style="max-width:800px">
+                <h1 class="w3-center w3-padding-large"><span :class="{'w3-header':true, 'correct':q2a.solved}" style="font-size:36px">Exercises</span></h5>
+                    <p>Write the code in order to generate a multiple linear regression model of MPG against cylinders, displacement, horsepower, weight, acceleration, year, and origin. Store your model in the variable ols_result.</p>
+                    <!-- Avoid the urge to indent this. The whitespace here is kept -->
+                    <textarea contenteditable id="answer2a">import pandas as pd
 df = pd.read_csv("data/dataset.csv")
 import statsmodels.formula.api as smf
 // to-do
     </textarea>
-      <button class="w3-button w3-border" type="button" @click="submit2a()">Run code</button>
-      <feedback :status="q2a.status" :correct="q2a.correct" :incorrect="q2a.incorrect"></feedback>
-  </div>
-</div>
+                    <button class="w3-button w3-border" type="button" @click="submit2a()">Run code</button>
+                    <hint :openheight="'60'" :title="'Hint!'" :wrong_attempts="q2a.wrong_attempts">The formula you need to use is 'mpg ~ cylinders + displacement + horsepower + weight + acceleration + year + origin'</hint>
+                    <feedback :status="q2a.status" :correct="q2a.correct" :incorrect="q2a.incorrect"></feedback>
+            </div>
+        </div>
 
-<!-- Next Page Button -->
-<div class="w3-panel" id="next" style="padding:64px 16px">
-  <div class="w3-content w3-opacity" style="max-width:800px">
-    <h1 class="w3-center w3-padding-large"><span class="w3-header" style="font-size:36px">To the next exercise!</span></h1>
-    <p>Done with the exercises? The next section is also on multiple linear regression but <a class="w3-button w3-border next" @click="nextPage()">Next Page</a></br>
-    we will be focusing on something different, the p-value! Click the button and let's go! </p>
-    <div id="prompt" style="display:none ; color:red">You have not completed all the exercises, are you sure you want to move on? Click Next Page again to confirm.
+        <!-- Next Page Button -->
+        <div class="w3-panel" id="next" style="padding:64px 16px">
+            <div class="w3-content w3-opacity" style="max-width:800px">
+                <h1 class="w3-center w3-padding-large"><span class="w3-header" style="font-size:36px">To the next exercise!</span></h1>
+                <p>Done with the exercises? The next section is also on multiple linear regression but <a class="w3-button w3-border next" @click="nextPage()">Next Page</a></br>
+                    we will be focusing on something different, the p-value! Click the button and let's go! </p>
+                <div id="prompt" style="display:none ; color:red">You have not completed all the exercises, are you sure you want to move on? Click Next Page again to confirm.
+                </div>
+            </div>
+        </div>
+        <footmenu></footmenu>
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+        <script src="./scripts/utils.js"></script>
+        <script src="./scripts/multipleRegression.js"></script>
+
+        <!-- End Page Content -->
     </div>
-  </div>
-</div>
-<footmenu></footmenu>
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/vue"></script>
-<script src="./scripts/utils.js"></script>
-<script src="./scripts/multipleRegression.js"></script>
-
-<!-- End Page Content -->
-</div>
-
-<!-- Footer -->
-<footer class="w3-container w3-padding-64 w3-light-grey w3-center w3-large"> 
-  <p>Tutorial created by Team 1d4 (Brandon, Daniel, Meng Yuan, Nelson) for our BT3103 Module Project</p>
-  <p>Powered by <a href="https://www.w3schools.com/w3css/default.asp" target="_blank" class="w3-hover-text-green">w3.css</a></p>
-</footer>
+    <!-- Footer -->
+    <footer class="w3-container w3-padding-64 w3-light-grey w3-center w3-large">
+        <p>Tutorial created by Team 1d4 (Brandon, Daniel, Meng Yuan, Nelson) for our BT3103 Module Project</p>
+        <p>Powered by <a href="https://www.w3schools.com/w3css/default.asp" target="_blank" class="w3-hover-text-green">w3.css</a></p>
+    </footer>
 
 </body>
+
 </html>

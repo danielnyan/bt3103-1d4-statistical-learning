@@ -5,13 +5,15 @@ let fuee = new Vue({
             correct: "Correct!",
             incorrect: "Incorrect!",
             status: "none",
-            solved: false
+            solved: false,
+            wrong_attempts: 0
         },
         q6b: {
             correct: "Correct!",
             incorrect: "Incorrect!",
             status: "none",
-            solved: false
+            solved: false,
+            wrong_attempts: 0
         },
     },
     methods: {
@@ -38,6 +40,7 @@ let fuee = new Vue({
             } else {
                 this.q6a.status = "incorrect";
                 this.q6a.incorrect = "Incorrect!";
+                this.q6a.wrong_attempts += 1;
             }
             if (resultInfo.gotten.error) {
                 this.q6a.incorrect += " It appears that there is an error. The message is as follows: ";
@@ -73,6 +76,7 @@ let fuee = new Vue({
             } else {
                 this.q6b.status = "incorrect";
                 this.q6b.incorrect = "Incorrect!";
+                this.q6b.wrong_attempts += 1;
             }
             if (resultInfo.gotten.error) {
                 this.q6b.incorrect += " It appears that there is an error. The message is as follows: ";
@@ -81,7 +85,6 @@ let fuee = new Vue({
                 if (resultInfo.gotten.output.model) {
                     this.q6b.incorrect += " You are regressing " + resultInfo.gotten.output.response + " against these variables: " +
                         resultInfo.gotten.output.predictors;
-                    this.q6b.incorrect += ". By the way, there is no need to create dummy variables. You can just use Survived ~ Sex + Embarked."
                 } else {
                     this.q6b.incorrect += " Are you sure you are using the correct model?";
                 }

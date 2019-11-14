@@ -12,7 +12,8 @@ let fuee = new Vue({
             correct: "Correct!",
             incorrect: "Incorrect!",
             status: "none",
-            solved: false
+            solved: false,
+            wrong_attempts: 0
         },
     },
     methods: {
@@ -48,6 +49,7 @@ let fuee = new Vue({
                 this.q1b.status = "correct";
                 this.q1b.solved = true;
             } else {
+                this.q1b.wrong_attempts += 1;
                 this.q1b.status = "incorrect";
                 this.q1b.incorrect = "Incorrect!";
             }

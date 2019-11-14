@@ -5,7 +5,8 @@ let fuee = new Vue({
             correct: "Correct! Because there is no pattern in the plot, linear model should be a good fit.",
             incorrect: "Incorrect! Try again!",
             status: "none",
-            solved: false
+            solved: false,
+            wrong_attempts: 0
         },
     },
     methods: {
@@ -16,6 +17,7 @@ let fuee = new Vue({
         },
         chooseNo() {
             this.q3a.status = "incorrect";
+            this.q3a.wrong_attempts += 1;
             submitToLambda("3a", JSON.stringify("No"));
         },
 
