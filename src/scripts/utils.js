@@ -1,124 +1,124 @@
 /* Credits to https://gist.github.com/adambene/b3de67803e634be8f7d6baa273b5f447
 for coroutine and delay code */
 const coroutine = nextValue => iterator => {
-	const {
-		done,
-		value
-	} = iterator.next(nextValue);
+    const {
+        done,
+        value
+    } = iterator.next(nextValue);
 
-	if (done) {
-		return;
-	}
+    if (done) {
+        return;
+    }
 
-	if (value.constructor === Promise) {
-		value.then(promiseValue => {
-			coroutine(promiseValue)(iterator);
-		});
-	} else {
-		coroutine(value)(iterator);
-	}
+    if (value.constructor === Promise) {
+        value.then(promiseValue => {
+            coroutine(promiseValue)(iterator);
+        });
+    } else {
+        coroutine(value)(iterator);
+    }
 };
 
 const delay = (ms, result) =>
-new Promise(resolve => setTimeout(() => resolve(result), ms));
+    new Promise(resolve => setTimeout(() => resolve(result), ms));
 
 // This one's stolen from https://stackoverflow.com/questions/3115982/how-to-check-if-two-arrays-are-equal-with-javascript
-const arraysEqual = function (a, b) {
-	if (a === b)
-		return true;
-	if (a == null || b == null)
-		return false;
-	if (a.length != b.length)
-		return false;
+const arraysEqual = function(a, b) {
+    if (a === b)
+        return true;
+    if (a == null || b == null)
+        return false;
+    if (a.length != b.length)
+        return false;
 
-	for (let i = 0; i < a.length; ++i) {
-		if (a[i] !== b[i])
-			return false;
-	}
-	return true;
+    for (let i = 0; i < a.length; ++i) {
+        if (a[i] !== b[i])
+            return false;
+    }
+    return true;
 }
 
 Vue.component("variableblock", {
-	props: ["name"],
-	template: `
+    props: ["name"],
+    template: `
   <span class="unselectable draggable block" @mousedown="handleMouseDown($event)" @mouseup="handleMouseUp($event)">
   {{name}}
   </span>
   `,
-	methods: {
-		initialize: async function (e) {
-			this.$emit("initialize", this);
-		},
-		handleMouseDown(e) {
-			this.$el.style.position = "absolute";
-			this.$el.style.zIndex = 9001;
-			document.body.appendChild(this.$el);
+    methods: {
+        initialize: async function(e) {
+            this.$emit("initialize", this);
+        },
+        handleMouseDown(e) {
+            this.$el.style.position = "absolute";
+            this.$el.style.zIndex = 9001;
+            document.body.appendChild(this.$el);
 
-			this.moveAt(e.pageX, e.pageY);
+            this.moveAt(e.pageX, e.pageY);
 
-			if (this.onMouseMove)
-				return;
+            if (this.onMouseMove)
+                return;
 
-			this.onMouseMove = (e) => {
-				this.moveAt(e.pageX, e.pageY);
-				let elemsBelow = document.elementsFromPoint(e.clientX, e.clientY);
+            this.onMouseMove = (e) => {
+                this.moveAt(e.pageX, e.pageY);
+                let elemsBelow = document.elementsFromPoint(e.clientX, e.clientY);
 
-				let foundDroppable = false;
-				for (candidate of elemsBelow) {
-					if (candidate.className.includes("droppable")) {
-						if (this.currentDroppable != candidate) {
-							this.currentDroppable = candidate;
-						}
-						foundDroppable = true;
-						break;
-					}
-				}
-				if (!foundDroppable) {
-					if (this.currentDroppable) {
-						this.currentDroppable = null;
-					}
-				}
-			};
-			document.addEventListener("mousemove", this.onMouseMove);
-		},
-		moveAt(pageX, pageY) {
-			this.$el.style.left = pageX - this.$el.offsetWidth / 2 + 'px';
-			this.$el.style.top = pageY - this.$el.offsetHeight / 2 + 'px';
-		},
-		handleMouseUp(e) {
-			document.removeEventListener("mousemove", this.onMouseMove);
-			this.onMouseMove = null;
-			this.$el.style.position = "";
-			this.$el.style.zIndex = "";
-			this.$el.style.left = "";
-			this.$el.style.top = "";
-			if (this.currentDroppable !== null) {
-				this.currentDroppable.appendChild(this.$el);
-				if (this.currentDroppable !== this.previousParent) {
-					this.$emit("itemclicked");
-				}
-				this.previousParent = this.currentDroppable;
-			} else {
-				this.previousParent.appendChild(this.$el);
-			}
-		},
-	},
-	data() {
-		return {
-			imageUrl: "",
-			currentDroppable: null,
-			previousParent: null,
-			onMouseMove: null,
-		}
-	},
-	created() {
-		this.initialize();
-	}
+                let foundDroppable = false;
+                for (candidate of elemsBelow) {
+                    if (candidate.className.includes("droppable")) {
+                        if (this.currentDroppable != candidate) {
+                            this.currentDroppable = candidate;
+                        }
+                        foundDroppable = true;
+                        break;
+                    }
+                }
+                if (!foundDroppable) {
+                    if (this.currentDroppable) {
+                        this.currentDroppable = null;
+                    }
+                }
+            };
+            document.addEventListener("mousemove", this.onMouseMove);
+        },
+        moveAt(pageX, pageY) {
+            this.$el.style.left = pageX - this.$el.offsetWidth / 2 + 'px';
+            this.$el.style.top = pageY - this.$el.offsetHeight / 2 + 'px';
+        },
+        handleMouseUp(e) {
+            document.removeEventListener("mousemove", this.onMouseMove);
+            this.onMouseMove = null;
+            this.$el.style.position = "";
+            this.$el.style.zIndex = "";
+            this.$el.style.left = "";
+            this.$el.style.top = "";
+            if (this.currentDroppable !== null) {
+                this.currentDroppable.appendChild(this.$el);
+                if (this.currentDroppable !== this.previousParent) {
+                    this.$emit("itemclicked");
+                }
+                this.previousParent = this.currentDroppable;
+            } else {
+                this.previousParent.appendChild(this.$el);
+            }
+        },
+    },
+    data() {
+        return {
+            imageUrl: "",
+            currentDroppable: null,
+            previousParent: null,
+            onMouseMove: null,
+        }
+    },
+    created() {
+        this.initialize();
+    }
 });
 
 Vue.component("bar", {
-	props: ["name", "val"],
-	template: `
+    props: ["name", "val"],
+    template: `
     <div style="height:16px; margin:10px;">
       <div class="bar-description">{{name}}</div>
         <div class="bar" :style="{width:size*60+'%','background-color':colour}"></div>
@@ -126,47 +126,47 @@ Vue.component("bar", {
       </div>
     </div>
   `,
-	data() {
-		return {
-			size: 0,
-			colour: "#CCC",
-			targetValue: null
-		}
-	},
-	methods: {
-		 * adjustBar() {
-			while (Math.abs(this.size - this.targetValue) > 0.001) {
-				this.size = (this.size) + 0.2 * (this.targetValue - this.size);
-				if (this.size > 0.05) {
-					this.colour = "#EBB";
-				} else {
-					this.colour = "#CCC";
-				}
-				yield delay(25, null);
-			}
-			this.size = this.targetValue;
-			this.targetValue = null;
-		}
-	},
-	watch: {
-		val(newValue, oldValue) {
-			if (this.targetValue == null) {
-				this.targetValue = newValue;
-				coroutine()(this.adjustBar());
-			} else {
-				this.targetValue = newValue;
-			}
-		}
-	},
-	created() {
-		this.targetValue = this.val;
-		coroutine()(this.adjustBar());
-	}
+    data() {
+        return {
+            size: 0,
+            colour: "#CCC",
+            targetValue: null
+        }
+    },
+    methods: {
+        * adjustBar() {
+            while (Math.abs(this.size - this.targetValue) > 0.001) {
+                this.size = (this.size) + 0.2 * (this.targetValue - this.size);
+                if (this.size > 0.05) {
+                    this.colour = "#EBB";
+                } else {
+                    this.colour = "#CCC";
+                }
+                yield delay(25, null);
+            }
+            this.size = this.targetValue;
+            this.targetValue = null;
+        }
+    },
+    watch: {
+        val(newValue, oldValue) {
+            if (this.targetValue == null) {
+                this.targetValue = newValue;
+                coroutine()(this.adjustBar());
+            } else {
+                this.targetValue = newValue;
+            }
+        }
+    },
+    created() {
+        this.targetValue = this.val;
+        coroutine()(this.adjustBar());
+    }
 });
 
 Vue.component("rsqbar", {
-	props: ["val", "target"],
-	template: `
+    props: ["val", "target"],
+    template: `
   <div style="height:22px">
     <div class="bar-description">Adj R^2</div>
     <div class="bar-container">
@@ -177,92 +177,92 @@ Vue.component("rsqbar", {
     </div>
   </div>
   `,
-	data() {
-		return {
-			size: this.val,
-			colour: "#CCC",
-			targetValue: null
-		}
-	},
-	methods: {
-		 * adjustBar() {
-			while (Math.abs(this.size - this.targetValue) > 0.00001) {
-				if (this.size < this.targetValue) {
-					this.colour = "#EEA";
-				} else {
-					this.colour = "#EBB";
-				}
-				this.size = (this.size) + 0.2 * (this.targetValue - this.size);
-				yield delay(25, null);
-			}
-			if (this.size > this.target) {
-				this.colour = "#9E9";
-			} else {
-				this.colour = "#CCC";
-			}
-			this.size = this.targetValue;
-			this.targetValue = null;
-		}
-	},
-	watch: {
-		val(newValue, oldValue) {
-			if (this.targetValue == null) {
-				this.targetValue = newValue;
-				coroutine()(this.adjustBar());
-			} else {
-				this.targetValue = newValue;
-			}
-		}
-	},
+    data() {
+        return {
+            size: this.val,
+            colour: "#CCC",
+            targetValue: null
+        }
+    },
+    methods: {
+        * adjustBar() {
+            while (Math.abs(this.size - this.targetValue) > 0.00001) {
+                if (this.size < this.targetValue) {
+                    this.colour = "#EEA";
+                } else {
+                    this.colour = "#EBB";
+                }
+                this.size = (this.size) + 0.2 * (this.targetValue - this.size);
+                yield delay(25, null);
+            }
+            if (this.size > this.target) {
+                this.colour = "#9E9";
+            } else {
+                this.colour = "#CCC";
+            }
+            this.size = this.targetValue;
+            this.targetValue = null;
+        }
+    },
+    watch: {
+        val(newValue, oldValue) {
+            if (this.targetValue == null) {
+                this.targetValue = newValue;
+                coroutine()(this.adjustBar());
+            } else {
+                this.targetValue = newValue;
+            }
+        }
+    },
 });
 
 Vue.component("feedback", {
-	props: ["status", "correct", "incorrect"],
-	template: `
+    props: ["status", "correct", "incorrect"],
+    template: `
     <div class="feedback">
       <div style="color:green; display:none">{{correct}}</div>
       <div style="color:red; display:none">{{incorrect}}</div>
       <div style="color:black; display:none">Checking answer...</div>
     </div>
   `,
-	watch: {
-		status(newValue, oldValue) {
-			const children = $(this.$el).children();
-			let correctElement = children.eq(0);
-			let incorrectElement = children.eq(1);
-			let checkingElement = children.eq(2);
-			switch (newValue) {
-			case "correct":
-				correctElement.slideDown(500);
-				incorrectElement.slideUp(500);
-				checkingElement.slideUp(500);
-				break;
-			case "incorrect":
-				correctElement.slideUp(500);
-				incorrectElement.slideDown(500);
-				checkingElement.slideUp(500);
-				break;
-			case "checking":
-				correctElement.slideUp(500);
-				incorrectElement.slideUp(500);
-				checkingElement.slideDown(500);
-				break;
-			default:
-				correctElement.slideUp(500);
-				incorrectElement.slideUp(500);
-				checkingElement.slideUp(500);
-				break;
-			}
-		}
-	},
+    watch: {
+        status(newValue, oldValue) {
+            const children = $(this.$el).children();
+            let correctElement = children.eq(0);
+            let incorrectElement = children.eq(1);
+            let checkingElement = children.eq(2);
+            switch (newValue) {
+                case "correct":
+                    correctElement.slideDown(500);
+                    incorrectElement.slideUp(500);
+                    checkingElement.slideUp(500);
+                    break;
+                case "incorrect":
+                    correctElement.slideUp(500);
+                    incorrectElement.slideDown(500);
+                    checkingElement.slideUp(500);
+                    break;
+                case "checking":
+                    correctElement.slideUp(500);
+                    incorrectElement.slideUp(500);
+                    checkingElement.slideDown(500);
+                    break;
+                default:
+                    correctElement.slideUp(500);
+                    incorrectElement.slideUp(500);
+                    checkingElement.slideUp(500);
+                    break;
+            }
+        }
+    },
 });
 
 // Note: there can only be one footmenu in the page. 
 Vue.component("footmenu", {
-  data() {
-    expand : false;
-  },
-  template: `
+    data() {
+        expand: false;
+    },
+    template: `
     <div class="footmenu w3-center">
       <div class="unselectable footmenu-button" @click="toggleExpand">
         Menu
@@ -271,130 +271,137 @@ Vue.component("footmenu", {
       <a href="contents.html" class="w3-bar-item w3-button">Return to Menu</a>
     </div>
   `,
-  methods: {
-    toggleExpand() {
-      this.expand = !this.expand;
-      if (this.expand) {
-        // footmenu already has a transition property in the CSS file
-        $(".footmenu").css({height:"60px"});
-      } else {
-        $(".footmenu").css({height:"20px"});
-      }
+    methods: {
+        toggleExpand() {
+            this.expand = !this.expand;
+            if (this.expand) {
+                // footmenu already has a transition property in the CSS file
+                $(".footmenu").css({ height: "60px" });
+            } else {
+                $(".footmenu").css({ height: "20px" });
+            }
+        }
     }
-  }
 });
 
 Vue.component("hint", {
-  props: ["questionid", "openheight", "title"],
-  template: `
-    <div>
-      <div @click="toggleExpand">{{title}}</div>
+    props: ["questionid", "openheight", "title", "wrong_attempts"],
+    template: `
+    <div style='display:none'>
+      <div class='hint-button' @click="toggleExpand">{{title}}</div>
       <div style="height:0px;overflow:hidden">
         <slot></slot>
       </div>
     </div>
   `,
-  data() {
-    clicked : false;
-    opened : false;
-  },
-  methods: {
-    toggleExpand() {
-      if (!this.clicked) {
-        this.clicked = true;
-        this.sendData();
-      }
-      if (this.opened) {
-        $(this.$el.children[1]).animate({height: 0}, 500);
-      } else {
-        $(this.$el.children[1]).animate({height: this.openheight}, 500);
-      }
-      this.opened = !this.opened;
+    data() {
+        clicked: false;
+        opened: false;
     },
-    sendData() {
-      const nekoUrl = window.location.origin + "/Prod/lambda_handler";
-      const xmlHttp = new XMLHttpRequest();
-      xmlHttp.open("POST", nekoUrl, true);
-      xmlHttp.send(JSON.stringify({
-        userId: sessionStorage.getItem("userID"),
-        operation: "hint",
-        questionId: this.questionid
-      }));
+    watch: {
+        wrong_attempts(newValue, oldValue) {
+            if (newValue >= 2) {
+                q1a.setAttribute("style", "display:inline");
+            }
+        }
+    },
+    methods: {
+        toggleExpand() {
+            if (!this.clicked) {
+                this.clicked = true;
+                this.sendData();
+            }
+            if (this.opened) {
+                $(this.$el.children[1]).animate({ height: 0 }, 500);
+            } else {
+                $(this.$el.children[1]).animate({ height: this.openheight }, 500);
+            }
+            this.opened = !this.opened;
+        },
+        sendData() {
+            const nekoUrl = window.location.origin + "/Prod/lambda_handler";
+            const xmlHttp = new XMLHttpRequest();
+            xmlHttp.open("POST", nekoUrl, true);
+            xmlHttp.send(JSON.stringify({
+                userId: sessionStorage.getItem("userID"),
+                operation: "hint",
+                questionId: this.questionid
+            }));
+        }
     }
-  }
 });
 
-const parseCode = function (id) {
-	let lines = $("#" + id).next().find(".codemirror-line");
-	if (lines.length === 0) {
-		lines = $("#" + id).next().find(".CodeMirror-line");
-	}
-	let output = ""
-		for (let i = 0; i < lines.length; i++) {
-			let line = lines.eq(i).text();
-			line = line.replace(/[\u200B-\u200D\uFEFF]/g, '');
-			if (line) {
-				output += line + '\n';
-			}
-		}
-		return output;
+const parseCode = function(id) {
+    let lines = $("#" + id).next().find(".codemirror-line");
+    if (lines.length === 0) {
+        lines = $("#" + id).next().find(".CodeMirror-line");
+    }
+    let output = ""
+    for (let i = 0; i < lines.length; i++) {
+        let line = lines.eq(i).text();
+        line = line.replace(/[\u200B-\u200D\uFEFF]/g, '');
+        if (line) {
+            output += line + '\n';
+        }
+    }
+    return output;
 }
 
-const initializeCodeblocks = function (codeblockNames) {
-	for (let name of codeblockNames) {
-		CodeMirror.fromTextArea(document.getElementById(name), {
-			lineNumbers: true,
-			mode: "python",
-			theme: "night",
-			indentUnit: 4
-		});
-	}
+const initializeCodeblocks = function(codeblockNames) {
+    for (let name of codeblockNames) {
+        CodeMirror.fromTextArea(document.getElementById(name), {
+            lineNumbers: true,
+            mode: "python",
+            theme: "night",
+            indentUnit: 4
+        });
+    }
 }
 
-const retrieveProgress = function () {
-	return new Promise((resolve, reject) => {
-		const nekoUrl = window.location.origin + "/Prod/lambda_handler";
-		const xmlHttp = new XMLHttpRequest();
-		xmlHttp.onreadystatechange = function () {
-			if (xmlHttp.readyState == 4 && xmlHttp.status == 200) {
-				const response = JSON.parse(xmlHttp.responseText);
-				resolve(JSON.parse(response.completed));
-			}
-		}
-		xmlHttp.onerror = () => {
-			console.error("Error! Progress cannot be retrieved");
-			resolve([]);
-		};
-		xmlHttp.open("POST", nekoUrl, true);
-		xmlHttp.send(JSON.stringify({
-				userId: sessionStorage.getItem("userID"),
-				operation: "getProgress"
-			}));
-	});
+const retrieveProgress = function() {
+    return new Promise((resolve, reject) => {
+        const nekoUrl = window.location.origin + "/Prod/lambda_handler";
+        const xmlHttp = new XMLHttpRequest();
+        xmlHttp.onreadystatechange = function() {
+            if (xmlHttp.readyState == 4 && xmlHttp.status == 200) {
+                const response = JSON.parse(xmlHttp.responseText);
+                resolve(JSON.parse(response.completed));
+            }
+        }
+        xmlHttp.onerror = () => {
+            console.error("Error! Progress cannot be retrieved");
+            resolve([]);
+        };
+        xmlHttp.open("POST", nekoUrl, true);
+        xmlHttp.send(JSON.stringify({
+            userId: sessionStorage.getItem("userID"),
+            operation: "getProgress"
+        }));
+    });
 }
 
 // Usage: await submitToLambda(questionId, answer)
-const submitToLambda = function (questionId, answer) {
-	return new Promise((resolve, reject) => {
-		const nekoUrl = window.location.origin + "/Prod/lambda_handler";
-		const xmlHttp = new XMLHttpRequest();
-		xmlHttp.onreadystatechange = function () {
-			if (xmlHttp.readyState == 4 && xmlHttp.status == 200) {
-				resolve(xmlHttp.responseText);
-			}
-		}
-		xmlHttp.onerror = () => {
-			console.error(xmlHttp);
-			reject(xmlHttp.responseText);
-		};
-		xmlHttp.open("POST", nekoUrl, true);
-		xmlHttp.send(JSON.stringify({
-				questionId: questionId,
-				answer: answer,
-				userId: sessionStorage.getItem("userID"),
-				operation: "checkAnswer"
-			}));
-	});
+const submitToLambda = function(questionId, answer) {
+    return new Promise((resolve, reject) => {
+        const nekoUrl = window.location.origin + "/Prod/lambda_handler";
+        const xmlHttp = new XMLHttpRequest();
+        xmlHttp.onreadystatechange = function() {
+            if (xmlHttp.readyState == 4 && xmlHttp.status == 200) {
+                resolve(xmlHttp.responseText);
+            }
+        }
+        xmlHttp.onerror = () => {
+            console.error(xmlHttp);
+            reject(xmlHttp.responseText);
+        };
+        xmlHttp.open("POST", nekoUrl, true);
+        xmlHttp.send(JSON.stringify({
+            questionId: questionId,
+            answer: answer,
+            userId: sessionStorage.getItem("userID"),
+            operation: "checkAnswer"
+        }));
+    });
 }
 
 {
@@ -409,9 +416,9 @@ const submitToLambda = function (questionId, answer) {
     }));
 }
 
-$(document).ready(() => {
-	if (sessionStorage.getItem("userID") === null) {
-		$("#nologin").show();
-		$("#app").hide();
-	}
-});
+// $(document).ready(() => {
+// 	if (sessionStorage.getItem("userID") === null) {
+// 		$("#nologin").show();
+// 		$("#app").hide();
+// 	}
+// });

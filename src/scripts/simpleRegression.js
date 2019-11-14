@@ -5,7 +5,8 @@ let fuee = new Vue({
             correct: "Correct!",
             incorrect: "Incorrect!",
             status: "none",
-            solved: false
+            solved: false,
+            wrong_attempts: 0
         },
         q1b: {
             correct: "Correct!",
@@ -23,6 +24,7 @@ let fuee = new Vue({
                 this.q1a.solved = true;
             } else {
                 this.q1a.status = "incorrect";
+                this.q1a.wrong_attempts += 1;
             }
         },
         submit1b: async function() {
