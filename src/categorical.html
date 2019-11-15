@@ -194,7 +194,7 @@
                         <textarea contenteditable id="answer6a">import pandas as pd
 import numpy as np
 df = pd.read_csv("data/titanic.csv")
-// to-do
+# to-do
           </textarea>
                         <button class="w3-button w3-border" type="button" @click="submit6a()">Run code</button>
                         <hint :openheight="'60'" :title="'Hint!'" :wrong_attempts="q6a.wrong_attempts">Use the code in the examples above to create your dummy variables. Then, remember to drop the nan column! After that, add the new variables to your original dataframe. The code for this is df = pd.concat([df,"name of your cabin
@@ -214,7 +214,7 @@ df = pd.read_csv("data/titanic.csv")
 import pandas as pd
 import numpy as np
 df = pd.read_csv("data/titanic.csv")
-// to-do
+# to-do
               </textarea>
                             <button class="w3-button w3-border" type="button" @click="submit6b()">Run code</button>
                             <hint :openheight="'120'" :title="'Hint!'" :wrong_attempts="q6b.wrong_attempts">Statsmodel is a very convenient package. It automatically detects any categorical variables, converts them to dummies, and then regresses using those dummies. The only code you need to use is what you have already been doing
