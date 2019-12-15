@@ -13,12 +13,11 @@ let fuee = new Vue({
         chooseYes() {
             this.q3a.status = "correct";
             this.q3a.solved = true;
-            submitToLambda("3a", JSON.stringify("Yes"));
+            setProgress("3a");
         },
         chooseNo() {
             this.q3a.status = "incorrect";
             this.q3a.wrong_attempts += 1;
-            submitToLambda("3a", JSON.stringify("No"));
         },
 
         nextPage() {

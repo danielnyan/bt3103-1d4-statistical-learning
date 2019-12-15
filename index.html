@@ -38,18 +38,18 @@
         <div style="width:33.3%;display:inline-block;float:left">
           <header class="w3-panel w3-center w3-opacity" style="padding:64px 16px">
             <h1 class="w3-xlarge">Regression Analysis by Team 1d4</h1>
-            <h1>Are you a new user or an existing user?</h1>
-            <button class="w3-button" @click="newuser">New User</button>
-            <button class="w3-button" @click="existinguser">Existing User</button>
+            <div>This is an offline version of the Regression Analysis Project created for our NUS BT3103 project. 
+            The URL for the online Lambda version can be provided upon request; alternatively, follow the instructions 
+            on the README to deploy your own version on Amazon AWS. </div>
+            <button class="w3-button" @click="newuser">Let's Go!</button>
+            <button class="w3-button" @click="existinguser">Deploy Your Own Version</button>
           </header>
         </div>
         <div style="width:33.3%;display:inline-block;float:left">
           <header class="w3-panel w3-center w3-opacity" style="padding:64px 16px">
-            <h1>Please input your save code here</h1>
-            <input class="w3-input" id="userid" style="width:600px;margin:auto"></input>
-            <button class="w3-button" @click="submitId">Submit</button>
+            <h1> Our GitHub repository can be found here </h1>
+            <p> https://github.com/danielnyan/bt3103-1d4-statistical-learning </p>
             <button class="w3-button" @click="returntomain">Return</button>
-            <p> {{existingUserStatus}} </p>
           </header>
         </div>
       </div>

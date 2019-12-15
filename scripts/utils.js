@@ -310,7 +310,6 @@ Vue.component("hint", {
         toggleExpand() {
             if (!this.clicked) {
                 this.clicked = true;
-                this.sendData();
             }
             console.log(this.$el.children);
             if (this.opened) {
@@ -319,16 +318,6 @@ Vue.component("hint", {
                 $(this.$el.children[2]).animate({ height: this.openheight }, 500);
             }
             this.opened = !this.opened;
-        },
-        sendData() {
-            const nekoUrl = window.location.origin + "/Prod/lambda_handler";
-            const xmlHttp = new XMLHttpRequest();
-            xmlHttp.open("POST", nekoUrl, true);
-            xmlHttp.send(JSON.stringify({
-                userId: sessionStorage.getItem("userID"),
-                operation: "hint",
-                questionId: this.questionid
-            }));
         }
     }
 });
@@ -346,6 +335,7 @@ const parseCode = function(id) {
             output += line + '\n';
         }
     }
+    output = output.replace(/\s+/g, '');
     return output;
 }
 
@@ -361,66 +351,17 @@ const initializeCodeblocks = function(codeblockNames) {
 }
 
 const retrieveProgress = function() {
-    return new Promise((resolve, reject) => {
-        const nekoUrl = window.location.origin + "/Prod/lambda_handler";
-        const xmlHttp = new XMLHttpRequest();
-        xmlHttp.onreadystatechange = function() {
-            if (xmlHttp.readyState == 4 && xmlHttp.status == 200) {
-                const response = JSON.parse(xmlHttp.responseText);
-                resolve(JSON.parse(response.completed));
-            }
-        }
-        xmlHttp.onerror = () => {
-            console.error("Error! Progress cannot be retrieved");
-            resolve([]);
-        };
-        xmlHttp.open("POST", nekoUrl, true);
-        xmlHttp.send(JSON.stringify({
-            userId: sessionStorage.getItem("userID"),
-            operation: "getProgress"
-        }));
+    return new Promise((resolve) => {
+      resolve(JSON.parse(sessionStorage.getItem("progress")));
     });
 }
 
-// Usage: await submitToLambda(questionId, answer)
-const submitToLambda = function(questionId, answer) {
-    return new Promise((resolve, reject) => {
-        const nekoUrl = window.location.origin + "/Prod/lambda_handler";
-        const xmlHttp = new XMLHttpRequest();
-        xmlHttp.onreadystatechange = function() {
-            if (xmlHttp.readyState == 4 && xmlHttp.status == 200) {
-                resolve(xmlHttp.responseText);
-            }
-        }
-        xmlHttp.onerror = () => {
-            console.error(xmlHttp);
-            reject(xmlHttp.responseText);
-        };
-        xmlHttp.open("POST", nekoUrl, true);
-        xmlHttp.send(JSON.stringify({
-            questionId: questionId,
-            answer: answer,
-            userId: sessionStorage.getItem("userID"),
-            operation: "checkAnswer"
-        }));
-    });
-}
-
-{
-    const nekoUrl = window.location.origin + "/Prod/lambda_handler";
-    const xmlHttp = new XMLHttpRequest();
-    xmlHttp.open("POST", nekoUrl, true);
-    xmlHttp.send(JSON.stringify({
-        userId: sessionStorage.getItem("userID"),
-        operation: "navigate",
-        website: window.location.href,
-        action: performance.navigation.type
-    }));
-}
-
-$(document).ready(() => {
-    if (sessionStorage.getItem("userID") === null) {
-        $("#nologin").show();
-        $("#app").hide();
+const setProgress = function(questionId) {
+  retrieveProgress().then((result) => {
+    let progress = result;
+    if (!progress.includes(questionId)) {
+      progress.push(questionId);
+      sessionStorage.setItem("progress", JSON.stringify(progress));
     }
-});
+  });
+}

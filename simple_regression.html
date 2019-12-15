@@ -18,17 +18,6 @@
     <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 </head>
-<!-- Global site tag (gtag.js) - Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-147552064-1"></script>
-<script>
-    window.dataLayer = window.dataLayer || [];
-
-    function gtag() {
-        dataLayer.push(arguments);
-    }
-    gtag('js', new Date());
-    gtag('config', 'UA-147552064-1');
-</script>
 
 <style>
     body,
@@ -46,14 +35,6 @@
 </style>
 
 <body>
-
-    <div id="nologin" style="display:none">
-        <h1 class="w3-content w3-center">
-            You have not logged in to our page. Please click
-            <a href="index.html"> here</a> to return.
-        </h1>
-    </div>
-
     <!-- !PAGE CONTENT! -->
     <div class="w3-content" id="app" style="max-width:1500px">
 
@@ -70,9 +51,6 @@
                     <a href="#exercise1" class="w3-bar-item w3-light-grey">Exercise 1</a>
                     <a href="#exercise2" class="w3-bar-item w3-light-grey">Exercise 2</a>
                 </div>
-            </div>
-            <div>
-                Your save code is {{sessionStorage.getItem("userID")}}
             </div>
         </header>
 
@@ -176,7 +154,7 @@ ols_result = ols.fit()
 print(ols_result.summary())
       </textarea>
                     <button class="w3-button w3-border" type="button" @click="submit1b()">Check Answer</button>
-                    <hint :openheight="'60'" :title="'Hint!'" :wrong_attempts="q1b.wrong_attempts">Remember the sample code from earlier? We regressed mpg against weight with the formula 'mpg ~ weight'. Now, we want to regress mpg against acceleration! What is the formula for this?</hint>
+                    <hint :openheight="'90'" :title="'Hint!'" :wrong_attempts="q1b.wrong_attempts">The GitHub Pages version of the app isn't as robust as the actual version deployed on Amazon AWS Lambda. Just change 'mpg ~ weight' to 'mpg ~ acceleration' and don't touch anything else. Remember to use single quotes.</hint>
                     <feedback :status="q1b.status" :correct="q1b.correct" :incorrect="q1b.incorrect"></feedback>
             </div>
         </div>

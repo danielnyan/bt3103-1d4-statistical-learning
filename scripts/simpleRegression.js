@@ -19,10 +19,10 @@ let fuee = new Vue({
     methods: {
         submit1a: async function() {
             let answer = $("#answer1a").val();
-            submitToLambda("1a", JSON.stringify(answer));
             if (answer === "7.82") {
                 this.q1a.status = "correct";
                 this.q1a.solved = true;
+                setProgress("1a");
             } else {
                 this.q1a.status = "incorrect";
                 this.q1a.wrong_attempts += 1;
@@ -31,34 +31,20 @@ let fuee = new Vue({
         submit1b: async function() {
             let entered = parseCode("answer1b");
             this.q1b.status = "checking";
-
-            let errorMessage = null;
-            let result = await submitToLambda("1b", JSON.stringify(entered))
-                .catch((err) => {
-                    errorMessage = err || "Network request failed";
-                });
-
-            if (errorMessage !== null) {
-                this.q1b.status = "incorrect";
-                this.q1b.incorrect = "There appears to be a network error. Message: " + errorMessage;
+            let answerCorrect = false;
+            
+            if (entered === "importstatsmodels.formula.apiassmfols=smf.ols(formula='mpg~acceleration',data=df)ols_result=ols.fit()print(ols_result.summary())") {
+              answerCorrect = true;
             }
-
-            let resultInfo = JSON.parse(result);
-            console.log(resultInfo);
-            if (resultInfo.correct) {
+            
+            if (answerCorrect) {
                 this.q1b.status = "correct";
                 this.q1b.solved = true;
+                setProgress("1b");
             } else {
                 this.q1b.wrong_attempts += 1;
                 this.q1b.status = "incorrect";
                 this.q1b.incorrect = "Incorrect!";
-            }
-            if (resultInfo.gotten.error) {
-                this.q1b.incorrect += " It appears that there is an error. The message is as follows: ";
-                this.q1b.incorrect += resultInfo.gotten.output;
-            } else if (!resultInfo.correct) {
-                this.q1b.incorrect += " You are regressing " + resultInfo.gotten.output.response + " against these variables: " +
-                    resultInfo.gotten.output.predictors;
             }
         },
         nextPage() {

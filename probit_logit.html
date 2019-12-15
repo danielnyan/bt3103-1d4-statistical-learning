@@ -164,7 +164,10 @@ df = pd.read_csv("data/titanic.csv")
 # put your code here
       </textarea>
                     <button class="w3-button w3-border" type="button" @click="submit5a()">Check Answer</button>
-                    <hint :openheight="'60'" :title="'Hint!'" :wrong_attempts="q5a.wrong_attempts">smf.logit(formula='Survived ~ Pclass', data=df) calls the logit function. To call the probit function instead of the logit function, what do you think needs to be changed?</hint>
+                    <hint :openheight="'90'" :title="'Hint!'" :wrong_attempts="q5a.wrong_attempts">
+                    model = smf.probit(formula = 'Survived ~ Fare + PClass + Age)<br>
+                    result = model.fit()
+                    </hint>
                     <feedback :status="q5a.status" :correct="q5a.correct" :incorrect="q5a.incorrect"></feedback>
             </div>
         </div>

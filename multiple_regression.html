@@ -137,10 +137,9 @@
                     <textarea contenteditable id="answer2a">import pandas as pd
 df = pd.read_csv("data/dataset.csv")
 import statsmodels.formula.api as smf
-# to-do
     </textarea>
                     <button class="w3-button w3-border" type="button" @click="submit2a()">Run code</button>
-                    <hint :openheight="'60'" :title="'Hint!'" :wrong_attempts="q2a.wrong_attempts">The formula you need to use is 'mpg ~ cylinders + displacement + horsepower + weight + acceleration + year + origin'</hint>
+                    <hint :openheight="'90'" :title="'Hint!'" :wrong_attempts="q2a.wrong_attempts">The formula you need to use is 'mpg ~ cylinders + displacement + horsepower + weight + acceleration + year + origin'. Due to limitations of the GitHub Pages demo version, you'll have to copy this formula ad vertabim, using single quotes (if you aren't already doing so).</hint>
                     <feedback :status="q2a.status" :correct="q2a.correct" :incorrect="q2a.incorrect"></feedback>
             </div>
         </div>

@@ -22,10 +22,10 @@ let fuee = new Vue({
     methods: {
         submit4a: async function() {
             let answer = $("#answer4a").val();
-            submitToLambda("4a", JSON.stringify(answer));
             if (answer === "3.9565") {
                 this.q4a.status = "correct";
                 this.q4a.solved = true;
+                setProgress("4a");
                 if (this.q4b.solved) {
                     this.q4.solved = true;
                 }
@@ -45,10 +45,10 @@ let fuee = new Vue({
         },
         submit4b: async function() {
             let answer = $("#answer4b").val();
-            submitToLambda("4b", JSON.stringify(answer));
             if (answer === "4.372") {
                 this.q4b.status = "correct";
                 this.q4b.solved = true;
+                setProgress("4b");
                 if (this.q4a.solved) {
                     this.q4.solved = true;
                 }

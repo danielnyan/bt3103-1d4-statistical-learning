@@ -46,7 +46,7 @@ let variables = new Vue({
                 window.location.href = "residual.html"
             } else {
                 $("#prompt").slideDown(500);
-                setTimeout(this.hidePrompt, 30000)
+                setTimeout(this.hidePrompt, 5000)
             }
         },
         hidePrompt() {
@@ -114,11 +114,8 @@ let variables = new Vue({
             }
             if (this.rSquared > this.target) {
                 this.q2b.solved = true;
+                setProgress("2b");
             }
-            submitToLambda("2b", JSON.stringify({
-                rSquared: this.rSquared,
-                selected: selectedNames
-            }));
         },
         initialise(e) {
             Vue.nextTick(() => {
