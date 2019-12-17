@@ -55,9 +55,9 @@ Special thanks to my awesome teammates of Team 1d4, it's been a pleasure working
 Brandon: https://github.com/coldsonata  
 AWS backend (auto-deployment with GitHub Actions and CloudFormation stack), hints button, HTML styling and lesson design
 
-Meng Yuan (HTML Backend: https://github.com/MENGYUAN1  
+Meng Yuan: https://github.com/MENGYUAN1  
 Code blocks, promotional videos, ALSET Achievement Path  
 https://achievements-prod.firebaseapp.com/#/paths/-Lq5Ie7SjSB9FDAiKlxC
 
-Nelson (HTML Front-end): https://github.com/Nelsonho1999  
+Nelson: https://github.com/Nelsonho1999  
 HTML lesson design, multiple choice questions
