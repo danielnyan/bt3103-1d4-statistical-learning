@@ -1,9 +1,13 @@
 # bt3103-1d4-statistical-learning
 *Now called Regression Analysis by Team 1d4*
 
-Note: You may view a demo version of this project at https://danielnyan.github.io/bt3103-1d4-statistical-learning/. Do note that the content is largely placeholder content intended to showcase features in HTML, CSS and JavaScript, and therefore the factual accuracy of the content may be questionable. This is by no means to be used as an educational resource. 
+_Note: You may view a demo version of this project at https://danielnyan.github.io/bt3103-1d4-statistical-learning/. Do note that the content is largely placeholder content intended to showcase features in HTML, CSS and JavaScript, and therefore the factual accuracy of the content may be questionable. This is by no means to be used as an educational resource._
 
-Steps for deploying to Lambda:
+The demo project does not contain the following features:  
+1. State persistence using save codes, progress tracking and usage logs stored in AWS DynamoDB Table.  
+2. Sanitisation and execution of Python code against test cases in AWS Backend for coding questions.  
+
+Steps for deploying to Lambda:  
 1)Go to your AWS Educate account and click Account Details. Click Show 
 to reveal your AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY, and AWS_SESSION_TOKEN
 <p align="center">
